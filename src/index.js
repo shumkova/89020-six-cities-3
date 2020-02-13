@@ -5,7 +5,7 @@ const Settings = {
   RENTAL_OFFERS_COUNT: 312
 };
 
-const rentalOffers = [
+const places = [
   `Beautiful & luxurious apartment at great location`,
   `Wood and stone place`,
   `Canal View Prinsengracht`,
@@ -13,10 +13,11 @@ const rentalOffers = [
   `Wood and stone place`
 ];
 
+
 ReactDOM.render(
     <App
-      rentalOffersCount={Settings.RENTAL_OFFERS_COUNT}
-      rentalOffers={rentalOffers}
+      placesFound={Settings.RENTAL_OFFERS_COUNT}
+      places={places}
     />,
     document.querySelector(`#root`)
 );

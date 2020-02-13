@@ -170,7 +170,7 @@ exports[`Render App 1`] = `
           className="cities__places-list places__list tabs__content"
         >
           <article
-            className="cities__place-cards place-cards"
+            className="cities__place-card place-card"
           >
             <div
               className="place-card__mark"
@@ -259,6 +259,7 @@ exports[`Render App 1`] = `
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
                   Wood and stone place
                 </a>
