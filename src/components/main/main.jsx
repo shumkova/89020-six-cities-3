@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import getRandom from "../get-random/get-random";
+import getRandom from "../../utils/get-random";
 
 const Main = (props) => {
-  const {rentalOffersCount, rentalOffers} = props;
+  const {placesFound, places, onPlaceNameClick} = props;
 
   return (
     <main className="page__main page__main--index">
@@ -48,7 +48,7 @@ const Main = (props) => {
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{rentalOffersCount} places to stay in Amsterdam</b>
+            <b className="places__found">{placesFound} places to stay in Amsterdam</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex="0">
@@ -65,7 +65,7 @@ const Main = (props) => {
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              {rentalOffers.map((title, index) => (
+              {places.map((title, index) => (
                 <article className="cities__place-card place-card" key={getRandom(index, 100)}>
                   <div className="place-card__mark">
                     <span>Premium</span>
@@ -95,7 +95,12 @@ const Main = (props) => {
                       </div>
                     </div>
                     <h2 className="place-card__name">
-                      <a href="#">{title}</a>
+                      <a
+                        onClick={onPlaceNameClick}
+                        href="#"
+                      >
+                        {title}
+                      </a>
                     </h2>
                     <p className="place-card__type">Apartment</p>
                   </div>
@@ -113,8 +118,9 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  rentalOffersCount: PropTypes.number.isRequired,
-  rentalOffers: PropTypes.array.isRequired,
+  placesFound: PropTypes.number.isRequired,
+  places: PropTypes.array.isRequired,
+  onPlaceNameClick: PropTypes.func.isRequired,
 };
 
 export default Main;
