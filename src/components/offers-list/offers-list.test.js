@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main";
+import OffersList from "./offers-list";
 
 const offers = [{
   img: `img/apartment-01.jpg`,
@@ -9,14 +9,12 @@ const offers = [{
   type: `Appartment`,
 }];
 
-it(`Render Main`, () => {
-  const tree = renderer
-    .create(
-        <Main
-          placesFound={312}
-          offers={offers}
-        />
-    ).toJSON();
+it(`Render OffersList`, () => {
+  const tree = renderer.create(
+      <OffersList
+        offers={offers}
+      />
+  ).toJSON;
 
   expect(tree).toMatchSnapshot();
 });

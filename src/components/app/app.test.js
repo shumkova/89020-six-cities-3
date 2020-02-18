@@ -2,14 +2,19 @@ import React from "react";
 import renderer from "react-test-renderer";
 import App from "./app";
 
-const places = [`Wood and stone place`];
+const offers = [{
+  img: `img/apartment-01.jpg`,
+  title: `Beautiful & luxurious apartment at great location`,
+  price: 120,
+  type: `Appartment`,
+}];
 
 it(`Render App`, () => {
   const tree = renderer
       .create(
           <App
             placesFound={312}
-            places={places}
+            offers={offers}
           />
       ).toJSON();
 

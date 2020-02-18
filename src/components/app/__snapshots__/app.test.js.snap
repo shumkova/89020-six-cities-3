@@ -206,7 +206,8 @@ exports[`Render App 1`] = `
                   <b
                     className="place-card__price-value"
                   >
-                    €120
+                    €
+                    120
                   </b>
                   <span
                     className="place-card__price-text"
@@ -259,15 +260,14 @@ exports[`Render App 1`] = `
               >
                 <a
                   href="#"
-                  onClick={[Function]}
                 >
-                  Wood and stone place
+                  Beautiful & luxurious apartment at great location
                 </a>
               </h2>
               <p
                 className="place-card__type"
               >
-                Apartment
+                Appartment
               </p>
             </div>
           </article>
