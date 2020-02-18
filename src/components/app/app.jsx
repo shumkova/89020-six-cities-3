@@ -1,24 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Main from "../main/main.jsx";
-
-const nameClickHandler = () => {};
+import Main from "../main/main";
 
 const App = (props) => {
-  const {placesFound, places} = props;
+  const {placesFound, offers} = props;
 
   return (
     <Main
       placesFound={placesFound}
-      places={places}
-      onPlaceNameClick={nameClickHandler}
+      offers={offers}
     />
   );
 };
 
 App.propTypes = {
   placesFound: PropTypes.number.isRequired,
-  places: PropTypes.array.isRequired,
+  offers: PropTypes.array.isRequired,
 };
 
 export default App;
