@@ -12,7 +12,7 @@ class OffersList extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, onHeaderClick} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
@@ -26,6 +26,7 @@ class OffersList extends PureComponent {
                 activeCard: cardObj,
               }));
             }}
+            onHeaderClick={onHeaderClick}
           />
         ))}
       </div>
@@ -40,6 +41,7 @@ OffersList.propTypes = {
     price: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
   })).isRequired,
+  onHeaderClick: PropTypes.func.isRequired,
 };
 
 export default OffersList;

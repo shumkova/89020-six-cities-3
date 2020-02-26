@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
+import Map from "../map/map";
 
 const Main = (props) => {
-  const {placesFound, offers} = props;
+  const {placesFound, offers, cityCords, onHeaderClick} = props;
+
+  const coordinates = offers.map((offer) => offer.point);
 
   return (
     <main className="page__main page__main--index">
@@ -67,11 +70,17 @@ const Main = (props) => {
 
             <OffersList
               offers={offers}
+              onHeaderClick={onHeaderClick}
             />
 
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map"></section>
+            <section className="cities__map map">
+              <Map
+                coordinates={coordinates}
+                cityCords={cityCords}
+              />
+            </section>
           </div>
         </div>
       </div>
@@ -81,7 +90,14 @@ const Main = (props) => {
 
 Main.propTypes = {
   placesFound: PropTypes.number.isRequired,
-  offers: PropTypes.array.isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape({
+    img: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+  })).isRequired,
+  cityCords: PropTypes.arrayOf(PropTypes.number),
+  onHeaderClick: PropTypes.func.isRequired,
 };
 
 export default Main;
