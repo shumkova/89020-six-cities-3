@@ -9,13 +9,15 @@ const offer = {
   type: `Appartment`,
 };
 
-const handleOfferHover = () => {};
+const onCardHover = () => {};
+const onHeaderClick = () => {};
 
 it(`Render OfferCard`, () => {
   const tree = renderer.create(
       <OfferCard
         offer={offer}
-        onCardHover={handleOfferHover}
+        onCardHover={onCardHover}
+        onHeaderClick={onHeaderClick}
       />
   ).toJSON;
 

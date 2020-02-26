@@ -14,15 +14,34 @@ const offer = {
 
 it(`On card hover active card is sent to callback`, () => {
   const onCardHover = jest.fn();
+  const onHeaderClick = jest.fn();
 
   const card = shallow(<OfferCard
     offer={offer}
     onCardHover={onCardHover}
+    onHeaderClick={onHeaderClick}
   />);
 
   card.simulate(`mouseover`);
-
   expect(onCardHover).toHaveBeenCalledTimes(1);
-
   expect(onCardHover.mock.calls[0][0]).toMatchObject(offer);
+
+  const offerName = card.find(`.place-card__name a`);
+  offerName.props().onClick();
+  expect(onHeaderClick.mock.calls.length).toBe(1);
+});
+
+it(`Offer name should be pressed`, () => {
+  const onCardHover = jest.fn();
+  const onHeaderClick = jest.fn();
+
+  const card = shallow(<OfferCard
+    offer={offer}
+    onCardHover={onCardHover}
+    onHeaderClick={onHeaderClick}
+  />);
+
+  const offerName = card.find(`.place-card__name a`);
+  offerName.props().onClick();
+  expect(onHeaderClick.mock.calls.length).toBe(1);
 });

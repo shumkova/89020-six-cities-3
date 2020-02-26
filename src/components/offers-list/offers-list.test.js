@@ -13,6 +13,7 @@ it(`Render OffersList`, () => {
   const tree = renderer.create(
       <OffersList
         offers={offers}
+        onHeaderClick={() => {}}
       />
   ).toJSON;
 

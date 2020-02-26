@@ -7,7 +7,10 @@ const offers = [{
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
   type: `Appartment`,
+  point: [52.3909553943508, 4.85309666406198],
 }];
+
+const cityCords = [52.38333, 4.9];
 
 it(`Render Main`, () => {
   const tree = renderer
@@ -15,8 +18,13 @@ it(`Render Main`, () => {
         <Main
           placesFound={312}
           offers={offers}
-        />
-    ).toJSON();
+          onHeaderClick={() => {}}
+          cityCords={cityCords}
+        />, {
+          createNodeMock: () => {
+            return document.createElement(`div`);
+          }
+        }).toJSON();
 
   expect(tree).toMatchSnapshot();
 });
