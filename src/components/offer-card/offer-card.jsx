@@ -8,12 +8,12 @@ const OfferCard = (props) => {
 
   return (
     <article className="cities__place-card place-card"
-             onMouseOver={() => {
-               if(!hover) {
-                 hover = true;
-                 onCardHover(offer);
-               }}
-             }
+      onMouseOver={() => {
+        if (!hover) {
+          hover = true;
+          onCardHover(offer);
+        }
+      }}
     >
       <div className="place-card__mark">
         <span>Premium</span>
