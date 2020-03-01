@@ -1,9 +1,13 @@
 import {extend} from "../utils";
-import offers from "../mocks/offers";
+import allOffers from "../mocks/offers";
+
+const filterOffers = (city, offersList) => {
+  return offersList.filter((offer) => offer.city === city);
+};
 
 const initialState = {
   city: `Amsterdam`,
-  offers: [],
+  offers: filterOffers(`Amsterdam`, allOffers),
 };
 
 const ActionType = {
@@ -11,17 +15,24 @@ const ActionType = {
   GET_OFFERS: `GET_OFFERS`,
 };
 
+
+
 const ActionCreator = {
   changeCity: (newCity) => ({
     type: ActionType.CHANGE_CITY,
     payload: newCity,
   }),
 
-  getOffers: (newOffers) => ({
-    type: ActionType.GET_OFFERS,
-    payload: newOffers,
-  })
+  getOffers: (city) => {
+    const newOffers = filterOffers(city, allOffers);
+
+    return {
+      type: ActionType.GET_OFFERS,
+      payload: newOffers,
+    };
+  },
 };
+
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
