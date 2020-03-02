@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {ActionCreator} from "../../reducer/reducer";
+import {connect} from "react-redux";
 import Main from "../main/main";
 
 const cityCords = [52.38333, 4.9];
@@ -7,26 +9,41 @@ const cityCords = [52.38333, 4.9];
 const nameClickHandler = () => {};
 
 const App = (props) => {
-  const {placesFound, offers} = props;
+  const {offers, onCityClick, city} = props;
 
   return (
     <Main
-      placesFound={placesFound}
       onHeaderClick={nameClickHandler}
+      onCityClick={onCityClick}
       offers={offers}
       cityCords={cityCords}
+      city={city}
     />
   );
 };
 
 App.propTypes = {
-  placesFound: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape({
     img: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     type: PropTypes.string.isRequired,
   })).isRequired,
+  onCityClick: PropTypes.func.isRequired,
+  city: PropTypes.string.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  city: state.city,
+  offers: state.offers,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCityClick(city) {
+    dispatch(ActionCreator.changeCity(city));
+    dispatch(ActionCreator.getOffers(city));
+  }
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);
