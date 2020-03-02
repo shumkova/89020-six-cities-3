@@ -16,7 +16,6 @@ const ActionType = {
 };
 
 
-
 const ActionCreator = {
   changeCity: (newCity) => ({
     type: ActionType.CHANGE_CITY,

@@ -10,6 +10,7 @@ const offer = {
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
   type: `Appartment`,
+  city: `Amsterdam`,
 };
 
 it(`On card hover active card is sent to callback`, () => {
@@ -25,10 +26,6 @@ it(`On card hover active card is sent to callback`, () => {
   card.simulate(`mouseover`);
   expect(onCardHover).toHaveBeenCalledTimes(1);
   expect(onCardHover.mock.calls[0][0]).toMatchObject(offer);
-
-  const offerName = card.find(`.place-card__name a`);
-  offerName.props().onClick();
-  expect(onHeaderClick.mock.calls.length).toBe(1);
 });
 
 it(`Offer name should be pressed`, () => {
