@@ -3,16 +3,8 @@ import React, {PureComponent} from "react";
 import OfferCard from "../offer-card/offer-card";
 
 class OffersList extends PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: {},
-    };
-  }
-
   render() {
-    const {offers, onHeaderClick} = this.props;
+    const {offers, onHeaderClick, onItemHover} = this.props;
 
     return (
       <div className="cities__places-list places__list tabs__content">
@@ -21,11 +13,7 @@ class OffersList extends PureComponent {
             key={`place-${index}`}
             offer={offer}
             index={index}
-            onCardHover={(cardObj) => {
-              this.setState(() => ({
-                activeCard: cardObj,
-              }));
-            }}
+            onCardHover={onItemHover}
             onHeaderClick={onHeaderClick}
           />
         ))}
@@ -42,6 +30,7 @@ OffersList.propTypes = {
     type: PropTypes.string.isRequired,
   })).isRequired,
   onHeaderClick: PropTypes.func.isRequired,
+  onItemHover: PropTypes.func.isRequired,
 };
 
 export default OffersList;
