@@ -99,7 +99,11 @@ exports[`Render Mail without offers 1`] = `
       </section>
       <div
         className="cities__right-section"
-      />
+      >
+        <section
+          className="cities__map map"
+        />
+      </div>
     </div>
   </div>
 </main>

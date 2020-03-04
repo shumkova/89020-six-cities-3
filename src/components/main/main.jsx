@@ -4,6 +4,9 @@ import OffersList from "../offers-list/offers-list";
 import Map from "../map/map";
 import CitiesList from "../cities-list/cicties-list";
 import allOffers from "../../mocks/offers";
+import withActiveItem from "../../hocs/with-active-item/with-active-item";
+
+const OffersListWrapped = withActiveItem(OffersList);
 
 const Main = (props) => {
   const {offers, cityCords, onHeaderClick, onCityClick, city} = props;
@@ -53,7 +56,7 @@ const Main = (props) => {
                 </ul>
               </form>
 
-              <OffersList
+              <OffersListWrapped
                 offers={offers}
                 onHeaderClick={onHeaderClick}
               />
@@ -77,7 +80,9 @@ const Main = (props) => {
                   Dusseldorf</p>
               </div>
             </section>
-            <div className="cities__right-section"></div>
+            <div className="cities__right-section">
+              <section className="cities__map map"></section>
+            </div>
           </div>
         )}
 

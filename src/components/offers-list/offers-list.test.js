@@ -7,6 +7,7 @@ const offers = [{
   title: `Beautiful & luxurious apartment at great location`,
   price: 120,
   type: `Appartment`,
+  city: `Amsterdam`,
 }];
 
 it(`Render OffersList`, () => {
@@ -14,6 +15,7 @@ it(`Render OffersList`, () => {
       <OffersList
         offers={offers}
         onHeaderClick={() => {}}
+        onItemHover={() => {}}
       />
   ).toJSON;
 
