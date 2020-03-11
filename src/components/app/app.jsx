@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {ActionCreator} from "../../reducer/reducer";
+import {ActionCreator} from "../../reducer/data/data";
 import {connect} from "react-redux";
 import Main from "../main/main";
+
+import {getInitialCity, getOffers} from "../../reducer/data/selectors";
 
 const cityCords = [52.38333, 4.9];
 
@@ -34,8 +36,8 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: state.offers,
+  city: getInitialCity(state),
+  offers: getOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

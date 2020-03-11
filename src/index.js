@@ -1,14 +1,33 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {createStore} from "redux";
+import {createStore, applyMiddleware} from "redux";
+import {composeWithDevTools} from "redux-devtools-extension";
 import {Provider} from "react-redux";
-import {reducer} from "./reducer/reducer";
+import reducer from "./reducer/reducer";
+import thunk from "redux-thunk";
+import {createApi} from "./api";
+import {Operation as DataOperation} from "./reducer/data/data";
+
 import App from "./components/app/app.jsx";
+
+const api = createApi();
 
 const store = createStore(
     reducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+    composeWithDevTools(
+        applyMiddleware(thunk.withExtraArgument(api))
+    )
 );
+
+
+store.dispatch(DataOperation.loadHotels());
+
+console.log(store.getState());
+
+setTimeout(() => {
+  console.log(store.getState());
+}, 1000);
+
 
 ReactDOM.render(
     <Provider store={store}>
