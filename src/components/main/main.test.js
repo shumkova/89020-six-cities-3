@@ -3,26 +3,58 @@ import renderer from "react-test-renderer";
 import Main from "./main";
 
 const offers = [{
-  img: `img/apartment-01.jpg`,
-  title: `Beautiful & luxurious apartment at great location`,
-  price: 120,
-  type: `Appartment`,
-  point: [52.3909553943508, 4.85309666406198],
-  city: `Amsterdam`,
+  "bedrooms": 3,
+  "city": {
+    "location": {
+      "latitude": 52.370216,
+      "longitude": 4.895168,
+      "zoom": 10
+    },
+    "name": `Amsterdam`
+  },
+  "description": `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+  "goods": [`Heating`, `Kitchen`, `Cable TV`, `Washing machine`, `Coffee machine`, `Dishwasher`],
+  "host": {
+    "avatar_url": `img/1.png`,
+    "id": 3,
+    "is_pro": true,
+    "name": `Angelina`
+  },
+  "id": 1,
+  "images": [`img/1.png`, `img/2.png`],
+  "is_favorite": false,
+  "is_premium": false,
+  "location": {
+    "latitude": 52.35514938496378,
+    "longitude": 4.673877537499948,
+    "zoom": 8
+  },
+  "max_adults": 4,
+  "preview_image": `img/1.png`,
+  "price": 120,
+  "rating": 4.8,
+  "title": `Beautiful & luxurious studio at great location`,
+  "type": `apartment`
 }];
 
-const cityCords = [52.38333, 4.9];
+const cities = [{
+  "location": {
+    "latitude": 52.370216,
+    "longitude": 4.895168,
+    "zoom": 10
+  },
+  "name": `Amsterdam`
+}];
 
 it(`Render Main with offers`, () => {
   const tree = renderer
     .create(
         <Main
-          placesFound={312}
           offers={offers}
           onHeaderClick={() => {}}
           onCityClick={() => {}}
-          cityCords={cityCords}
           city={`Amsterdam`}
+          cities={cities}
         />, {
           createNodeMock: () => {
             return document.createElement(`div`);
@@ -36,12 +68,11 @@ it(`Render Mail without offers`, () => {
   const tree = renderer
       .create(
           <Main
-            placesFound={312}
             offers={[]}
             onHeaderClick={() => {}}
             onCityClick={() => {}}
-            cityCords={cityCords}
             city={`Amsterdam`}
+            cities={cities}
           />, {
             createNodeMock: () => {
               return document.createElement(`div`);

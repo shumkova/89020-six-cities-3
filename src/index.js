@@ -22,16 +22,11 @@ const store = createStore(
 
 store.dispatch(DataOperation.loadHotels());
 
-console.log(store.getState());
-
-setTimeout(() => {
-  console.log(store.getState());
-}, 1000);
-
-
 ReactDOM.render(
     <Provider store={store}>
       <App />
     </Provider>,
     document.querySelector(`#root`)
 );
+
+

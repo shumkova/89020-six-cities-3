@@ -2,10 +2,12 @@ import {extend} from "../../utils";
 
 const initialState = {
   hotels: [],
+  applicationIsReady: false,
 };
 
 const ActionType = {
   LOAD_HOTELS: `LOAD_HOTELS`,
+  ACTIVATE_APP: `ACTIVATE_APP`,
 };
 
 const ActionCreator = {
@@ -14,16 +16,22 @@ const ActionCreator = {
       type: ActionType.LOAD_HOTELS,
       payload: hotels,
     };
-  }
+  },
+
+  activateApp: () => {
+    return {
+      type: ActionType.ACTIVATE_APP,
+      payload: true,
+    };
+  },
 };
 
 const Operation = {
   loadHotels: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
-        console.log(`response.data:`);
-        console.log(response.data);
         dispatch(ActionCreator.loadHotels(response.data));
+        dispatch(ActionCreator.activateApp());
       });
   }
 };
@@ -31,10 +39,13 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_HOTELS: {
-      console.log(`action.payload:`);
-      console.log(action.payload);
       return extend(state, {
         hotels: action.payload,
+      });
+    }
+    case ActionType.ACTIVATE_APP: {
+      return extend(state, {
+        applicationIsReady: true,
       });
     }
   }

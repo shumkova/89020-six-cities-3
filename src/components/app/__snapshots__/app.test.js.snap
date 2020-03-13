@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render App 1`] = `
+exports[`App should render "pending" 1`] = `"pending"`;
+
+exports[`App should render everything 1`] = `
 <main
   className="page__main page__main--index"
 >
@@ -28,45 +30,6 @@ exports[`Render App 1`] = `
           >
             <span>
               Amsterdam
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item "
-            href="#"
-            onClick={[Function]}
-          >
-            <span>
-              Paris
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item "
-            href="#"
-            onClick={[Function]}
-          >
-            <span>
-              Cologne
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item "
-            href="#"
-            onClick={[Function]}
-          >
-            <span>
-              Hamburg
             </span>
           </a>
         </li>
@@ -172,7 +135,7 @@ exports[`Render App 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  src="img/apartment-01.jpg"
+                  src="img/1.png"
                   width="260"
                 />
               </a>
@@ -245,13 +208,13 @@ exports[`Render App 1`] = `
                   href="#"
                   onClick={[Function]}
                 >
-                  Beautiful & luxurious apartment at great location
+                  Beautiful & luxurious studio at great location
                 </a>
               </h2>
               <p
                 className="place-card__type"
               >
-                Appartment
+                apartment
               </p>
             </div>
           </article>

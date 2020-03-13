@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 
-const ZOOM = 12;
+// const ZOOM = 12;
 
 const ICON = leaflet.icon({
   iconUrl: `img/pin.svg`,
@@ -22,14 +22,14 @@ class Map extends React.PureComponent {
     const {coordinates, cityCords} = this.props;
 
     this._map = leaflet.map(mapRef, {
-      center: cityCords,
-      zoom: ZOOM,
+      center: [cityCords.latitude, cityCords.longitude],
+      zoom: cityCords.zoom,
       zoomControl: false,
       marker: true
     });
 
 
-    this._map.setView(cityCords, ZOOM);
+    this._map.setView([cityCords.latitude, cityCords.longitude], cityCords.zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -41,19 +41,21 @@ class Map extends React.PureComponent {
 
     coordinates.map((coordinate) => {
       leaflet
-        .marker(coordinate, {icon: ICON})
+        .marker([coordinate.latitude, coordinate.longitude], {icon: ICON})
         .addTo(this._layerGroup);
     });
   }
 
   componentDidUpdate() {
-    const {coordinates} = this.props;
+    const {coordinates, cityCords} = this.props;
+
+    this._map.setView([cityCords.latitude, cityCords.longitude], cityCords.zoom);
 
     this._layerGroup.clearLayers();
 
     coordinates.map((coordinate) => {
       leaflet
-        .marker(coordinate, {icon: ICON})
+        .marker([coordinate.latitude, coordinate.longitude], {icon: ICON})
         .addTo(this._layerGroup);
     });
   }
@@ -71,9 +73,9 @@ class Map extends React.PureComponent {
 
 Map.propTypes = {
   coordinates: PropTypes.arrayOf(
-      PropTypes.arrayOf(PropTypes.number.isRequired).isRequired
+      PropTypes.object.isRequired
   ).isRequired,
-  cityCords: PropTypes.arrayOf(PropTypes.number.isRequired),
+  cityCords: PropTypes.object.isRequired,
 };
 
 export default Map;

@@ -2,8 +2,6 @@ import {createSelector} from "reselect";
 import NameSpace from "../name-space";
 
 const getHotels = (state) => {
-  console.log(`hotels:`);
-  console.log(state[NameSpace.DATA].hotels);
   return state[NameSpace.DATA].hotels;
 };
 
@@ -14,7 +12,11 @@ const getCity = (state) => {
 const getInitialCity = createSelector(
     getHotels,
     (hotels) => {
-      return hotels[0].city;
+      if (hotels.length) {
+        return hotels[0].city.name;
+      }
+
+      return ``;
     }
 );
 
@@ -22,22 +24,37 @@ const getOffers = createSelector(
     getHotels,
     getCity,
     (hotels, city) => {
-      return hotels.filter((hotel) => hotel.city === city);
+      return hotels.filter((hotel) => hotel.city.name === city);
     }
 );
 
 const getCities = createSelector(
     getHotels,
     (hotels) => {
-      const cities = new Set();
+      const citiesNames = new Set();
 
       hotels.forEach((hotel) => {
-        cities.add(hotel.city);
+        citiesNames.add(hotel.city.name);
+      });
+
+      const hotelsWithUnicCities = Array.of(...citiesNames)
+        .map((city) => {
+          return hotels.find((hotel) => {
+            return hotel.city.name === city;
+          });
+        });
+
+      const cities = hotelsWithUnicCities.map((hotel) => {
+        return hotel.city;
       });
 
       return cities;
     }
 );
 
+const getReady = (state) => {
+  return state[NameSpace.DATA].applicationIsReady;
+};
 
-export {getHotels, getInitialCity, getOffers, getCities};
+
+export {getHotels, getInitialCity, getOffers, getCities, getReady};

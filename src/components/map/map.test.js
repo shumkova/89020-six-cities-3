@@ -2,14 +2,17 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Map from "./map";
 
-const coordinates = [
-  [52.3909553943508, 4.85309666406198],
-  [52.369553943508, 4.85309666406198],
-  [52.3909553943508, 4.929309666406198],
-  [52.3809553943508, 4.939309666406198],
-];
+const coordinates = [{
+  latitude: 52.35514938496378,
+  longitude: 4.673877537499948,
+  zoom: 8,
+}];
 
-const cityCords = [52.38333, 4.9];
+const cityCords = {
+  latitude: 52.370216,
+  longitude: 4.895168,
+  zoom: 10
+};
 
 it(`Map should render correctly`, () => {
   const tree = renderer.create(

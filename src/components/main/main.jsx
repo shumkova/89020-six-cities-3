@@ -2,24 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
 import Map from "../map/map";
-import CitiesList from "../cities-list/cicties-list";
-import allOffers from "../../mocks/offers";
+import CitiesList from "../cities-list/cities-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
 
 const OffersListWrapped = withActiveItem(OffersList);
 
 const Main = (props) => {
-  const {offers, cityCords, onHeaderClick, onCityClick, city} = props;
+  const {offers, onHeaderClick, onCityClick, city, cities} = props;
 
-  const coordinates = offers.map((offer) => offer.point);
-
-  const cities = new Set();
-
-  allOffers.forEach((offer) => {
-    cities.add(offer.city);
-  });
-
-  const maxCities = [...cities].slice(0, 6);
+  const coordinates = offers.map((offer) => offer.location);
+  const cityCords = cities.find((item) => {
+    return item.name === city;
+  }).location;
 
   return (
     <main className="page__main page__main--index">
@@ -28,7 +22,7 @@ const Main = (props) => {
         <section className="locations container">
           <CitiesList
             activeCity={city}
-            cities={maxCities}
+            cities={cities}
             onCityClick={onCityClick}
           />
         </section>
@@ -77,7 +71,7 @@ const Main = (props) => {
               <div className="cities__status-wrapper tabs__content">
                 <b className="cities__status">No places to stay available</b>
                 <p className="cities__status-description">We could not find any property availbale at the moment in
-                  Dusseldorf</p>
+                  {city}</p>
               </div>
             </section>
             <div className="cities__right-section">
@@ -93,15 +87,49 @@ const Main = (props) => {
 
 Main.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
-    img: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
+    "bedrooms": PropTypes.number.isRequired,
+    "city": PropTypes.shape({
+      "name": PropTypes.string.isRequired,
+      "location": PropTypes.shape({
+        "latitude": PropTypes.number.isRequired,
+        "longitude": PropTypes.number.isRequired,
+        "zoom": PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    "description": PropTypes.string.isRequired,
+    "goods": PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    "host": PropTypes.shape({
+      'avatar_url': PropTypes.string.isRequired,
+      'id': PropTypes.number.isRequired,
+      'name': PropTypes.string.isRequired,
+    }),
+    "id": PropTypes.number.isRequired,
+    "images": PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    "is_favorite": PropTypes.bool.isRequired,
+    "is_premium": PropTypes.bool.isRequired,
+    "location": PropTypes.shape({
+      "latitude": PropTypes.number.isRequired,
+      "longitude": PropTypes.number.isRequired,
+      "zoom": PropTypes.number.isRequired,
+    }).isRequired,
+    "max_adults": PropTypes.number.isRequired,
+    "preview_image": PropTypes.string.isRequired,
+    "price": PropTypes.number.isRequired,
+    "rating": PropTypes.number.isRequired,
+    "title": PropTypes.string.isRequired,
+    "type": PropTypes.string.isRequired,
   })).isRequired,
-  cityCords: PropTypes.arrayOf(PropTypes.number),
   onHeaderClick: PropTypes.func.isRequired,
   onCityClick: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  })).isRequired,
 };
 
 export default Main;
