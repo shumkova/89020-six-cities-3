@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import CitiesList from "./cicties-list";
+import CitiesList from "./cities-list";
 
 const cities = [`Amsterdam`, `Moscow`, `New York`, `London`];
 const activeCity = `London`;

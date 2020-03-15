@@ -8,12 +8,12 @@ const CitiesList = (props) => {
     <ul className="locations__list tabs__list">
       {cities.map((city, index) => (
         <li className="locations__item" key={`city-${index}`}>
-          <a className={`locations__item-link tabs__item ${city === activeCity ? `tabs__item--active` : ``}`} href="#"
+          <a className={`locations__item-link tabs__item ${city.name === activeCity ? `tabs__item--active` : ``}`} href="#"
             onClick={() => {
-              onCityClick(city);
+              onCityClick(city.name);
             }}
           >
-            <span>{city}</span>
+            <span>{city.name}</span>
           </a>
         </li>
       ))}
@@ -22,7 +22,8 @@ const CitiesList = (props) => {
 };
 
 CitiesList.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  // cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  cities: PropTypes.array.isRequired,
   onCityClick: PropTypes.func.isRequired,
   activeCity: PropTypes.string.isRequired,
 };

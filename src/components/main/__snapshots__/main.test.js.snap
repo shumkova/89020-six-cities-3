@@ -31,45 +31,6 @@ exports[`Render Mail without offers 1`] = `
             </span>
           </a>
         </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item "
-            href="#"
-            onClick={[Function]}
-          >
-            <span>
-              Paris
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item "
-            href="#"
-            onClick={[Function]}
-          >
-            <span>
-              Cologne
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item "
-            href="#"
-            onClick={[Function]}
-          >
-            <span>
-              Hamburg
-            </span>
-          </a>
-        </li>
       </ul>
     </section>
   </div>
@@ -93,7 +54,8 @@ exports[`Render Mail without offers 1`] = `
           <p
             className="cities__status-description"
           >
-            We could not find any property availbale at the moment in Dusseldorf
+            We could not find any property availbale at the moment in
+            Amsterdam
           </p>
         </div>
       </section>
@@ -137,45 +99,6 @@ exports[`Render Main with offers 1`] = `
           >
             <span>
               Amsterdam
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item "
-            href="#"
-            onClick={[Function]}
-          >
-            <span>
-              Paris
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item "
-            href="#"
-            onClick={[Function]}
-          >
-            <span>
-              Cologne
-            </span>
-          </a>
-        </li>
-        <li
-          className="locations__item"
-        >
-          <a
-            className="locations__item-link tabs__item "
-            href="#"
-            onClick={[Function]}
-          >
-            <span>
-              Hamburg
             </span>
           </a>
         </li>
@@ -281,7 +204,7 @@ exports[`Render Main with offers 1`] = `
                   alt="Place image"
                   className="place-card__image"
                   height="200"
-                  src="img/apartment-01.jpg"
+                  src="img/1.png"
                   width="260"
                 />
               </a>
@@ -354,13 +277,13 @@ exports[`Render Main with offers 1`] = `
                   href="#"
                   onClick={[Function]}
                 >
-                  Beautiful & luxurious apartment at great location
+                  Beautiful & luxurious studio at great location
                 </a>
               </h2>
               <p
                 className="place-card__type"
               >
-                Appartment
+                apartment
               </p>
             </div>
           </article>
