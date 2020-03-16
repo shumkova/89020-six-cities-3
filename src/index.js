@@ -6,11 +6,16 @@ import {Provider} from "react-redux";
 import reducer from "./reducer/reducer";
 import thunk from "redux-thunk";
 import {createApi} from "./api";
-import {Operation as DataOperation} from "./reducer/data/data";
+import {Operation as DataOperation} from "./reducer/operation";
+import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
 
 import App from "./components/app/app.jsx";
 
-const api = createApi();
+const onUnauthorized = () => {
+  store.dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.NO_AUTH));
+};
+
+const api = createApi(onUnauthorized);
 
 const store = createStore(
     reducer,
@@ -19,8 +24,8 @@ const store = createStore(
     )
 );
 
-
 store.dispatch(DataOperation.loadHotels());
+store.dispatch(UserOperation.checkAuth());
 
 ReactDOM.render(
     <Provider store={store}>

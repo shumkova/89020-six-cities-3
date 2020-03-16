@@ -1,4 +1,4 @@
-import {reducer, ActionType, ActionCreator} from "./state";
+import {reducer, ActionType, ActionCreator} from "./app";
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
