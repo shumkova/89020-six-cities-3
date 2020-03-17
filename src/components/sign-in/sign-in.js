@@ -11,10 +11,10 @@ class SignIn extends React.PureComponent {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(evt) {
+  handleSubmit() {
     const onSubmit = this.props;
 
-    evt.preventDefault();
+    // evt.preventDefault();
 
     onSubmit({
       login: this.loginRef.current.value,
@@ -106,7 +106,7 @@ class SignIn extends React.PureComponent {
       </div>
     );
   }
-};
+}
 
 SignIn.propTypes = {
   onSubmit: PropTypes.func.isRequired,

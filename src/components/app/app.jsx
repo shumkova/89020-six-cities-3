@@ -8,7 +8,7 @@ import SignIn from "../sign-in/sign-in";
 
 import {getOffers, getCities, getReady} from "../../reducer/data/selectors";
 import {getCity} from "../../reducer/app/selectors";
-import {getAuthorizationStatus, getUserData} from "../../reducer/user/selectors";
+import {getAuthorizationStatus, getAuthInfo} from "../../reducer/user/selectors";
 
 const nameClickHandler = () => {};
 
@@ -53,7 +53,7 @@ class App extends React.PureComponent {
       </BrowserRouter>
     );
   }
-};
+}
 
 App.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
@@ -110,7 +110,7 @@ const mapStateToProps = (state) => ({
   offers: getOffers(state),
   cities: getCities(state),
   authorizationStatus: getAuthorizationStatus(state),
-  userData: getUserData(state),
+  userData: getAuthInfo(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

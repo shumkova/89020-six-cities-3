@@ -12,7 +12,7 @@ export const Operation = {
 
         const cities = [...new Set(hotels.map((item) => item.city.name))];
 
-        dispatch(AppActionCreator.changeCity(cities[0]));
+        dispatch(AppActionCreator.changeCity(cities.length ? cities[0] : ``));
       });
   }
 };

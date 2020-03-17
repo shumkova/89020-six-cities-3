@@ -1,5 +1,5 @@
 import {extend} from "../../utils";
-import EditUser from "../../editUser";
+import EditAuthInfo from "../../editAuthInfo";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,
@@ -8,12 +8,12 @@ const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
-  userData: {},
+  authInfo: {},
 };
 
 const ActionTypes = {
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
-  SET_USER: `SET_USER`,
+  SET_INFO: `SET_INFO`,
 };
 
 const ActionCreator = {
@@ -26,7 +26,7 @@ const ActionCreator = {
 
   setUser: (data) => {
     return {
-      type: ActionTypes.SET_USER,
+      type: ActionTypes.SET_INFO,
       payload: data,
     };
   }
@@ -39,9 +39,9 @@ const reducer = (state = initialState, action) => {
         authorizationStatus: action.payload,
       });
 
-    case ActionTypes.SET_USER:
+    case ActionTypes.SET_INFO:
       return extend(state, {
-        userData: action.payload,
+        authInfo: action.payload,
       });
   }
 
@@ -51,8 +51,9 @@ const reducer = (state = initialState, action) => {
 const Operation = {
   checkAuth: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
+      .then((response) => {
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.setUser(EditAuthInfo.parseUser(response.data)));
       })
       .catch((err) => {
         throw err;
@@ -65,7 +66,7 @@ const Operation = {
       password: authData.password,
     })
       .then((response) => {
-        const user = EditUser.parseUser(response.data);
+        const user = EditAuthInfo.parseUser(response.data);
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setUser(user));
       });

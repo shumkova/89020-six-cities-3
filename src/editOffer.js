@@ -8,14 +8,14 @@ class EditOffer {
         zoom: data.city.location[`zoom`],
       },
       name: data.city[`name`],
-    }
+    };
     this.description = data[`description`];
     this.goods = data[`goods`];
     this.host = {
       avatar: data.host[`avatar_url`],
       id: data.host[`id`],
       name: data.host[`name`],
-      superStar: data.host[`is_pro`]
+      isPro: data.host[`is_pro`]
     };
     this.id = data[`id`];
     this.images = data[`images`];
@@ -25,7 +25,7 @@ class EditOffer {
       latitude: data.location[`latitude`],
       longitude: data.location[`longitude`],
       zoom: data.location[`zoom`],
-    }
+    };
     this.adults = data[`max_adults`];
     this.preview = data[`preview_image`];
     this.price = data[`price`];
@@ -59,7 +59,7 @@ class EditOffer {
         'avatar_url': this.host.avatar,
         'id': this.host.id,
         'name': this.host.name,
-        'is_pro': this.host.superStar
+        'is_pro': this.host.isPro,
       },
       'id': this.id,
       'images': this.images,

@@ -4,15 +4,10 @@ import React from "react";
 const OfferCard = (props) => {
   const {offer, onCardHover, onHeaderClick} = props;
 
-  let hover = false;
-
   return (
     <article className="cities__place-card place-card"
-      onMouseOver={() => {
-        if (!hover) {
-          hover = true;
-          onCardHover(offer);
-        }
+      onMouseEnter={() => {
+        onCardHover(offer);
       }}
     >
       <div className="place-card__mark">
