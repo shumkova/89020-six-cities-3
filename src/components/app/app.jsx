@@ -1,14 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import {ActionCreator} from "../../reducer/app/app";
-import {connect} from "react-redux";
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
-
-import {getOffers, getCities, getReady} from "../../reducer/data/selectors";
-import {getCity} from "../../reducer/app/selectors";
-import {getAuthorizationStatus, getAuthInfo} from "../../reducer/user/selectors";
 
 const nameClickHandler = () => {};
 
@@ -38,6 +32,7 @@ class App extends React.PureComponent {
   }
 
   render() {
+    const {login} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -46,7 +41,7 @@ class App extends React.PureComponent {
           </Route>
           <Route exact path="/dev-login">
             <SignIn
-              onSubmit={() => {}}
+              onSubmit={login}
             />
           </Route>
         </Switch>
@@ -102,23 +97,8 @@ App.propTypes = {
   })).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  ready: getReady(state),
-  city: getCity(state),
-  offers: getOffers(state),
-  cities: getCities(state),
-  authorizationStatus: getAuthorizationStatus(state),
-  userData: getAuthInfo(state),
-});
+export default App;
 
-const mapDispatchToProps = (dispatch) => ({
-  onCityClick(evt, city) {
-    evt.preventDefault();
-    dispatch(ActionCreator.changeCity(city));
-  }
-});
-
-export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);

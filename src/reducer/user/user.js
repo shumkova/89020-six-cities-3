@@ -1,5 +1,5 @@
 import {extend} from "../../utils";
-import EditAuthInfo from "../../editAuthInfo";
+import EditAuthInfo from "../../adapters/edit-auth-info";
 
 const AuthorizationStatus = {
   AUTH: `AUTH`,

@@ -1,6 +1,6 @@
 import {ActionCreator as DataActionCreator} from "./data/data";
 import {ActionCreator as AppActionCreator} from "./app/app";
-import EditOffer from "../editOffer";
+import EditOffer from "../adapters/edit-offer";
 
 export const Operation = {
   loadHotels: () => (dispatch, getState, api) => {
