@@ -9,8 +9,8 @@ const CitiesList = (props) => {
       {cities.map((city, index) => (
         <li className="locations__item" key={`city-${index}`}>
           <a className={`locations__item-link tabs__item ${city.name === activeCity ? `tabs__item--active` : ``}`} href="#"
-            onClick={() => {
-              onCityClick(city.name);
+            onClick={(evt) => {
+              onCityClick(evt, city.name);
             }}
           >
             <span>{city.name}</span>
@@ -22,7 +22,6 @@ const CitiesList = (props) => {
 };
 
 CitiesList.propTypes = {
-  // cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   cities: PropTypes.array.isRequired,
   onCityClick: PropTypes.func.isRequired,
   activeCity: PropTypes.string.isRequired,

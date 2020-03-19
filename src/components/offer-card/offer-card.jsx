@@ -4,15 +4,10 @@ import React from "react";
 const OfferCard = (props) => {
   const {offer, onCardHover, onHeaderClick} = props;
 
-  let hover = false;
-
   return (
     <article className="cities__place-card place-card"
-      onMouseOver={() => {
-        if (!hover) {
-          hover = true;
-          onCardHover(offer);
-        }
+      onMouseEnter={() => {
+        onCardHover(offer);
       }}
     >
       <div className="place-card__mark">
@@ -20,7 +15,7 @@ const OfferCard = (props) => {
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={offer[`preview_image`]} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={offer.preview} width="260" height="200" alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
@@ -58,38 +53,38 @@ const OfferCard = (props) => {
 
 OfferCard.propTypes = {
   offer: PropTypes.shape({
-    "bedrooms": PropTypes.number.isRequired,
-    "city": PropTypes.shape({
-      "name": PropTypes.string.isRequired,
-      "location": PropTypes.shape({
-        "latitude": PropTypes.number.isRequired,
-        "longitude": PropTypes.number.isRequired,
-        "zoom": PropTypes.number.isRequired,
+    bedrooms: PropTypes.number.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
       }).isRequired,
     }).isRequired,
-    "description": PropTypes.string.isRequired,
-    "goods": PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    "host": PropTypes.shape({
-      'avatar_url': PropTypes.string.isRequired,
-      'id': PropTypes.number.isRequired,
-      'name': PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    host: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
     }),
-    "id": PropTypes.number.isRequired,
-    "images": PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-    "is_favorite": PropTypes.bool.isRequired,
-    "is_premium": PropTypes.bool.isRequired,
-    "location": PropTypes.shape({
-      "latitude": PropTypes.number.isRequired,
-      "longitude": PropTypes.number.isRequired,
-      "zoom": PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
     }).isRequired,
-    "max_adults": PropTypes.number.isRequired,
-    "preview_image": PropTypes.string.isRequired,
-    "price": PropTypes.number.isRequired,
-    "rating": PropTypes.number.isRequired,
-    "title": PropTypes.string.isRequired,
-    "type": PropTypes.string.isRequired,
-  }),
+    adults: PropTypes.number.isRequired,
+    preview: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  }).isRequired,
   onCardHover: PropTypes.func.isRequired,
   onHeaderClick: PropTypes.func.isRequired,
 };

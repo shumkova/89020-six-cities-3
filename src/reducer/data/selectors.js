@@ -6,7 +6,7 @@ const getHotels = (state) => {
 };
 
 const getCity = (state) => {
-  return state[NameSpace.STATE].city;
+  return state[NameSpace.APP].city;
 };
 
 const getInitialCity = createSelector(

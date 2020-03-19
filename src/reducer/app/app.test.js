@@ -1,4 +1,4 @@
-import {reducer, ActionType, ActionCreator} from "./state";
+import {reducer, ActionTypes, ActionCreator} from "./app";
 
 describe(`Reducer works correctly`, () => {
   it(`Reducer without additional parameters should return initial state`, () => {
@@ -11,7 +11,7 @@ describe(`Reducer works correctly`, () => {
     expect(reducer({
       city: `Hamburg`,
     }, {
-      type: ActionType.CHANGE_CITY,
+      type: ActionTypes.CHANGE_CITY,
       payload: `Amsterdam`,
     })).toEqual({
       city: `Amsterdam`,
@@ -22,7 +22,7 @@ describe(`Reducer works correctly`, () => {
 describe(`Action creators work correctly`, () => {
   it(`Action creator returns object with new city`, () => {
     expect(ActionCreator.changeCity(`Paris`)).toEqual({
-      type: ActionType.CHANGE_CITY,
+      type: ActionTypes.CHANGE_CITY,
       payload: `Paris`,
     });
   });
