@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
+import {AppRoute} from "../../const";
+import PrivateRoute from "../private-route/private-route";
 
 const nameClickHandler = () => {};
 
@@ -11,39 +13,38 @@ class App extends React.PureComponent {
     super(props);
   }
 
-  _renderApp() {
-    const {offers, onCityClick, city, cities, ready, authorizationStatus, userData} = this.props;
-
-    if (!ready) {
-      return <>pending</>;
-    }
-
-    return (
-      <Main
-        onHeaderClick={nameClickHandler}
-        onCityClick={onCityClick}
-        offers={offers}
-        city={city}
-        cities={cities}
-        authorizationStatus={authorizationStatus}
-        userData={userData}
-      />
-    );
-  }
-
   render() {
-    const {login} = this.props;
+    const {login, offers, onCityClick, city, cities, ready, authorizationStatus, userData} = this.props;
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
+          <Route exact path={AppRoute.ROOT}>
+            {ready ?
+              <Main
+                onHeaderClick={nameClickHandler}
+                onCityClick={onCityClick}
+                offers={offers}
+                city={city}
+                cities={cities}
+                authorizationStatus={authorizationStatus}
+                userData={userData}
+              /> :
+              <>pending</>
+            }
           </Route>
-          <Route exact path="/login">
+          <Route exact path={AppRoute.LOGIN}>
             <SignIn
               onSubmit={login}
             />
           </Route>
+          <PrivateRoute
+            authorizationStatus={authorizationStatus}
+            exact
+            path={AppRoute.FAVORITES}
+            render={() => {
+              return <div>favorites</div>;
+            }}
+          />
         </Switch>
       </BrowserRouter>
     );
