@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
   login(authData) {
     dispatch(UserOperation.login(authData));
   },
-  onCityClick(evt, city) {
+  changeCity(evt, city) {
     dispatch(ActionCreator.changeCity(city));
   },
 });

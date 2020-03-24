@@ -14,7 +14,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {login, offers, onCityClick, city, cities, ready, authorizationStatus, userData} = this.props;
+    const {login, offers, changeCity, city, cities, ready, authorizationStatus, userData} = this.props;
     return (
       <BrowserRouter>
         <Switch>
@@ -22,7 +22,7 @@ class App extends React.PureComponent {
             {ready ?
               <Main
                 onHeaderClick={nameClickHandler}
-                onCityClick={onCityClick}
+                onCityClick={changeCity}
                 offers={offers}
                 city={city}
                 cities={cities}
@@ -85,7 +85,7 @@ App.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   })).isRequired,
-  onCityClick: PropTypes.func.isRequired,
+  changeCity: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
   ready: PropTypes.bool.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({

@@ -12,7 +12,7 @@ import Header from "../header/header";
 const OffersListWrapped = withActiveItem(OffersList);
 
 const Main = (props) => {
-  const {offers, onHeaderClick, onCityClick, city, cities, authorizationStatus, userData} = props;
+  const {offers, onHeaderClick, onCityClick, city, cities} = props;
 
   const coordinates = offers.map((offer) => offer.location);
   const cityCords = cities.find((item) => {

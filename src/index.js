@@ -6,8 +6,9 @@ import {Provider} from "react-redux";
 import reducer from "./reducer/reducer";
 import thunk from "redux-thunk";
 import {createApi} from "./api";
-import {Operation as DataOperation} from "./reducer/operation";
+import {Operation as Operation} from "./reducer/operation";
 import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
+import {Operation as FavoritesOperation} from "./reducer/favorites/favorites";
 
 import App from "./components/app/app.connect";
 
@@ -24,8 +25,9 @@ const store = createStore(
     )
 );
 
-store.dispatch(DataOperation.loadHotels());
+store.dispatch(Operation.loadHotels());
 store.dispatch(UserOperation.checkAuth());
+store.dispatch(Operation.loadFavorites());
 
 ReactDOM.render(
     <Provider store={store}>
