@@ -39,7 +39,7 @@ class App extends React.PureComponent {
           <Route exact path="/">
             {this._renderApp()}
           </Route>
-          <Route exact path="/dev-login">
+          <Route exact path="/login">
             <SignIn
               onSubmit={login}
             />

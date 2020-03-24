@@ -20,7 +20,8 @@ export const createApi = (onUnauthorized) => {
 
     if (response.status === Errors.UNAUTHORIZED) {
       onUnauthorized();
-      throw err;
+
+      // window.location = `/login`;
     }
 
     throw err;
