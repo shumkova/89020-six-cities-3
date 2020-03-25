@@ -8,7 +8,6 @@ import thunk from "redux-thunk";
 import {createApi} from "./api";
 import {Operation as Operation} from "./reducer/operation";
 import {Operation as UserOperation, ActionCreator, AuthorizationStatus} from "./reducer/user/user.js";
-import {Operation as FavoritesOperation} from "./reducer/favorites/favorites";
 
 import App from "./components/app/app.connect";
 

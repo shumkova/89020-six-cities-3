@@ -4,9 +4,6 @@ import OffersList from "../offers-list/offers-list";
 import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
-import {AuthorizationStatus} from "../../reducer/user/user";
-import {Link} from "react-router-dom";
-import {AppRoute} from "../../const";
 import Header from "../header/header";
 
 const OffersListWrapped = withActiveItem(OffersList);

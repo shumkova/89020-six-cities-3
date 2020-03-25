@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
 import {AppRoute} from "../../const";
 import PrivateRoute from "../private-route/private-route";
+import history from "../../history";
 
 const nameClickHandler = () => {};
 
@@ -16,7 +17,9 @@ class App extends React.PureComponent {
   render() {
     const {login, offers, changeCity, city, cities, ready, authorizationStatus, userData} = this.props;
     return (
-      <BrowserRouter>
+      <Router
+        history={history}
+      >
         <Switch>
           <Route exact path={AppRoute.ROOT}>
             {ready ?
@@ -46,7 +49,7 @@ class App extends React.PureComponent {
             }}
           />
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }

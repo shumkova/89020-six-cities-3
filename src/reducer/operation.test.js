@@ -3,6 +3,7 @@ import MockAdapter from "axios-mock-adapter";
 import {createApi} from "../api";
 import {ActionTypes as DataActionTypes} from "./data/data";
 import {ActionTypes as AppActionTypes} from "./app/app";
+import {ActionTypes as FavoritesActionTypes} from "./favorites/favorites";
 import EditOffer from "../adapters/edit-offer";
 
 const api = createApi(() => {});
@@ -42,6 +43,8 @@ const rawHotels = [{
   "type": `apartment`
 }];
 
+const hotels = EditOffer.parseOffers(rawHotels);
+
 describe(`Operation works correctly`, () => {
   it(`Should make a correct API call to /hotels, change application's state and set city`, () => {
     const apiMock = new MockAdapter(api);
@@ -57,7 +60,7 @@ describe(`Operation works correctly`, () => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: DataActionTypes.LOAD_HOTELS,
-          payload: EditOffer.parseOffers(rawHotels),
+          payload: hotels,
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {

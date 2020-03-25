@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import OfferCard from "./offer-card";
+import {AuthorizationStatus} from "../../reducer/user/user";
 
 const offer = {
   bedrooms: 3,
@@ -37,15 +38,16 @@ const offer = {
   type: `apartment`
 };
 
-const onCardHover = () => {};
-const onHeaderClick = () => {};
+const noop = () => {};
 
 it(`Render OfferCard`, () => {
   const tree = renderer.create(
       <OfferCard
         offer={offer}
-        onCardHover={onCardHover}
-        onHeaderClick={onHeaderClick}
+        onCardHover={noop}
+        onHeaderClick={noop}
+        onBookmarkClick={noop}
+        authorizationStatus={AuthorizationStatus.AUTH}
       />
   ).toJSON;
 
