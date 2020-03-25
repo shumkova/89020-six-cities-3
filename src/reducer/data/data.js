@@ -54,7 +54,6 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.CHANGE_FAVORITE: {
       return extend(state, {
         hotels: state.hotels.map((hotel) => (hotel.id === action.payload.id ?
-          // {...hotel, isFavorite: action.payload.isFavorite} : hotel)),
           extend(hotel, {
             isFavorite: action.payload.isFavorite
           }) : hotel)),
