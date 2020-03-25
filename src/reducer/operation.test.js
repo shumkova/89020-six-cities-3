@@ -3,7 +3,6 @@ import MockAdapter from "axios-mock-adapter";
 import {createApi} from "../api";
 import {ActionTypes as DataActionTypes} from "./data/data";
 import {ActionTypes as AppActionTypes} from "./app/app";
-import {ActionTypes as FavoritesActionTypes} from "./favorites/favorites";
 import EditOffer from "../adapters/edit-offer";
 
 const api = createApi(() => {});
