@@ -2,6 +2,13 @@ import React from "react";
 import renderer from "react-test-renderer";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import Main from "./main";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space";
+import {Router} from "react-router-dom";
+import history from "../../history";
+
+const mockStore = configureStore([]);
 
 const offers = [{
   bedrooms: 3,
@@ -56,17 +63,35 @@ const userData = {
 };
 
 it(`Render Main with offers and user email`, () => {
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      hotels: offers,
+      applicationIsReady: true,
+    },
+    [NameSpace.APP]: {
+      city: `Amsterdam`,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.AUTH,
+      authInfo: {},
+    }
+  });
+
   const tree = renderer
     .create(
-        <Main
-          offers={offers}
-          onHeaderClick={() => {}}
-          onCityClick={() => {}}
-          city={`Amsterdam`}
-          cities={cities}
-          authorizationStatus={AuthorizationStatus.AUTH}
-          userData={userData}
-        />, {
+        <Router history={history}>
+          <Provider store={store}>
+            <Main
+              offers={offers}
+              onHeaderClick={() => {}}
+              onCityClick={() => {}}
+              city={`Amsterdam`}
+              cities={cities}
+              authorizationStatus={AuthorizationStatus.AUTH}
+              userData={userData}
+            />
+          </Provider>
+        </Router>, {
           createNodeMock: () => {
             return document.createElement(`div`);
           }
@@ -76,17 +101,35 @@ it(`Render Main with offers and user email`, () => {
 });
 
 it(`Render Mail without offers`, () => {
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      hotels: offers,
+      applicationIsReady: true,
+    },
+    [NameSpace.APP]: {
+      city: `Amsterdam`,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.AUTH,
+      authInfo: {},
+    }
+  });
+
   const tree = renderer
       .create(
-          <Main
-            offers={[]}
-            onHeaderClick={() => {}}
-            onCityClick={() => {}}
-            city={`Amsterdam`}
-            cities={cities}
-            authorizationStatus={AuthorizationStatus.AUTH}
-            userData={userData}
-          />, {
+          <Router history={history}>
+            <Provider store={store}>
+              <Main
+                offers={[]}
+                onHeaderClick={() => {}}
+                onCityClick={() => {}}
+                city={`Amsterdam`}
+                cities={cities}
+                authorizationStatus={AuthorizationStatus.AUTH}
+                userData={userData}
+              />
+            </Provider>
+          </Router>, {
             createNodeMock: () => {
               return document.createElement(`div`);
             }
@@ -96,17 +139,35 @@ it(`Render Mail without offers`, () => {
 });
 
 it(`Render Main with offers and sign in`, () => {
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      hotels: offers,
+      applicationIsReady: true,
+    },
+    [NameSpace.APP]: {
+      city: `Amsterdam`,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authInfo: {},
+    }
+  });
+
   const tree = renderer
     .create(
-        <Main
-          offers={offers}
-          onHeaderClick={() => {}}
-          onCityClick={() => {}}
-          city={`Amsterdam`}
-          cities={cities}
-          authorizationStatus={AuthorizationStatus.NO_AUTH}
-          userData={userData}
-        />, {
+        <Router history={history}>
+          <Provider store={store}>
+            <Main
+              offers={offers}
+              onHeaderClick={() => {}}
+              onCityClick={() => {}}
+              city={`Amsterdam`}
+              cities={cities}
+              authorizationStatus={AuthorizationStatus.NO_AUTH}
+              userData={userData}
+            />
+          </Provider>
+        </Router>, {
           createNodeMock: () => {
             return document.createElement(`div`);
           }

@@ -1,6 +1,14 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import OffersList from "./offers-list";
+import {Provider} from "react-redux";
+import configureStore from "redux-mock-store";
+import NameSpace from "../../reducer/name-space";
+import {Router} from "react-router-dom";
+import history from "../../history";
+import {AuthorizationStatus} from "../../reducer/user/user";
+
+const mockStore = configureStore([]);
 
 const offers = [{
   bedrooms: 3,
@@ -38,12 +46,31 @@ const offers = [{
 }];
 
 it(`Render OffersList`, () => {
+  const store = mockStore({
+    [NameSpace.DATA]: {
+      hotels: offers,
+      applicationIsReady: true,
+    },
+    [NameSpace.APP]: {
+      city: `Amsterdam`,
+    },
+    [NameSpace.USER]: {
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
+      authInfo: {},
+    }
+  });
+
   const tree = renderer.create(
-      <OffersList
-        offers={offers}
-        onHeaderClick={() => {}}
-        onItemHover={() => {}}
-      />
+      <Router history={history}>
+        <Provider store={store}>
+          <OffersList
+            offers={offers}
+            onHeaderClick={() => {}}
+            onItemHover={() => {}}
+          />
+        </Provider>
+      </Router>
+
   ).toJSON;
 
   expect(tree).toMatchSnapshot();

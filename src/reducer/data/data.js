@@ -8,6 +8,7 @@ const initialState = {
 const ActionTypes = {
   LOAD_HOTELS: `LOAD_HOTELS`,
   ACTIVATE_APP: `ACTIVATE_APP`,
+  CHANGE_FAVORITE: `CHANGE_FAVORITE`,
 };
 
 const ActionCreator = {
@@ -24,6 +25,13 @@ const ActionCreator = {
       payload: true,
     };
   },
+
+  changeFavorite: (hotel) => {
+    return {
+      type: ActionTypes.CHANGE_FAVORITE,
+      payload: hotel,
+    };
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -41,6 +49,14 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.SET_CITY: {
       return extend(state, {
         city: action.payload,
+      });
+    }
+    case ActionTypes.CHANGE_FAVORITE: {
+      return extend(state, {
+        hotels: state.hotels.map((hotel) => (hotel.id === action.payload.id ?
+          extend(hotel, {
+            isFavorite: action.payload.isFavorite
+          }) : hotel)),
       });
     }
   }

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header should render properly Header with Log In 1`] = `[Function]`;
+
+exports[`Header should render properly Header with email 1`] = `[Function]`;

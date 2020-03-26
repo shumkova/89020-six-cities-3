@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import OfferCard from "../offer-card/offer-card";
+import OfferCard from "../offer-card/offer-card.connect";
 
 const OffersList = (props) => {
   const {offers, onHeaderClick, onItemHover} = props;

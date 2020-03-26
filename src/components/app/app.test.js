@@ -43,6 +43,25 @@ const HOTELS = [{
   type: `apartment`
 }];
 
+const cities = [{
+  location: {
+    latitude: 52.370216,
+    longitude: 4.895168,
+    zoom: 10
+  },
+  name: `Amsterdam`
+}];
+
+const userData = {
+  avatar: `img/1.png`,
+  email: `Oliver.conner@gmail.com`,
+  id: 1,
+  isPro: false,
+  name: `Oliver.conner`
+};
+
+const noop = () => {};
+
 it(`App should render everything`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
@@ -62,7 +81,15 @@ it(`App should render everything`, () => {
     .create(
         <Provider store={store}>
           <App
-            onCityClick={() => {}}
+            onCityClick={noop}
+            login={noop}
+            offers={HOTELS}
+            changeCity={noop}
+            city={`Amsterdam`}
+            cities={cities}
+            ready={true}
+            authorizationStatus={AuthorizationStatus.AUTH}
+            userData={userData}
           />
         </Provider>, {
           createNodeMock: () => {
@@ -92,7 +119,15 @@ it(`App should render "pending"`, () => {
     .create(
         <Provider store={store}>
           <App
-            onCityClick={() => {}}
+            onCityClick={noop}
+            login={noop}
+            offers={HOTELS}
+            changeCity={noop}
+            city={`Amsterdam`}
+            cities={cities}
+            ready={false}
+            authorizationStatus={AuthorizationStatus.AUTH}
+            userData={userData}
           />
         </Provider>, {
           createNodeMock: () => {

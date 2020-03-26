@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route, Switch} from 'react-router-dom';
 import Main from "../main/main";
 import SignIn from "../sign-in/sign-in";
+import {AppRoute} from "../../const";
+import PrivateRoute from "../private-route/private-route";
+import history from "../../history";
 
 const nameClickHandler = () => {};
 
@@ -11,41 +14,42 @@ class App extends React.PureComponent {
     super(props);
   }
 
-  _renderApp() {
-    const {offers, onCityClick, city, cities, ready, authorizationStatus, userData} = this.props;
-
-    if (!ready) {
-      return <>pending</>;
-    }
-
-    return (
-      <Main
-        onHeaderClick={nameClickHandler}
-        onCityClick={onCityClick}
-        offers={offers}
-        city={city}
-        cities={cities}
-        authorizationStatus={authorizationStatus}
-        userData={userData}
-      />
-    );
-  }
-
   render() {
-    const {login} = this.props;
+    const {login, offers, changeCity, city, cities, ready, authorizationStatus, userData} = this.props;
     return (
-      <BrowserRouter>
+      <Router
+        history={history}
+      >
         <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
+          <Route exact path={AppRoute.ROOT}>
+            {ready ?
+              <Main
+                onHeaderClick={nameClickHandler}
+                onCityClick={changeCity}
+                offers={offers}
+                city={city}
+                cities={cities}
+                authorizationStatus={authorizationStatus}
+                userData={userData}
+              /> :
+              <>pending</>
+            }
           </Route>
-          <Route exact path="/dev-login">
+          <Route exact path={AppRoute.LOGIN}>
             <SignIn
               onSubmit={login}
             />
           </Route>
+          <PrivateRoute
+            authorizationStatus={authorizationStatus}
+            exact
+            path={AppRoute.FAVORITES}
+            render={() => {
+              return <div>favorites</div>;
+            }}
+          />
         </Switch>
-      </BrowserRouter>
+      </Router>
     );
   }
 }
@@ -84,7 +88,7 @@ App.propTypes = {
     title: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
   })).isRequired,
-  onCityClick: PropTypes.func.isRequired,
+  changeCity: PropTypes.func.isRequired,
   city: PropTypes.string.isRequired,
   ready: PropTypes.bool.isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape({

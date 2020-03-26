@@ -42,6 +42,8 @@ const rawHotels = [{
   "type": `apartment`
 }];
 
+const hotels = EditOffer.parseOffers(rawHotels);
+
 describe(`Operation works correctly`, () => {
   it(`Should make a correct API call to /hotels, change application's state and set city`, () => {
     const apiMock = new MockAdapter(api);
@@ -57,7 +59,7 @@ describe(`Operation works correctly`, () => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: DataActionTypes.LOAD_HOTELS,
-          payload: EditOffer.parseOffers(rawHotels),
+          payload: hotels,
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
