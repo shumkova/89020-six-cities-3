@@ -16,24 +16,26 @@ class App extends React.PureComponent {
 
   render() {
     const {login, offers, changeCity, city, cities, ready, authorizationStatus, userData} = this.props;
+
+    if (!ready) {
+      return <>pending</>;
+    }
+
     return (
       <Router
         history={history}
       >
         <Switch>
           <Route exact path={AppRoute.ROOT}>
-            {ready ?
-              <Main
-                onHeaderClick={nameClickHandler}
-                onCityClick={changeCity}
-                offers={offers}
-                city={city}
-                cities={cities}
-                authorizationStatus={authorizationStatus}
-                userData={userData}
-              /> :
-              <>pending</>
-            }
+            <Main
+              onHeaderClick={nameClickHandler}
+              onCityClick={changeCity}
+              offers={offers}
+              city={city}
+              cities={cities}
+              authorizationStatus={authorizationStatus}
+              userData={userData}
+            />
           </Route>
           <Route exact path={AppRoute.LOGIN}>
             <SignIn
