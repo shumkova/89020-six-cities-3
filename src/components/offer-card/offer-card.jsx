@@ -3,9 +3,12 @@ import React from "react";
 import history from "../../history";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {AppRoute} from "../../const";
+import {Link} from "react-router-dom";
 
 const OfferCard = (props) => {
   const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus} = props;
+
+  const percent = parseFloat(offer.rating) / 5 * 100 + `%`;
 
   return (
     <article className="cities__place-card place-card"
@@ -44,16 +47,19 @@ const OfferCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}}></span>
+            <span style={{width: percent}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#"
-            onClick={onHeaderClick}
+          <Link
+            to={AppRoute.OFFER + `/${offer.id}`}
+            onClick={() => {
+              onHeaderClick(offer);
+            }}
           >
             {offer.title}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
