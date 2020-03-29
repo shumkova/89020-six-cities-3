@@ -1,7 +1,6 @@
 import {ActionCreator as DataActionCreator} from "./data/data";
 import {ActionCreator as AppActionCreator} from "./app/app";
 import EditOffer from "../adapters/edit-offer";
-import {ActionCreator as FavoritesActionCreator} from "./favorites/favorites";
 
 export const Operation = {
   loadHotels: () => (dispatch, getState, api) => {
@@ -21,7 +20,7 @@ export const Operation = {
     return api.get(`/favorite`)
       .then((response) => {
         const offers = EditOffer.parseOffers(response.data);
-        dispatch(FavoritesActionCreator.loadFavorites(offers));
+        dispatch(DataActionCreator.loadFavorites(offers));
       });
   },
 
@@ -33,7 +32,6 @@ export const Operation = {
     })
       .then((response) => {
         const updatedOffer = EditOffer.parseOffer(response.data);
-        dispatch(FavoritesActionCreator.changeFavorite(updatedOffer));
         dispatch(DataActionCreator.changeFavorite(updatedOffer));
       });
   }
