@@ -1,16 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import Header from "../header/header";
-import {getActiveOffer} from "../../reducer/app/selectors";
-import {getAuthorizationStatus} from "../../reducer/user/selectors";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import history from "../../history";
 import {AppRoute} from "../../const";
 
 const DetailOffer = (props) => {
   const {offer, onBookmarkClick, authorizationStatus} = props;
-  console.log(offer);
 
   const percent = parseFloat(offer.rating) / 5 * 100 + `%`;
 
@@ -91,7 +87,7 @@ const DetailOffer = (props) => {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={offer.host.avatar} width="74" height="74" alt="Host avatar"></img>
+                    <img className="property__avatar user__avatar" src={`../` + offer.host.avatar} width="74" height="74" alt="Host avatar"></img>
                   </div>
                   <span className="property__user-name">
                     {offer.host.name}
@@ -329,11 +325,4 @@ DetailOffer.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  offer: getActiveOffer(state),
-  authorizationStatus: getAuthorizationStatus(state),
-});
-
-export {DetailOffer};
-
-export default connect(mapStateToProps)(DetailOffer);
+export default DetailOffer;

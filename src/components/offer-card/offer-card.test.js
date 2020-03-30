@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import OfferCard from "./offer-card";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {Router} from "react-router-dom";
+import history from "../../history";
 
 const offer = {
   bedrooms: 3,
@@ -42,13 +44,15 @@ const noop = () => {};
 
 it(`Render OfferCard`, () => {
   const tree = renderer.create(
-      <OfferCard
-        offer={offer}
-        onCardHover={noop}
-        onHeaderClick={noop}
-        onBookmarkClick={noop}
-        authorizationStatus={AuthorizationStatus.AUTH}
-      />
+      <Router history={history}>
+        <OfferCard
+          offer={offer}
+          onCardHover={noop}
+          onHeaderClick={noop}
+          onBookmarkClick={noop}
+          authorizationStatus={AuthorizationStatus.AUTH}
+        />
+      </Router>
   ).toJSON;
 
   expect(tree).toMatchSnapshot();

@@ -1,7 +1,7 @@
 import {extend} from "../../utils";
 
 const initialState = {
-  city: `Hamburg`,
+  city: ``,
   offer: {},
 };
 

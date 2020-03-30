@@ -45,6 +45,8 @@ const offers = [{
   type: `apartment`
 }];
 
+const noop = () => {};
+
 it(`Render OffersList`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
@@ -65,8 +67,9 @@ it(`Render OffersList`, () => {
         <Provider store={store}>
           <OffersList
             offers={offers}
-            onHeaderClick={() => {}}
-            onItemHover={() => {}}
+            onHeaderClick={noop}
+            onBookmarkClick={noop}
+            onItemHover={noop}
           />
         </Provider>
       </Router>

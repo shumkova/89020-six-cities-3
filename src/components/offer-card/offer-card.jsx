@@ -53,6 +53,7 @@ const OfferCard = (props) => {
         </div>
         <h2 className="place-card__name">
           <Link
+            className="place-card__name-link"
             to={AppRoute.OFFER + `/${offer.id}`}
             onClick={() => {
               onHeaderClick(offer);

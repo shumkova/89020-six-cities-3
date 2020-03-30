@@ -70,6 +70,7 @@ it(`App should render everything`, () => {
     },
     [NameSpace.APP]: {
       city: `Amsterdam`,
+      offer: {},
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -82,6 +83,10 @@ it(`App should render everything`, () => {
         <Provider store={store}>
           <App
             onCityClick={noop}
+            onHeaderClick={noop}
+            setActiveOffer={noop}
+            changeFavorite={noop}
+            onBookmarkClick={noop}
             login={noop}
             offers={HOTELS}
             changeCity={noop}
@@ -120,6 +125,10 @@ it(`App should render "pending"`, () => {
         <Provider store={store}>
           <App
             onCityClick={noop}
+            onHeaderClick={noop}
+            setActiveOffer={noop}
+            changeFavorite={noop}
+            onBookmarkClick={noop}
             login={noop}
             offers={HOTELS}
             changeCity={noop}

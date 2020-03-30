@@ -6,7 +6,7 @@ import SignIn from "../sign-in/sign-in";
 import {AppRoute} from "../../const";
 import PrivateRoute from "../private-route/private-route";
 import history from "../../history";
-import DetailOffer from "../detail-offer/detail-offer";
+import DetailOffer from "../detail-offer/detail-offer.connect";
 
 class App extends React.PureComponent {
   constructor(props) {
