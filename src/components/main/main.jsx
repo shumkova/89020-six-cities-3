@@ -9,7 +9,7 @@ import Header from "../header/header";
 const OffersListWrapped = withActiveItem(OffersList);
 
 const Main = (props) => {
-  const {offers, onHeaderClick, onCityClick, city, cities} = props;
+  const {offers, onHeaderClick, onCityClick, city, cities, onBookmarkClick} = props;
 
   const coordinates = offers.map((offer) => offer.location);
   const cityCords = cities.find((item) => {
@@ -57,6 +57,7 @@ const Main = (props) => {
                 <OffersListWrapped
                   offers={offers}
                   onHeaderClick={onHeaderClick}
+                  onBookmarkClick={onBookmarkClick}
                 />
 
               </section>
@@ -137,6 +138,7 @@ Main.propTypes = {
   })).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
+  onBookmarkClick: PropTypes.func.isRequired,
 };
 
 export default Main;

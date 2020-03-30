@@ -5,6 +5,7 @@ import {getAuthInfo, getAuthorizationStatus} from "../../reducer/user/selectors"
 import {ActionCreator} from "../../reducer/app/app";
 import {Operation as UserOperation} from "../../reducer/user/user";
 import App from "./app";
+import {Operation} from "../../reducer/operation";
 
 const mapStateToProps = (state) => ({
   ready: getReady(state),
@@ -21,6 +22,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   changeCity(evt, city) {
     dispatch(ActionCreator.changeCity(city));
+  },
+  setActiveOffer(offer) {
+    dispatch(ActionCreator.setOffer(offer));
+  },
+  changeFavorite(offer) {
+    dispatch(Operation.changeFavorite(offer));
   },
 });
 

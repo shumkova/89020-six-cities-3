@@ -375,7 +375,7 @@ exports[`Render Main with offers and sign in 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "96%",
                         }
                       }
                     />
@@ -390,7 +390,8 @@ exports[`Render Main with offers and sign in 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    className="place-card__name-link"
+                    href="/offer/1"
                     onClick={[Function]}
                   >
                     Beautiful & luxurious studio at great location
@@ -672,7 +673,7 @@ exports[`Render Main with offers and user email 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "96%",
                         }
                       }
                     />
@@ -687,7 +688,8 @@ exports[`Render Main with offers and user email 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    className="place-card__name-link"
+                    href="/offer/1"
                     onClick={[Function]}
                   >
                     Beautiful & luxurious studio at great location

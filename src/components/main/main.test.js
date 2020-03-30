@@ -62,6 +62,8 @@ const userData = {
   name: `Oliver.conner`
 };
 
+const noop = () => {};
+
 it(`Render Main with offers and user email`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
@@ -83,8 +85,9 @@ it(`Render Main with offers and user email`, () => {
           <Provider store={store}>
             <Main
               offers={offers}
-              onHeaderClick={() => {}}
-              onCityClick={() => {}}
+              onHeaderClick={noop}
+              onCityClick={noop}
+              onBookmarkClick={noop}
               city={`Amsterdam`}
               cities={cities}
               authorizationStatus={AuthorizationStatus.AUTH}
@@ -121,8 +124,9 @@ it(`Render Mail without offers`, () => {
             <Provider store={store}>
               <Main
                 offers={[]}
-                onHeaderClick={() => {}}
-                onCityClick={() => {}}
+                onHeaderClick={noop}
+                onCityClick={noop}
+                onBookmarkClick={noop}
                 city={`Amsterdam`}
                 cities={cities}
                 authorizationStatus={AuthorizationStatus.AUTH}
@@ -159,8 +163,9 @@ it(`Render Main with offers and sign in`, () => {
           <Provider store={store}>
             <Main
               offers={offers}
-              onHeaderClick={() => {}}
-              onCityClick={() => {}}
+              onHeaderClick={noop}
+              onCityClick={noop}
+              onBookmarkClick={noop}
               city={`Amsterdam`}
               cities={cities}
               authorizationStatus={AuthorizationStatus.NO_AUTH}

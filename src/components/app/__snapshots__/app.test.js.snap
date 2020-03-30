@@ -249,7 +249,7 @@ exports[`App should render everything 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "96%",
                         }
                       }
                     />
@@ -264,7 +264,8 @@ exports[`App should render everything 1`] = `
                   className="place-card__name"
                 >
                   <a
-                    href="#"
+                    className="place-card__name-link"
+                    href="/offer/1"
                     onClick={[Function]}
                   >
                     Beautiful & luxurious studio at great location

@@ -63,13 +63,13 @@ describe(`Operation works correctly`, () => {
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(2, {
-          type: DataActionTypes.ACTIVATE_APP,
-          payload: true,
+          type: AppActionTypes.CHANGE_CITY,
+          payload: `Amsterdam`,
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(3, {
-          type: AppActionTypes.CHANGE_CITY,
-          payload: `Amsterdam`,
+          type: DataActionTypes.ACTIVATE_APP,
+          payload: true,
         });
       });
   });

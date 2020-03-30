@@ -3,7 +3,7 @@ import React from "react";
 import OfferCard from "../offer-card/offer-card.connect";
 
 const OffersList = (props) => {
-  const {offers, onHeaderClick, onItemHover} = props;
+  const {offers, onHeaderClick, onItemHover, onBookmarkClick} = props;
 
   return (
     <div className="cities__places-list places__list tabs__content">
@@ -14,6 +14,7 @@ const OffersList = (props) => {
           index={index}
           onCardHover={onItemHover}
           onHeaderClick={onHeaderClick}
+          onBookmarkClick={onBookmarkClick}
         />
       ))}
     </div>
@@ -56,6 +57,7 @@ OffersList.propTypes = {
   })).isRequired,
   onHeaderClick: PropTypes.func.isRequired,
   onItemHover: PropTypes.func.isRequired,
+  onBookmarkClick: PropTypes.func.isRequired,
 };
 
 export default OffersList;

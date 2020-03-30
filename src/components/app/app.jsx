@@ -6,8 +6,7 @@ import SignIn from "../sign-in/sign-in";
 import {AppRoute} from "../../const";
 import PrivateRoute from "../private-route/private-route";
 import history from "../../history";
-
-const nameClickHandler = () => {};
+import DetailOffer from "../detail-offer/detail-offer.connect";
 
 class App extends React.PureComponent {
   constructor(props) {
@@ -15,31 +14,40 @@ class App extends React.PureComponent {
   }
 
   render() {
-    const {login, offers, changeCity, city, cities, ready, authorizationStatus, userData} = this.props;
+    const {login, offers, changeCity, city, cities, ready, authorizationStatus, userData, setActiveOffer, changeFavorite} = this.props;
+
+    if (!ready) {
+      return <>pending</>;
+    }
+
     return (
       <Router
         history={history}
       >
         <Switch>
           <Route exact path={AppRoute.ROOT}>
-            {ready ?
-              <Main
-                onHeaderClick={nameClickHandler}
-                onCityClick={changeCity}
-                offers={offers}
-                city={city}
-                cities={cities}
-                authorizationStatus={authorizationStatus}
-                userData={userData}
-              /> :
-              <>pending</>
-            }
+            <Main
+              offers={offers}
+              city={city}
+              cities={cities}
+              authorizationStatus={authorizationStatus}
+              userData={userData}
+              onCityClick={changeCity}
+              onHeaderClick={setActiveOffer}
+              onBookmarkClick={changeFavorite}
+            />
           </Route>
           <Route exact path={AppRoute.LOGIN}>
             <SignIn
               onSubmit={login}
             />
           </Route>
+          <Route exact path={AppRoute.OFFER + `/:id?`}>
+            <DetailOffer
+              onBookmarkClick={changeFavorite}
+            />
+          </Route>
+
           <PrivateRoute
             authorizationStatus={authorizationStatus}
             exact
@@ -102,6 +110,8 @@ App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
+  setActiveOffer: PropTypes.func.isRequired,
+  changeFavorite: PropTypes.func.isRequired,
 };
 
 export default App;
