@@ -5,13 +5,13 @@ import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Header from "../header/header";
+import {ListKind} from "../../const";
 
 const OffersListWrapped = withActiveItem(OffersList);
 
 const Main = (props) => {
   const {offers, onHeaderClick, onCityClick, city, cities, onBookmarkClick} = props;
 
-  const coordinates = offers.map((offer) => offer.location);
   const cityCords = cities.find((item) => {
     return item.name === city;
   }).location;
@@ -58,13 +58,14 @@ const Main = (props) => {
                   offers={offers}
                   onHeaderClick={onHeaderClick}
                   onBookmarkClick={onBookmarkClick}
+                  kind={ListKind.OFFER}
                 />
 
               </section>
               <div className="cities__right-section">
                 <section className="cities__map map">
                   <Map
-                    coordinates={coordinates}
+                    places={offers}
                     cityCords={cityCords}
                   />
                 </section>
@@ -75,7 +76,7 @@ const Main = (props) => {
               <section className="cities__no-places">
                 <div className="cities__status-wrapper tabs__content">
                   <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">We could not find any property availbale at the moment in
+                  <p className="cities__status-description">We could not find any property available at the moment in
                     {city}</p>
                 </div>
               </section>

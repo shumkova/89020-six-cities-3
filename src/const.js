@@ -9,3 +9,8 @@ export const AppState = {
   PENDING: `Pending`,
   READY: `Ready`,
 };
+
+export const ListKind = {
+  OFFER: `offer`,
+  NEAR: `near`,
+};

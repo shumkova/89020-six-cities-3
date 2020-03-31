@@ -9,7 +9,20 @@ import history from "../../history";
 import DetailOffer from "../detail-offer/detail-offer.connect";
 
 const App = (props) => {
-  const {login, offers, changeCity, city, cities, appState, authorizationStatus, userData, setActiveOffer, changeFavorite} = props;
+  const {
+    activeOffer,
+    appState,
+    authorizationStatus,
+    changeCity,
+    changeFavorite,
+    city,
+    cities,
+    login,
+    nearbyOffers,
+    offers,
+    reviews,
+    setActiveOffer,
+    userData} = props;
 
   if (appState === AppState.PENDING) {
     return <>pending</>;
@@ -39,7 +52,13 @@ const App = (props) => {
         </Route>
         <Route exact path={AppRoute.OFFER + `/:id?`}>
           <DetailOffer
+            offer={activeOffer}
             onBookmarkClick={changeFavorite}
+            authorizationStatus={authorizationStatus}
+            reviews={reviews}
+            nearbyOffers={nearbyOffers}
+            cities={cities}
+            onHeaderClick={setActiveOffer}
           />
         </Route>
 

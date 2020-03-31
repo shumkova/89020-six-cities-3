@@ -19,7 +19,9 @@ class Map extends React.PureComponent {
   componentDidMount() {
     const mapRef = this._mapRef.current;
 
-    const {coordinates, cityCords} = this.props;
+    const {places, cityCords} = this.props;
+
+    const coordinates = places.map((place) => place.location);
 
     this._map = leaflet.map(mapRef, {
       center: [cityCords.latitude, cityCords.longitude],
@@ -47,7 +49,9 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    const {coordinates, cityCords} = this.props;
+    const {places, cityCords} = this.props;
+
+    const coordinates = places.map((place) => place.location);
 
     this._map.setView([cityCords.latitude, cityCords.longitude], cityCords.zoom);
 
@@ -72,7 +76,7 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
-  coordinates: PropTypes.arrayOf(
+  places: PropTypes.arrayOf(
       PropTypes.object.isRequired
   ).isRequired,
   cityCords: PropTypes.object.isRequired,

@@ -9,6 +9,12 @@ const getCity = (state) => {
   return state[NameSpace.APP].city;
 };
 
+const getHotelById = (state, id) => {
+  return state[NameSpace.DATA].hotels.find((hotel) => {
+    return hotel.id === id;
+  });
+};
+
 const getInitialCity = createSelector(
     getHotels,
     (hotels) => {
@@ -37,14 +43,14 @@ const getCities = createSelector(
         citiesNames.add(hotel.city.name);
       });
 
-      const hotelsWithUnicCities = Array.of(...citiesNames)
+      const hotelsWithUniqCities = Array.of(...citiesNames)
         .map((city) => {
           return hotels.find((hotel) => {
             return hotel.city.name === city;
           });
         });
 
-      const cities = hotelsWithUnicCities.map((hotel) => {
+      const cities = hotelsWithUniqCities.map((hotel) => {
         return hotel.city;
       });
 
@@ -57,4 +63,4 @@ const getAppState = (state) => {
 };
 
 
-export {getHotels, getInitialCity, getOffers, getCities, getAppState};
+export {getHotels, getInitialCity, getOffers, getCities, getAppState, getHotelById};

@@ -1,16 +1,20 @@
 import {extend} from "../../utils";
 import EditComment from "../../adapters/edit-comment";
+import EditOffer from "../../adapters/edit-offer";
+import {AppState} from "../../const";
 
 const initialState = {
   city: ``,
   offer: {},
   reviews: [],
+  nearbyOffers: [],
 };
 
 const ActionTypes = {
   CHANGE_CITY: `CHANGE_CITY`,
   SET_OFFER: `SET_OFFER`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
+  LOAD_NEARBY: `LOAD_NEARBY`,
 };
 
 const ActionCreator = {
@@ -27,7 +31,12 @@ const ActionCreator = {
   loadReviews: (reviews) => ({
     type: ActionTypes.LOAD_REVIEWS,
     payload: reviews,
-  })
+  }),
+
+  loadNearbyOffers: (offers) => ({
+    type: ActionTypes.LOAD_NEARBY,
+    payload: offers,
+  }),
 };
 
 
@@ -48,6 +57,12 @@ const reducer = (state = initialState, action) => {
         reviews: action.payload,
       });
     }
+
+    case ActionTypes.LOAD_NEARBY: {
+      return extend(state, {
+        nearbyOffers: action.payload,
+      });
+    }
   }
 
   return state;
@@ -65,6 +80,17 @@ const Operation = {
         throw err;
       });
   },
+
+  loadNearbyOffers: (id) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${id}/nearby`)
+      .then((response) => {
+        const offers = EditOffer.parseOffers(response.data);
+        dispatch(ActionCreator.loadNearbyOffers(offers));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
 };
 
 export {reducer, ActionTypes, ActionCreator, Operation};

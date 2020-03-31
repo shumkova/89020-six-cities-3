@@ -1,12 +1,13 @@
 import {connect} from "react-redux";
 import {getCities, getOffers, getAppState} from "../../reducer/data/selectors";
-import {getCity} from "../../reducer/app/selectors";
+import {getActiveOffer, getCity, getNearbyOffers, getReviews} from "../../reducer/app/selectors";
 import {getAuthInfo, getAuthorizationStatus} from "../../reducer/user/selectors";
-import {ActionCreator} from "../../reducer/app/app";
+import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
+import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
 import {Operation as UserOperation} from "../../reducer/user/user";
-import {Operation as AppOperation} from "../../reducer/app/app"
 import App from "./app";
 import {Operation} from "../../reducer/operation";
+import {AppState} from "../../const";
 
 const mapStateToProps = (state) => ({
   appState: getAppState(state),
@@ -15,6 +16,9 @@ const mapStateToProps = (state) => ({
   cities: getCities(state),
   authorizationStatus: getAuthorizationStatus(state),
   userData: getAuthInfo(state),
+  activeOffer: getActiveOffer(state),
+  reviews: getReviews(state),
+  nearbyOffers: getNearbyOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -22,11 +26,13 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(UserOperation.login(authData));
   },
   changeCity(evt, city) {
-    dispatch(ActionCreator.changeCity(city));
+    dispatch(AppActionCreator.changeCity(city));
   },
   setActiveOffer(offer) {
-    dispatch(ActionCreator.setOffer(offer));
-    dispatch(AppOperation.loadReviews(offer.id));
+    dispatch(DataActionCreator.changeAppReadiness(AppState.PENDING));
+    dispatch(AppActionCreator.setOffer(offer));
+    dispatch(Operation.loadReviews(offer.id));
+    dispatch(Operation.loadNearbyOffers(offer.id));
   },
   changeFavorite(offer) {
     dispatch(Operation.changeFavorite(offer));

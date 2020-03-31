@@ -12,4 +12,8 @@ const getReviews = (state) => {
   return state[NameSpace.APP].reviews;
 };
 
-export {getCity, getActiveOffer, getReviews};
+const getNearbyOffers = (state) => {
+  return state[NameSpace.APP].nearbyOffers;
+};
+
+export {getCity, getActiveOffer, getReviews, getNearbyOffers};

@@ -8,7 +8,7 @@ const initialState = {
 
 const ActionTypes = {
   LOAD_HOTELS: `LOAD_HOTELS`,
-  ACTIVATE_APP: `ACTIVATE_APP`,
+  CHANGE_APP_READINESS: `CHANGE_APP_READINESS`,
   LOAD_FAVORITES: `LOAD_FAVORITES`,
   CHANGE_FAVORITE: `CHANGE_FAVORITE`,
 };
@@ -19,9 +19,9 @@ const ActionCreator = {
     payload: hotels,
   }),
 
-  activateApp: () => ({
-    type: ActionTypes.ACTIVATE_APP,
-    payload: AppState.READY,
+  changeAppReadiness: (readiness) => ({
+    type: ActionTypes.CHANGE_APP_READINESS,
+    payload: readiness,
   }),
 
   loadFavorites: (offers) => ({
@@ -43,7 +43,7 @@ const reducer = (state = initialState, action) => {
       });
     }
 
-    case ActionTypes.ACTIVATE_APP: {
+    case ActionTypes.CHANGE_APP_READINESS: {
       return extend(state, {
         appState: AppState.READY,
       });
