@@ -4,6 +4,7 @@ import {getCity} from "../../reducer/app/selectors";
 import {getAuthInfo, getAuthorizationStatus} from "../../reducer/user/selectors";
 import {ActionCreator} from "../../reducer/app/app";
 import {Operation as UserOperation} from "../../reducer/user/user";
+import {Operation as AppOperation} from "../../reducer/app/app"
 import App from "./app";
 import {Operation} from "../../reducer/operation";
 
@@ -25,6 +26,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setActiveOffer(offer) {
     dispatch(ActionCreator.setOffer(offer));
+    dispatch(AppOperation.loadReviews(offer.id));
   },
   changeFavorite(offer) {
     dispatch(Operation.changeFavorite(offer));

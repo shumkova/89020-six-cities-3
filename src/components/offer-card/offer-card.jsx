@@ -6,7 +6,7 @@ import {AppRoute} from "../../const";
 import {Link} from "react-router-dom";
 
 const OfferCard = (props) => {
-  const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus} = props;
+  const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus, loadReviews} = props;
 
   const percent = parseFloat(offer.rating) / 5 * 100 + `%`;
 
@@ -107,6 +107,7 @@ OfferCard.propTypes = {
   onHeaderClick: PropTypes.func.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  loadReviews: PropTypes.func.isRequired,
 };
 
 export default OfferCard;

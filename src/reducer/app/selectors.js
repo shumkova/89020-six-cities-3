@@ -8,4 +8,8 @@ const getActiveOffer = (state) => {
   return state[NameSpace.APP].offer;
 };
 
-export {getCity, getActiveOffer};
+const getReviews = (state) => {
+  return state[NameSpace.APP].reviews;
+};
+
+export {getCity, getActiveOffer, getReviews};

@@ -14,31 +14,25 @@ const ActionTypes = {
 };
 
 const ActionCreator = {
-  loadHotels: (hotels) => {
-    return {
-      type: ActionTypes.LOAD_HOTELS,
-      payload: hotels,
-    };
-  },
+  loadHotels: (hotels) => ({
+    type: ActionTypes.LOAD_HOTELS,
+    payload: hotels,
+  }),
 
-  activateApp: () => {
-    return {
-      type: ActionTypes.ACTIVATE_APP,
-      payload: AppState.READY,
-    };
-  },
+  activateApp: () => ({
+    type: ActionTypes.ACTIVATE_APP,
+    payload: AppState.READY,
+  }),
 
   loadFavorites: (offers) => ({
     type: ActionTypes.LOAD_FAVORITES,
     payload: offers,
   }),
 
-  changeFavorite: (hotel) => {
-    return {
-      type: ActionTypes.CHANGE_FAVORITE,
-      payload: hotel,
-    };
-  }
+  changeFavorite: (hotel) => ({
+    type: ActionTypes.CHANGE_FAVORITE,
+    payload: hotel,
+  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -69,13 +63,14 @@ const reducer = (state = initialState, action) => {
       });
     }
 
-    case ActionTypes.CHANGE_FAVORITE:
+    case ActionTypes.CHANGE_FAVORITE: {
       return extend(state, {
         hotels: state.hotels.map((hotel) => (hotel.id === action.payload.id ?
           extend(hotel, {
             isFavorite: action.payload.isFavorite
           }) : hotel)),
       });
+    }
   }
 
   return state;
