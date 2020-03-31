@@ -52,9 +52,9 @@ const getCities = createSelector(
     }
 );
 
-const getReady = (state) => {
-  return state[NameSpace.DATA].applicationIsReady;
+const getAppState = (state) => {
+  return state[NameSpace.DATA].appState;
 };
 
 
-export {getHotels, getInitialCity, getOffers, getCities, getReady};
+export {getHotels, getInitialCity, getOffers, getCities, getAppState};

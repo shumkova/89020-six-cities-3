@@ -5,10 +5,12 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import history from "../../history";
 import {AppRoute} from "../../const";
 
+const MAX_STARS = 5;
+
 const DetailOffer = (props) => {
   const {offer, onBookmarkClick, authorizationStatus} = props;
 
-  const percent = parseFloat(offer.rating) / 5 * 100 + `%`;
+  const percentRating = Math.round(offer.rating) / MAX_STARS * 100 + `%`;
 
   return (
     <div className="page">
@@ -53,7 +55,7 @@ const DetailOffer = (props) => {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: percent}}></span>
+                  <span style={{width: percentRating}}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{offer.rating}</span>

@@ -4,3 +4,8 @@ export const AppRoute = {
   FAVORITES: `/favorites`,
   OFFER: `/offer`,
 };
+
+export const AppState = {
+  PENDING: `Pending`,
+  READY: `Ready`,
+};

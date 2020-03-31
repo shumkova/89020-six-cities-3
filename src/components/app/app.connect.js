@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {getCities, getOffers, getReady} from "../../reducer/data/selectors";
+import {getCities, getOffers, getAppState} from "../../reducer/data/selectors";
 import {getCity} from "../../reducer/app/selectors";
 import {getAuthInfo, getAuthorizationStatus} from "../../reducer/user/selectors";
 import {ActionCreator} from "../../reducer/app/app";
@@ -8,7 +8,7 @@ import App from "./app";
 import {Operation} from "../../reducer/operation";
 
 const mapStateToProps = (state) => ({
-  ready: getReady(state),
+  appState: getAppState(state),
   city: getCity(state),
   offers: getOffers(state),
   cities: getCities(state),

@@ -1,8 +1,9 @@
 import {extend} from "../../utils";
+import {AppState} from "../../const";
 
 const initialState = {
   hotels: [],
-  applicationIsReady: false,
+  appState: AppState.PENDING,
 };
 
 const ActionTypes = {
@@ -23,7 +24,7 @@ const ActionCreator = {
   activateApp: () => {
     return {
       type: ActionTypes.ACTIVATE_APP,
-      payload: true,
+      payload: AppState.READY,
     };
   },
 
@@ -50,7 +51,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionTypes.ACTIVATE_APP: {
       return extend(state, {
-        applicationIsReady: true,
+        appState: AppState.READY,
       });
     }
 

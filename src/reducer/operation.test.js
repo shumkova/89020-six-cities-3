@@ -4,6 +4,7 @@ import {createApi} from "../api";
 import {ActionTypes as DataActionTypes} from "./data/data";
 import {ActionTypes as AppActionTypes} from "./app/app";
 import EditOffer from "../adapters/edit-offer";
+import {AppState} from "../const";
 
 const api = createApi(() => {});
 
@@ -69,7 +70,7 @@ describe(`Operation works correctly`, () => {
 
         expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: DataActionTypes.ACTIVATE_APP,
-          payload: true,
+          payload: AppState.READY,
         });
       });
   });
