@@ -9,7 +9,9 @@ const ReviewsList = (props) => {
     <section className="property__reviews reviews">
       <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
       <ul className="reviews__list">
-        {reviews.map((review) => (
+        {reviews.sort((a, b) => {
+          return a.date.valueOf() - b.date.valueOf();
+        }).map((review) => (
           <Review
             key={review.id}
             review={review}

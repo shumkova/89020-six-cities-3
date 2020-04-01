@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {getCities, getOffers, getAppState} from "../../reducer/data/selectors";
-import {getActiveOffer, getCity, getNearbyOffers, getReviews} from "../../reducer/app/selectors";
+import {getCity} from "../../reducer/app/selectors";
 import {getAuthInfo, getAuthorizationStatus} from "../../reducer/user/selectors";
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
@@ -16,9 +16,6 @@ const mapStateToProps = (state) => ({
   cities: getCities(state),
   authorizationStatus: getAuthorizationStatus(state),
   userData: getAuthInfo(state),
-  activeOffer: getActiveOffer(state),
-  reviews: getReviews(state),
-  nearbyOffers: getNearbyOffers(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -30,9 +27,8 @@ const mapDispatchToProps = (dispatch) => ({
   },
   setActiveOffer(offer) {
     dispatch(DataActionCreator.changeAppReadiness(AppState.PENDING));
-    dispatch(AppActionCreator.setOffer(offer));
-    dispatch(Operation.loadReviews(offer.id));
-    dispatch(Operation.loadNearbyOffers(offer.id));
+    dispatch(AppActionCreator.setActiveOffer(offer));
+    dispatch(Operation.loadDetailOfferInfo(offer.id));
   },
   changeFavorite(offer) {
     dispatch(Operation.changeFavorite(offer));

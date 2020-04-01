@@ -6,10 +6,10 @@ import {getCities} from "../../reducer/data/selectors";
 
 const mapStateToProps = (state) => ({
   offer: getActiveOffer(state),
-  // authorizationStatus: getAuthorizationStatus(state),
-  // reviews: getReviews(state),
-  // nearbyOffers: getNearbyOffers(state),
-  // cities: getCities(state),
+  authorizationStatus: getAuthorizationStatus(state),
+  reviews: getReviews(state),
+  nearbyOffers: getNearbyOffers(state),
+  cities: getCities(state),
 });
 
 export default connect(mapStateToProps)(DetailOffer);

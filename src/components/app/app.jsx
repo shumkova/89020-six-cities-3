@@ -10,7 +10,6 @@ import DetailOffer from "../detail-offer/detail-offer.connect";
 
 const App = (props) => {
   const {
-    activeOffer,
     appState,
     authorizationStatus,
     changeCity,
@@ -18,9 +17,7 @@ const App = (props) => {
     city,
     cities,
     login,
-    nearbyOffers,
     offers,
-    reviews,
     setActiveOffer,
     userData} = props;
 
@@ -52,12 +49,7 @@ const App = (props) => {
         </Route>
         <Route exact path={AppRoute.OFFER + `/:id?`}>
           <DetailOffer
-            offer={activeOffer}
             onBookmarkClick={changeFavorite}
-            authorizationStatus={authorizationStatus}
-            reviews={reviews}
-            nearbyOffers={nearbyOffers}
-            cities={cities}
             onHeaderClick={setActiveOffer}
           />
         </Route>

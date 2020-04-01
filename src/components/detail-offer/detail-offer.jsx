@@ -119,7 +119,7 @@ const DetailOffer = (props) => {
             </div>
           </div>
           <section className="property__map map">
-            <Map coordinates={nearbyOffers} cityCords={cityCords}/>
+            <Map places={nearbyOffers} cityCords={cityCords}/>
           </section>
         </section>
         <div className="container">

@@ -5,14 +5,14 @@ import {AppState} from "../../const";
 
 const initialState = {
   city: ``,
-  offer: {},
+  activeOffer: {},
   reviews: [],
   nearbyOffers: [],
 };
 
 const ActionTypes = {
   CHANGE_CITY: `CHANGE_CITY`,
-  SET_OFFER: `SET_OFFER`,
+  SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_NEARBY: `LOAD_NEARBY`,
 };
@@ -23,8 +23,8 @@ const ActionCreator = {
     payload: newCity,
   }),
 
-  setOffer: (offer) => ({
-    type: ActionTypes.SET_OFFER,
+  setActiveOffer: (offer) => ({
+    type: ActionTypes.SET_ACTIVE_OFFER,
     payload: offer,
   }),
 
@@ -47,9 +47,9 @@ const reducer = (state = initialState, action) => {
         city: action.payload,
       });
 
-    case ActionTypes.SET_OFFER:
+    case ActionTypes.SET_ACTIVE_OFFER:
       return extend(state, {
-        offer: action.payload,
+        activeOffer: action.payload,
       });
 
     case ActionTypes.LOAD_REVIEWS: {

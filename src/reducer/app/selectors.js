@@ -5,7 +5,7 @@ const getCity = (state) => {
 };
 
 const getActiveOffer = (state) => {
-  return state[NameSpace.APP].offer;
+  return state[NameSpace.APP].activeOffer;
 };
 
 const getReviews = (state) => {
