@@ -9,7 +9,7 @@ const getCity = (state) => {
   return state[NameSpace.APP].city;
 };
 
-const getHotelById = (state, id) => {
+const getOfferById = (state, id) => {
   return state[NameSpace.DATA].hotels.find((hotel) => {
     return hotel.id === id;
   });
@@ -62,5 +62,4 @@ const getAppState = (state) => {
   return state[NameSpace.DATA].appState;
 };
 
-
-export {getHotels, getInitialCity, getOffers, getCities, getAppState, getHotelById};
+export {getHotels, getInitialCity, getOffers, getCities, getAppState, getOfferById};

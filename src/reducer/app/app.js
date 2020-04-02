@@ -6,7 +6,8 @@ import {SortTypes} from "../../const";
 
 const initialState = {
   city: ``,
-  activeOffer: {},
+  activeOffer: null,
+  currentOffer: null,
   reviews: [],
   nearbyOffers: [],
   sortType: SortTypes.POPULAR,
@@ -15,6 +16,7 @@ const initialState = {
 const ActionTypes = {
   CHANGE_CITY: `CHANGE_CITY`,
   SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
+  SET_CURRENT_OFFER: `SET_CURRENT_OFFER`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_NEARBY: `LOAD_NEARBY`,
   SET_SORTING_TYPE: `SET_SORTING_TYPE`,
@@ -26,9 +28,14 @@ const ActionCreator = {
     payload: newCity,
   }),
 
-  setActiveOffer: (offer) => ({
+  setActiveOffer: (offerId) => ({
     type: ActionTypes.SET_ACTIVE_OFFER,
-    payload: offer,
+    payload: offerId,
+  }),
+
+  setCurrentOffer: (offerId) => ({
+    type: ActionTypes.SET_CURRENT_OFFER,
+    payload: offerId,
   }),
 
   loadReviews: (reviews) => ({
@@ -58,6 +65,11 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.SET_ACTIVE_OFFER:
       return extend(state, {
         activeOffer: action.payload,
+      });
+
+    case ActionTypes.SET_CURRENT_OFFER:
+      return extend(state, {
+        currentOffer: action.payload,
       });
 
     case ActionTypes.LOAD_REVIEWS: {

@@ -9,15 +9,18 @@ import Sorting from "../sorting/sorting";
 import {ListKind} from "../../const";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 
-const OffersListWrapped = withActiveItem(OffersList);
+// const OffersListWrapped = withActiveItem(OffersList);
 const SortingWrapped = withToggle(Sorting);
 
 const Main = (props) => {
-  const {offers, onHeaderClick, onCityClick, city, cities, onBookmarkClick} = props;
+  const {offers, onHeaderClick, onCityClick, city, cities, onBookmarkClick, clearCurrentOffer} = props;
 
   const cityCords = cities.find((item) => {
     return item.name === city;
   }).location;
+
+  clearCurrentOffer();
+
 
   return (
     <div className="page page--gray">
@@ -44,7 +47,7 @@ const Main = (props) => {
 
                 <SortingWrapped/>
 
-                <OffersListWrapped
+                <OffersList
                   offers={offers}
                   onHeaderClick={onHeaderClick}
                   onBookmarkClick={onBookmarkClick}

@@ -8,6 +8,10 @@ const getActiveOffer = (state) => {
   return state[NameSpace.APP].activeOffer;
 };
 
+const getCurrentOffer = (state) => {
+  return state[NameSpace.APP].currentOffer;
+};
+
 const getReviews = (state) => {
   return state[NameSpace.APP].reviews;
 };
@@ -20,4 +24,4 @@ const getSortType = (state) => {
   return state[NameSpace.APP].sortType;
 }
 
-export {getCity, getActiveOffer, getReviews, getNearbyOffers, getSortType};
+export {getCity, getActiveOffer, getReviews, getNearbyOffers, getSortType, getCurrentOffer};
