@@ -5,6 +5,7 @@ import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import App from "./app";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {AppState} from "../../const";
 
 const mockStore = configureStore([]);
 
@@ -66,7 +67,7 @@ it(`App should render everything`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       hotels: HOTELS,
-      applicationIsReady: true,
+      state: AppState.READY,
     },
     [NameSpace.APP]: {
       city: `Amsterdam`,
@@ -109,10 +110,11 @@ it(`App should render "pending"`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       hotels: [],
-      applicationIsReady: false,
+      state: AppState.PENDING,
     },
     [NameSpace.APP]: {
       city: `Amsterdam`,
+      offer: {},
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,

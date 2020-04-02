@@ -1,15 +1,17 @@
 import PropTypes from "prop-types";
 import React from "react";
 import OfferCard from "../offer-card/offer-card.connect";
+import {ListKind} from "../../const";
 
 const OffersList = (props) => {
-  const {offers, onHeaderClick, onItemHover, onBookmarkClick} = props;
+  const {offers, onHeaderClick, onItemHover, onBookmarkClick, kind} = props;
 
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={`places__list ${kind === ListKind.OFFER ? `cities__places-list  tabs__content` : `near-places__list`}`}>
       {offers.map((offer, index) => (
         <OfferCard
           key={`place-${index}`}
+          kind={kind}
           offer={offer}
           index={index}
           onCardHover={onItemHover}
@@ -58,6 +60,7 @@ OffersList.propTypes = {
   onHeaderClick: PropTypes.func.isRequired,
   onItemHover: PropTypes.func.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
+  kind: PropTypes.string.isRequired,
 };
 
 export default OffersList;

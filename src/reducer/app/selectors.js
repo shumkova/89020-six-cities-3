@@ -5,7 +5,15 @@ const getCity = (state) => {
 };
 
 const getActiveOffer = (state) => {
-  return state[NameSpace.APP].offer;
+  return state[NameSpace.APP].activeOffer;
 };
 
-export {getCity, getActiveOffer};
+const getReviews = (state) => {
+  return state[NameSpace.APP].reviews;
+};
+
+const getNearbyOffers = (state) => {
+  return state[NameSpace.APP].nearbyOffers;
+};
+
+export {getCity, getActiveOffer, getReviews, getNearbyOffers};

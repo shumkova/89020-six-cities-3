@@ -2,23 +2,27 @@ import PropTypes from "prop-types";
 import React from "react";
 import history from "../../history";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import {AppRoute} from "../../const";
+import {AppRoute, ListKind} from "../../const";
 import {Link} from "react-router-dom";
 
 const OfferCard = (props) => {
-  const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus} = props;
+  const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus, kind} = props;
 
   const percent = parseFloat(offer.rating) / 5 * 100 + `%`;
 
   return (
-    <article className="cities__place-card place-card"
+    <article className={`place-card ${kind === ListKind.OFFER ? `cities__place-card` : `near-places__card`}`}
       onMouseEnter={() => {
         onCardHover(offer);
       }}
     >
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      {offer.isPremium ?
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+        : <></>
+      }
+
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={offer.preview} width="260" height="200" alt="Place image"/>
@@ -52,15 +56,16 @@ const OfferCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link
+          <a
             className="place-card__name-link"
-            to={AppRoute.OFFER + `/${offer.id}`}
-            onClick={() => {
+            href="#"
+            onClick={(evt) => {
+              evt.preventDefault();
               onHeaderClick(offer);
             }}
           >
             {offer.title}
-          </Link>
+          </a>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
@@ -107,6 +112,7 @@ OfferCard.propTypes = {
   onHeaderClick: PropTypes.func.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  kind: PropTypes.string.isRequired,
 };
 
 export default OfferCard;
