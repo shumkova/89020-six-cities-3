@@ -2,13 +2,16 @@ import PropTypes from "prop-types";
 import React from "react";
 import OfferCard from "../offer-card/offer-card.connect";
 import {ListKind} from "../../const";
+import {getSortType} from "../../reducer/app/selectors";
+import {connect} from "react-redux";
+import {sortOffers} from "../../utils";
 
 const OffersList = (props) => {
-  const {offers, onHeaderClick, onItemHover, onBookmarkClick, kind} = props;
+  const {offers, onHeaderClick, onItemHover, onBookmarkClick, kind, sortBy} = props;
 
   return (
     <div className={`places__list ${kind === ListKind.OFFER ? `cities__places-list  tabs__content` : `near-places__list`}`}>
-      {offers.map((offer, index) => (
+      {sortOffers(offers, sortBy).map((offer, index) => (
         <OfferCard
           key={`place-${index}`}
           kind={kind}
@@ -61,6 +64,11 @@ OffersList.propTypes = {
   onItemHover: PropTypes.func.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
   kind: PropTypes.string.isRequired,
+  sortBy: PropTypes.string.isRequired,
 };
 
-export default OffersList;
+const mapStateToProps = (state) => ({
+  sortBy: getSortType(state),
+});
+
+export default connect(mapStateToProps)(OffersList);

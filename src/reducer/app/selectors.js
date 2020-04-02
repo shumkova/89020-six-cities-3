@@ -16,4 +16,8 @@ const getNearbyOffers = (state) => {
   return state[NameSpace.APP].nearbyOffers;
 };
 
-export {getCity, getActiveOffer, getReviews, getNearbyOffers};
+const getSortType = (state) => {
+  return state[NameSpace.APP].sortType;
+}
+
+export {getCity, getActiveOffer, getReviews, getNearbyOffers, getSortType};

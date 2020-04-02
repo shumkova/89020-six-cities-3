@@ -2,12 +2,14 @@ import {extend} from "../../utils";
 import EditComment from "../../adapters/edit-comment";
 import EditOffer from "../../adapters/edit-offer";
 import {AppState} from "../../const";
+import {SortTypes} from "../../const";
 
 const initialState = {
   city: ``,
   activeOffer: {},
   reviews: [],
   nearbyOffers: [],
+  sortType: SortTypes.POPULAR,
 };
 
 const ActionTypes = {
@@ -15,6 +17,7 @@ const ActionTypes = {
   SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_NEARBY: `LOAD_NEARBY`,
+  SET_SORTING_TYPE: `SET_SORTING_TYPE`,
 };
 
 const ActionCreator = {
@@ -37,6 +40,11 @@ const ActionCreator = {
     type: ActionTypes.LOAD_NEARBY,
     payload: offers,
   }),
+
+  setSortingType: (type) => ({
+    type: ActionTypes.SET_SORTING_TYPE,
+    payload: type,
+  })
 };
 
 
@@ -61,6 +69,12 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.LOAD_NEARBY: {
       return extend(state, {
         nearbyOffers: action.payload,
+      });
+    }
+
+    case ActionTypes.SET_SORTING_TYPE: {
+      return extend(state, {
+        sortType: action.payload,
       });
     }
   }
