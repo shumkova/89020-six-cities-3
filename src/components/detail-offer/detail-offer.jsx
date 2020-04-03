@@ -8,6 +8,7 @@ import ReviewsList from "../reviews-list/reviews-list";
 import OffersList from "../offers-list/offers-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Map from "../map/map";
+import ReviewForm from "../review-form/review-form";
 
 const OffersListWrapped = withActiveItem(OffersList);
 
@@ -112,10 +113,17 @@ const DetailOffer = (props) => {
                 </div>
               </div>
 
-              <ReviewsList
-                reviews={reviews}
-              />
+              <section className="property__reviews reviews">
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewsList
+                  reviews={reviews}
+                />
 
+                {authorizationStatus === AuthorizationStatus.AUTH ?
+                  <ReviewForm/> :
+                  <></>
+                }
+              </section>
             </div>
           </div>
           <section className="property__map map">
