@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {getCities, getOffers, getAppState} from "../../reducer/data/selectors";
-import {getCity, getCurrentOffer} from "../../reducer/app/selectors";
+import {getCity, getCurrentOffer, getLoadingStatus} from "../../reducer/app/selectors";
 import {getAuthInfo, getAuthorizationStatus} from "../../reducer/user/selectors";
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data";

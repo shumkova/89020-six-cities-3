@@ -4,6 +4,12 @@ import EditOffer from "../../adapters/edit-offer";
 import {AppState} from "../../const";
 import {SortTypes} from "../../const";
 
+const LoadingStatus = {
+  DISABLED: `DISABLED`,
+  SUCCESS: `SUCCESS`,
+  FAILED: `FAILED`
+};
+
 const initialState = {
   city: ``,
   activeOffer: null,
@@ -11,6 +17,7 @@ const initialState = {
   reviews: [],
   nearbyOffers: [],
   sortType: SortTypes.POPULAR,
+  reviewsLoadingStatus: ``,
 };
 
 const ActionTypes = {
@@ -20,6 +27,7 @@ const ActionTypes = {
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_NEARBY: `LOAD_NEARBY`,
   SET_SORTING_TYPE: `SET_SORTING_TYPE`,
+  SET_REVIEWS_LOADING_STATUS: `SET_REVIEWS_LOADING_STATUS`,
 };
 
 const ActionCreator = {
@@ -51,7 +59,12 @@ const ActionCreator = {
   setSortingType: (type) => ({
     type: ActionTypes.SET_SORTING_TYPE,
     payload: type,
-  })
+  }),
+
+  setReviewsLoadingStatus: (status) => ({
+    type: ActionTypes.SET_REVIEWS_LOADING_STATUS,
+    payload: status,
+  }),
 };
 
 
@@ -89,6 +102,12 @@ const reducer = (state = initialState, action) => {
         sortType: action.payload,
       });
     }
+
+    case ActionTypes.SET_REVIEWS_LOADING_STATUS: {
+      return extend(state, {
+        reviewsLoadingStatus: action.payload,
+      });
+    }
   }
 
   return state;
@@ -116,7 +135,18 @@ const Operation = {
       .catch((err) => {
         throw err;
       });
-  }
+  },
+
+  postReview: (id, review) => (dispatch, getState, api) => {
+    return api.post(`/comments/` + id, review)
+      .then((response) => {
+        const reviews = EditComment.parseComments(response.data);
+        dispatch(ActionCreator.loadReviews(reviews));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
 };
 
-export {reducer, ActionTypes, ActionCreator, Operation};
+export {reducer, ActionTypes, ActionCreator, Operation, LoadingStatus};

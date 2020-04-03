@@ -22,6 +22,10 @@ const getNearbyOffers = (state) => {
 
 const getSortType = (state) => {
   return state[NameSpace.APP].sortType;
+};
+
+const getLoadingStatus = (state) => {
+  return state[NameSpace.APP].reviewsLoadingStatus;
 }
 
-export {getCity, getActiveOffer, getReviews, getNearbyOffers, getSortType, getCurrentOffer};
+export {getCity, getActiveOffer, getReviews, getNearbyOffers, getSortType, getCurrentOffer, getLoadingStatus};
