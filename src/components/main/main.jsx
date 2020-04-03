@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list";
 import Map from "../map/map";
 import CitiesList from "../cities-list/cities-list";
-import withActiveItem from "../../hocs/with-active-item/with-active-item";
+// import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Header from "../header/header";
 import Sorting from "../sorting/sorting";
 import {ListKind} from "../../const";
 import withToggle from "../../hocs/with-toggle/with-toggle";
+import MainEmpty from "../main-empty/main-empty";
 
 // const OffersListWrapped = withActiveItem(OffersList);
 const SortingWrapped = withToggle(Sorting);
@@ -65,20 +66,10 @@ const Main = (props) => {
               </div>
             </div>
           ) : (
-            <div className="cities__places-container cities__places-container--empty container">
-              <section className="cities__no-places">
-                <div className="cities__status-wrapper tabs__content">
-                  <b className="cities__status">No places to stay available</b>
-                  <p className="cities__status-description">We could not find any property available at the moment in
-                    {city}</p>
-                </div>
-              </section>
-              <div className="cities__right-section">
-                <section className="cities__map map"></section>
-              </div>
-            </div>
+            <MainEmpty
+              city={city}
+            />
           )}
-
         </div>
       </main>
     </div>

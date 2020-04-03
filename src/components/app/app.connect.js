@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => ({
   login(authData) {
     dispatch(UserOperation.login(authData));
   },
-  changeCity(evt, city) {
+  changeCity(city) {
     dispatch(AppActionCreator.changeCity(city));
   },
   loadCurrentOffer(offerId) {

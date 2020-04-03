@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import {connect} from "react-redux";
 import {getOfferById} from "../../reducer/data/selectors";
-import NameSpace from "../../reducer/name-space";
 import {getActiveOffer, getCurrentOffer} from "../../reducer/app/selectors";
 
 // const ZOOM = 12;
