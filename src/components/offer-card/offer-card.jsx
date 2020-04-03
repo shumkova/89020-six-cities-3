@@ -3,7 +3,6 @@ import React from "react";
 import history from "../../history";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {AppRoute, ListKind} from "../../const";
-import {Link} from "react-router-dom";
 
 const OfferCard = (props) => {
   const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus, kind} = props;
@@ -13,7 +12,10 @@ const OfferCard = (props) => {
   return (
     <article className={`place-card ${kind === ListKind.OFFER ? `cities__place-card` : `near-places__card`}`}
       onMouseEnter={() => {
-        onCardHover(offer);
+        onCardHover(offer.id);
+      }}
+      onMouseLeave={() => {
+        onCardHover(null);
       }}
     >
       {offer.isPremium ?
@@ -61,7 +63,7 @@ const OfferCard = (props) => {
             href="#"
             onClick={(evt) => {
               evt.preventDefault();
-              onHeaderClick(offer);
+              onHeaderClick(offer.id);
             }}
           >
             {offer.title}

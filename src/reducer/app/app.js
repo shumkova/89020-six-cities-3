@@ -2,19 +2,32 @@ import {extend} from "../../utils";
 import EditComment from "../../adapters/edit-comment";
 import EditOffer from "../../adapters/edit-offer";
 import {AppState} from "../../const";
+import {SortTypes} from "../../const";
+
+const LoadingStatus = {
+  DISABLED: `DISABLED`,
+  SUCCESS: `SUCCESS`,
+  FAILED: `FAILED`
+};
 
 const initialState = {
   city: ``,
-  activeOffer: {},
+  activeOffer: null,
+  currentOffer: null,
   reviews: [],
   nearbyOffers: [],
+  sortType: SortTypes.POPULAR,
+  reviewsLoadingStatus: ``,
 };
 
 const ActionTypes = {
   CHANGE_CITY: `CHANGE_CITY`,
   SET_ACTIVE_OFFER: `SET_ACTIVE_OFFER`,
+  SET_CURRENT_OFFER: `SET_CURRENT_OFFER`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   LOAD_NEARBY: `LOAD_NEARBY`,
+  SET_SORTING_TYPE: `SET_SORTING_TYPE`,
+  SET_REVIEWS_LOADING_STATUS: `SET_REVIEWS_LOADING_STATUS`,
 };
 
 const ActionCreator = {
@@ -23,9 +36,14 @@ const ActionCreator = {
     payload: newCity,
   }),
 
-  setActiveOffer: (offer) => ({
+  setActiveOffer: (offerId) => ({
     type: ActionTypes.SET_ACTIVE_OFFER,
-    payload: offer,
+    payload: offerId,
+  }),
+
+  setCurrentOffer: (offerId) => ({
+    type: ActionTypes.SET_CURRENT_OFFER,
+    payload: offerId,
   }),
 
   loadReviews: (reviews) => ({
@@ -36,6 +54,16 @@ const ActionCreator = {
   loadNearbyOffers: (offers) => ({
     type: ActionTypes.LOAD_NEARBY,
     payload: offers,
+  }),
+
+  setSortingType: (type) => ({
+    type: ActionTypes.SET_SORTING_TYPE,
+    payload: type,
+  }),
+
+  setReviewsLoadingStatus: (status) => ({
+    type: ActionTypes.SET_REVIEWS_LOADING_STATUS,
+    payload: status,
   }),
 };
 
@@ -52,6 +80,11 @@ const reducer = (state = initialState, action) => {
         activeOffer: action.payload,
       });
 
+    case ActionTypes.SET_CURRENT_OFFER:
+      return extend(state, {
+        currentOffer: action.payload,
+      });
+
     case ActionTypes.LOAD_REVIEWS: {
       return extend(state, {
         reviews: action.payload,
@@ -61,6 +94,18 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.LOAD_NEARBY: {
       return extend(state, {
         nearbyOffers: action.payload,
+      });
+    }
+
+    case ActionTypes.SET_SORTING_TYPE: {
+      return extend(state, {
+        sortType: action.payload,
+      });
+    }
+
+    case ActionTypes.SET_REVIEWS_LOADING_STATUS: {
+      return extend(state, {
+        reviewsLoadingStatus: action.payload,
       });
     }
   }
@@ -90,7 +135,18 @@ const Operation = {
       .catch((err) => {
         throw err;
       });
-  }
+  },
+
+  postReview: (id, review) => (dispatch, getState, api) => {
+    return api.post(`/comments/` + id, review)
+      .then((response) => {
+        const reviews = EditComment.parseComments(response.data);
+        dispatch(ActionCreator.loadReviews(reviews));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
 };
 
-export {reducer, ActionTypes, ActionCreator, Operation};
+export {reducer, ActionTypes, ActionCreator, Operation, LoadingStatus};

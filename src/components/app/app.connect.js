@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import {getCities, getOffers, getAppState} from "../../reducer/data/selectors";
-import {getCity} from "../../reducer/app/selectors";
+import {getCity, getCurrentOffer, getLoadingStatus} from "../../reducer/app/selectors";
 import {getAuthInfo, getAuthorizationStatus} from "../../reducer/user/selectors";
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
 import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
@@ -22,17 +22,24 @@ const mapDispatchToProps = (dispatch) => ({
   login(authData) {
     dispatch(UserOperation.login(authData));
   },
-  changeCity(evt, city) {
+  changeCity(city) {
     dispatch(AppActionCreator.changeCity(city));
   },
-  setActiveOffer(offer) {
+  loadCurrentOffer(offerId) {
     dispatch(DataActionCreator.changeAppReadiness(AppState.PENDING));
-    dispatch(AppActionCreator.setActiveOffer(offer));
-    dispatch(Operation.loadDetailOfferInfo(offer.id));
+    dispatch(AppActionCreator.setActiveOffer(null));
+    dispatch(AppActionCreator.setCurrentOffer(offerId));
+    dispatch(Operation.loadDetailOfferInfo(offerId));
   },
   changeFavorite(offer) {
     dispatch(Operation.changeFavorite(offer));
   },
+  clearCurrentOffer() {
+    dispatch(AppActionCreator.setCurrentOffer(null));
+  },
+  setAppState(appState) {
+    dispatch(DataActionCreator.changeAppReadiness(appState));
+  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

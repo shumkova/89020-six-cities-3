@@ -2,19 +2,23 @@ import PropTypes from "prop-types";
 import React from "react";
 import OfferCard from "../offer-card/offer-card.connect";
 import {ListKind} from "../../const";
+import {getSortType} from "../../reducer/app/selectors";
+import {connect} from "react-redux";
+import {sortOffers} from "../../utils";
+import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
 
 const OffersList = (props) => {
-  const {offers, onHeaderClick, onItemHover, onBookmarkClick, kind} = props;
+  const {offers, onHeaderClick, setActiveOffer, onBookmarkClick, kind, sortBy} = props;
 
   return (
     <div className={`places__list ${kind === ListKind.OFFER ? `cities__places-list  tabs__content` : `near-places__list`}`}>
-      {offers.map((offer, index) => (
+      {sortOffers(offers, sortBy).map((offer, index) => (
         <OfferCard
           key={`place-${index}`}
           kind={kind}
           offer={offer}
           index={index}
-          onCardHover={onItemHover}
+          onCardHover={setActiveOffer}
           onHeaderClick={onHeaderClick}
           onBookmarkClick={onBookmarkClick}
         />
@@ -58,9 +62,20 @@ OffersList.propTypes = {
     type: PropTypes.string.isRequired,
   })).isRequired,
   onHeaderClick: PropTypes.func.isRequired,
-  onItemHover: PropTypes.func.isRequired,
+  setActiveOffer: PropTypes.func.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
   kind: PropTypes.string.isRequired,
+  sortBy: PropTypes.string.isRequired,
 };
 
-export default OffersList;
+const mapStateToProps = (state) => ({
+  sortBy: getSortType(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setActiveOffer(offerId) {
+    dispatch(AppActionCreator.setActiveOffer(offerId));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OffersList);

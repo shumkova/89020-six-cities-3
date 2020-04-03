@@ -18,12 +18,16 @@ const App = (props) => {
     cities,
     login,
     offers,
-    setActiveOffer,
-    userData} = props;
+    loadCurrentOffer,
+    userData,
+    clearCurrentOffer,
+  } = props;
+
 
   if (appState === AppState.PENDING) {
     return <>pending</>;
   }
+
 
   return (
     <Router
@@ -38,8 +42,9 @@ const App = (props) => {
             authorizationStatus={authorizationStatus}
             userData={userData}
             onCityClick={changeCity}
-            onHeaderClick={setActiveOffer}
+            onHeaderClick={loadCurrentOffer}
             onBookmarkClick={changeFavorite}
+            clearCurrentOffer={clearCurrentOffer}
           />
         </Route>
         <Route exact path={AppRoute.LOGIN}>
@@ -50,7 +55,8 @@ const App = (props) => {
         <Route exact path={AppRoute.OFFER + `/:id?`}>
           <DetailOffer
             onBookmarkClick={changeFavorite}
-            onHeaderClick={setActiveOffer}
+            onHeaderClick={loadCurrentOffer}
+            authorizationStatus={authorizationStatus}
           />
         </Route>
 
@@ -115,8 +121,9 @@ App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
-  setActiveOffer: PropTypes.func.isRequired,
+  loadCurrentOffer: PropTypes.func.isRequired,
   changeFavorite: PropTypes.func.isRequired,
+  clearCurrentOffer: PropTypes.func.isRequired,
 };
 
 export default App;
