@@ -15,7 +15,7 @@ const OffersListWrapped = withActiveItem(OffersList);
 const MAX_STARS = 5;
 
 const DetailOffer = (props) => {
-  const {offer, onBookmarkClick, authorizationStatus, reviews, nearbyOffers, cities, onHeaderClick} = props;
+  const {offer, onBookmarkClick, authorizationStatus, reviews, nearbyOffers, cities, onHeaderClick, postReview} = props;
 
   const cityCords = cities.find((item) => {
     return item.name === offer.city.name;
@@ -120,7 +120,10 @@ const DetailOffer = (props) => {
                 />
 
                 {authorizationStatus === AuthorizationStatus.AUTH ?
-                  <ReviewForm/> :
+                  <ReviewForm
+                    id={offer.id}
+                    onSubmit={postReview}
+                  /> :
                   <></>
                 }
               </section>
@@ -198,6 +201,7 @@ DetailOffer.propTypes = {
   nearbyOffers: PropTypes.array.isRequired,
   cities: PropTypes.array.isRequired,
   onHeaderClick: PropTypes.func.isRequired,
+  postReview: PropTypes.func.isRequired,
 };
 
 export default DetailOffer;

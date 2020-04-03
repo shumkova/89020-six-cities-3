@@ -84,4 +84,15 @@ export const Operation = {
         throw err;
       });
   },
+
+  postReview: (id, review) => (dispatch, getState, api) => {
+    return api.post(`/comments/` + id, review)
+      .then((response) => {
+        const reviews = EditComment.parseComments(response.data);
+        dispatch(AppActionCreator.loadReviews(reviews));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
 };
