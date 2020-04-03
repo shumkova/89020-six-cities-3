@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../header/header";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import history from "../../history";
-import {AppRoute, AppState, ListKind} from "../../const";
+import {AppRoute, AppState, ListKind, ListTypes} from "../../const";
 import ReviewsList from "../reviews-list/reviews-list";
 import OffersList from "../offers-list/offers-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
@@ -142,7 +142,7 @@ const DetailOffer = (props) => {
               offers={nearbyOffers}
               onHeaderClick={onHeaderClick}
               onBookmarkClick={onBookmarkClick}
-              kind={ListKind.NEAR}
+              listType={ListTypes.NEARBY}
             >
             </OffersListWrapped>
           </section>

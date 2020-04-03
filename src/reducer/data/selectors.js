@@ -9,6 +9,12 @@ const getCity = (state) => {
   return state[NameSpace.APP].city;
 };
 
+const getFavorites = (state) => {
+  return state[NameSpace.DATA].hotels.filter((hotel) => (
+    hotel.isFavorite
+  ));
+};
+
 const getOfferById = (state, id) => {
   return state[NameSpace.DATA].hotels.find((hotel) => {
     return hotel.id === id;
@@ -62,4 +68,4 @@ const getAppState = (state) => {
   return state[NameSpace.DATA].appState;
 };
 
-export {getHotels, getInitialCity, getOffers, getCities, getAppState, getOfferById};
+export {getHotels, getInitialCity, getOffers, getCities, getAppState, getOfferById, getFavorites};

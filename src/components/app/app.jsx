@@ -7,6 +7,7 @@ import {AppRoute, AppState} from "../../const";
 import PrivateRoute from "../private-route/private-route";
 import history from "../../history";
 import DetailOffer from "../detail-offer/detail-offer.connect";
+import Favorites from "../favorites/favorites";
 
 const App = (props) => {
   const {
@@ -64,9 +65,13 @@ const App = (props) => {
           authorizationStatus={authorizationStatus}
           exact
           path={AppRoute.FAVORITES}
-          render={() => {
-            return <div>favorites</div>;
-          }}
+          render={() =>
+            <Favorites
+              onHeaderClick={loadCurrentOffer}
+              onBookmarkClick={changeFavorite}
+            />
+          }
+
         />
       </Switch>
     </Router>

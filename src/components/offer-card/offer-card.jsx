@@ -5,12 +5,12 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {AppRoute, ListKind} from "../../const";
 
 const OfferCard = (props) => {
-  const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus, kind} = props;
+  const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus, cardType} = props;
 
   const percent = parseFloat(offer.rating) / 5 * 100 + `%`;
 
   return (
-    <article className={`place-card ${kind === ListKind.OFFER ? `cities__place-card` : `near-places__card`}`}
+    <article className={`place-card ${cardType}`}
       onMouseEnter={() => {
         onCardHover(offer.id);
       }}
@@ -114,7 +114,7 @@ OfferCard.propTypes = {
   onHeaderClick: PropTypes.func.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  kind: PropTypes.string.isRequired,
+  cardType: PropTypes.string.isRequired,
 };
 
 export default OfferCard;
