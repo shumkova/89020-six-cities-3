@@ -6,7 +6,7 @@ import EditComment from "../adapters/edit-comment";
 import history from "../history";
 
 export const Operation = {
-  loadHotels: () => (dispatch, getState, api) => {
+  loadHotels: (id) => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
         const hotels = EditOffer.parseOffers(response.data);
@@ -15,7 +15,11 @@ export const Operation = {
         const cities = [...new Set(hotels.map((item) => item.city.name))];
 
         dispatch(AppActionCreator.changeCity(cities.length ? cities[0] : ``));
-        dispatch(DataActionCreator.changeAppReadiness(AppState.READY));
+      })
+      .then(() => {
+        if (!id) {
+          dispatch(DataActionCreator.changeAppReadiness(AppState.READY));
+        }
       });
   },
 
@@ -39,7 +43,35 @@ export const Operation = {
       });
   },
 
+  loadReviews: (id) => (dispatch, getState, api) => {
+    return api.get(`/comments/` + id)
+      .then((response) => {
+        const reviews = EditComment.parseComments(response.data);
+
+        dispatch(AppActionCreator.loadReviews(reviews));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
+
+  loadNearbyOffers: (id) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${id}/nearby`)
+      .then((response) => {
+        const offers = EditOffer.parseOffers(response.data);
+        dispatch(AppActionCreator.loadNearbyOffers(offers));
+        dispatch(DataActionCreator.changeAppReadiness(AppState.READY));
+      })
+      .catch((err) => {
+        throw err;
+      });
+  },
+
   loadDetailOfferInfo: (id) => (dispatch, getState, api) => {
+    dispatch(DataActionCreator.changeAppReadiness(AppState.PENDING));
+    dispatch(AppActionCreator.setActiveOffer(null));
+    dispatch(AppActionCreator.setCurrentOffer(id));
+
     return api.get(`/comments/` + id)
       .then((response) => {
         const reviews = EditComment.parseComments(response.data);
@@ -51,8 +83,6 @@ export const Operation = {
       .then((response) => {
         const offers = EditOffer.parseOffers(response.data);
         dispatch(AppActionCreator.loadNearbyOffers(offers));
-      })
-      .then(() => {
         dispatch(DataActionCreator.changeAppReadiness(AppState.READY));
         history.push(AppRoute.OFFER + `/${id}`);
       })

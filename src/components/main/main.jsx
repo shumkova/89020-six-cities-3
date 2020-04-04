@@ -15,14 +15,11 @@ import {ListTypes} from "../../const";
 const SortingWrapped = withToggle(Sorting);
 
 const Main = (props) => {
-  const {offers, onHeaderClick, onCityClick, city, cities, onBookmarkClick, clearCurrentOffer} = props;
+  const {offers, onHeaderClick, onCityClick, city, cities, onBookmarkClick} = props;
 
   const cityCords = cities.find((item) => {
     return item.name === city;
   }).location;
-
-  clearCurrentOffer();
-
 
   return (
     <div className="page page--gray">
@@ -125,7 +122,6 @@ Main.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
-  clearCurrentOffer: PropTypes.func.isRequired,
 };
 
 export default Main;

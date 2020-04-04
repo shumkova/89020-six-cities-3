@@ -58,7 +58,7 @@ const Operation = {
         dispatch(ActionCreator.setUser(EditAuthInfo.parseUser(response.data)));
       })
       .catch((err) => {
-        throw err;
+        // throw err;
       });
   },
 
@@ -71,7 +71,7 @@ const Operation = {
         const user = EditAuthInfo.parseUser(response.data);
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setUser(user));
-        history.push(AppRoute.ROOT);
+        history.goBack();
       });
   }
 };

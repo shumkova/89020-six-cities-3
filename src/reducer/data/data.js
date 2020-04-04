@@ -45,7 +45,7 @@ const reducer = (state = initialState, action) => {
 
     case ActionTypes.CHANGE_APP_READINESS: {
       return extend(state, {
-        appState: AppState.READY,
+        appState: action.payload,
       });
     }
 
