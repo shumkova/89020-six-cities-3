@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(AppOperation.postReview(id, review));
   },
   clearReviewLoadingStatus() {
-    dispatch(ActionCreator.setReviewsLoadingStatus(``));
+    dispatch(ActionCreator.setReviewLoadingStatus(``));
   }
 });
 

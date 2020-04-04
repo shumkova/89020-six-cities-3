@@ -24,9 +24,9 @@ const store = createStore(
     )
 );
 
-store.dispatch(Operation.loadHotels());
-store.dispatch(UserOperation.checkAuth());
-store.dispatch(Operation.loadFavorites());
+// store.dispatch(Operation.loadHotels());
+// store.dispatch(UserOperation.checkAuth());
+// store.dispatch(Operation.loadFavorites());
 
 ReactDOM.render(
     <Provider store={store}>

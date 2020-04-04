@@ -9,73 +9,79 @@ import history from "../../history";
 import DetailOffer from "../detail-offer/detail-offer.connect";
 import Favorites from "../favorites/favorites";
 
-const App = (props) => {
-  const {
-    appState,
-    authorizationStatus,
-    changeCity,
-    changeFavorite,
-    city,
-    cities,
-    login,
-    offers,
-    loadCurrentOffer,
-    userData,
-    clearCurrentOffer,
-  } = props;
+class App extends React.PureComponent {
 
+  componentDidMount() {
+    const path = history.location.pathname;
+    const id = (path.search(AppRoute.OFFER) !== -1) && path.split(`/`)[2];
 
-  if (appState === AppState.PENDING) {
-    return <>pending</>;
+    this.props.init(id);
   }
 
+  render() {
+    const {
+      appState,
+      authorizationStatus,
+      changeCity,
+      changeFavorite,
+      city,
+      cities,
+      login,
+      offers,
+      loadCurrentOffer,
+      userData,
+    } = this.props;
 
-  return (
-    <Router
-      history={history}
-    >
-      <Switch>
-        <Route exact path={AppRoute.ROOT}>
-          <Main
-            offers={offers}
-            city={city}
-            cities={cities}
-            authorizationStatus={authorizationStatus}
-            userData={userData}
-            onCityClick={changeCity}
-            onHeaderClick={loadCurrentOffer}
-            onBookmarkClick={changeFavorite}
-            clearCurrentOffer={clearCurrentOffer}
-          />
-        </Route>
-        <Route exact path={AppRoute.LOGIN}>
-          <SignIn
-            onSubmit={login}
-          />
-        </Route>
-        <Route exact path={AppRoute.OFFER + `/:id?`}>
-          <DetailOffer
-            onBookmarkClick={changeFavorite}
-            onHeaderClick={loadCurrentOffer}
-            authorizationStatus={authorizationStatus}
-          />
-        </Route>
+    if (appState === AppState.PENDING) {
+      return <>pending</>;
+    }
 
-        <PrivateRoute
-          authorizationStatus={authorizationStatus}
-          exact
-          path={AppRoute.FAVORITES}
-          render={() =>
-            <Favorites
+    return (
+      <Router
+        history={history}
+      >
+        <Switch>
+          <Route exact path={AppRoute.ROOT}>
+            <Main
+              offers={offers}
+              city={city}
+              cities={cities}
+              authorizationStatus={authorizationStatus}
+              userData={userData}
+              onCityClick={changeCity}
               onHeaderClick={loadCurrentOffer}
               onBookmarkClick={changeFavorite}
             />
-          }
+          </Route>
+          <Route exact path={AppRoute.LOGIN}>
+            <SignIn
+              onSubmit={login}
+            />
+          </Route>
+          <Route exact path={AppRoute.OFFER + `/:id?`}>
+            <DetailOffer
+              onBookmarkClick={changeFavorite}
+              onHeaderClick={loadCurrentOffer}
+              authorizationStatus={authorizationStatus}
+            />
+          </Route>
 
-        />
-      </Switch>
-    </Router>
-  );
+          <PrivateRoute
+            authorizationStatus={authorizationStatus}
+            exact
+            path={AppRoute.FAVORITES}
+            render={() => (
+              <Favorites
+                onHeaderClick={loadCurrentOffer}
+                onBookmarkClick={changeFavorite}
+              />
+            )}
+          />
+        </Switch>
+      </Router>
+    );
+  }
+
 };
 
 App.propTypes = {
@@ -128,7 +134,7 @@ App.propTypes = {
   login: PropTypes.func.isRequired,
   loadCurrentOffer: PropTypes.func.isRequired,
   changeFavorite: PropTypes.func.isRequired,
-  clearCurrentOffer: PropTypes.func.isRequired,
+  init: PropTypes.func.isRequired,
 };
 
 export default App;

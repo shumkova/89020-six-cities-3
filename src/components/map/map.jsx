@@ -89,15 +89,15 @@ class Map extends React.PureComponent {
         .addTo(this._layerGroup);
     }
 
-    if (activeOffer && currentOffer) {
-      leaflet
-        .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: ICON_ACTIVE})
-        .addTo(this._layerGroup);
-
-      leaflet
-        .marker([currentOffer.location.latitude, currentOffer.location.longitude], {icon: ICON})
-        .addTo(this._layerGroup);
-    }
+    // if (activeOffer && currentOffer) {
+    //   leaflet
+    //     .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: ICON_ACTIVE})
+    //     .addTo(this._layerGroup);
+    //
+    //   leaflet
+    //     .marker([currentOffer.location.latitude, currentOffer.location.longitude], {icon: ICON})
+    //     .addTo(this._layerGroup);
+    // }
   }
 
   render() {

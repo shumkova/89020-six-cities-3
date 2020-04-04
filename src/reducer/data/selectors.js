@@ -17,7 +17,7 @@ const getFavorites = (state) => {
 
 const getOfferById = (state, id) => {
   return state[NameSpace.DATA].hotels.find((hotel) => {
-    return hotel.id === id;
+    return hotel.id === parseInt(id, 10);
   });
 };
 
