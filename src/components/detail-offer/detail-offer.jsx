@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Header from "../header/header";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import history from "../../history";
-import {AppRoute, AppState, ListKind} from "../../const";
+import {AppRoute, AppState, ListKind, ListTypes} from "../../const";
 import ReviewsList from "../reviews-list/reviews-list";
 import OffersList from "../offers-list/offers-list";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
@@ -51,14 +51,14 @@ const DetailOffer = (props) => {
                   {offer.title}
                 </h1>
                 <button
-                  className="property__bookmark-button button"
+                  className={`property__bookmark-button button${offer.isFavorite ? ` property__bookmark-button--active` : ``}`}
                   type="button"
                   onClick={() => {
                     return authorizationStatus === AuthorizationStatus.AUTH ?
                       onBookmarkClick(offer) :
                       history.push(AppRoute.LOGIN);
                   }}>
-                  <svg className="property__bookmark-icon" width="31" height="33">
+                  <svg className="place-card__bookmark-icon property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
                   <span className="visually-hidden">To bookmarks</span>
@@ -142,7 +142,7 @@ const DetailOffer = (props) => {
               offers={nearbyOffers}
               onHeaderClick={onHeaderClick}
               onBookmarkClick={onBookmarkClick}
-              kind={ListKind.NEAR}
+              listType={ListTypes.NEARBY}
             >
             </OffersListWrapped>
           </section>

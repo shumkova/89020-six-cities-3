@@ -9,6 +9,7 @@ import Sorting from "../sorting/sorting";
 import {ListKind} from "../../const";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 import MainEmpty from "../main-empty/main-empty";
+import {ListTypes} from "../../const";
 
 // const OffersListWrapped = withActiveItem(OffersList);
 const SortingWrapped = withToggle(Sorting);
@@ -52,7 +53,7 @@ const Main = (props) => {
                   offers={offers}
                   onHeaderClick={onHeaderClick}
                   onBookmarkClick={onBookmarkClick}
-                  kind={ListKind.OFFER}
+                  listType={ListTypes.CITY}
                 />
 
               </section>
@@ -124,6 +125,7 @@ Main.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
+  clearCurrentOffer: PropTypes.func.isRequired,
 };
 
 export default Main;

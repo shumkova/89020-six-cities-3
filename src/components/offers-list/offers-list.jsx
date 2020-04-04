@@ -8,14 +8,14 @@ import {sortOffers} from "../../utils";
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
 
 const OffersList = (props) => {
-  const {offers, onHeaderClick, setActiveOffer, onBookmarkClick, kind, sortBy} = props;
+  const {offers, onHeaderClick, setActiveOffer, onBookmarkClick, listType, sortBy} = props;
 
   return (
-    <div className={`places__list ${kind === ListKind.OFFER ? `cities__places-list  tabs__content` : `near-places__list`}`}>
+    <div className={`places__list ${listType.list}`}>
       {sortOffers(offers, sortBy).map((offer, index) => (
         <OfferCard
           key={`place-${index}`}
-          kind={kind}
+          cardType={listType.card}
           offer={offer}
           index={index}
           onCardHover={setActiveOffer}
@@ -64,7 +64,7 @@ OffersList.propTypes = {
   onHeaderClick: PropTypes.func.isRequired,
   setActiveOffer: PropTypes.func.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
-  kind: PropTypes.string.isRequired,
+  listType: PropTypes.object.isRequired,
   sortBy: PropTypes.string.isRequired,
 };
 

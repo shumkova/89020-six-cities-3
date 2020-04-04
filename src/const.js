@@ -21,3 +21,18 @@ export const SortTypes = {
   PRICE_TO_LOW: `Price: high to low`,
   TOP_RATED: `Top rated first`,
 };
+
+export const ListTypes = {
+  CITY: {
+    list: `cities__places-list`,
+    card: `cities__place-card`,
+  },
+  NEARBY: {
+    list: `near-places__list`,
+    card: `near-places__card`,
+  },
+  FAVORITE: {
+    list: ``,
+    card: `favorites__card`,
+  },
+};
