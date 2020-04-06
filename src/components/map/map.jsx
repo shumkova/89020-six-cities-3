@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
-import {connect} from "react-redux";
-import {getOfferById} from "../../reducer/data/selectors";
-import {getActiveOffer, getCurrentOffer} from "../../reducer/app/selectors";
 
 // const ZOOM = 12;
 
@@ -116,11 +113,4 @@ Map.propTypes = {
   currentOffer: PropTypes.object,
 };
 
-const mapStateToProps = (state) => ({
-  activeOffer: getOfferById(state, getActiveOffer(state)),
-  currentOffer: getOfferById(state, getCurrentOffer(state)),
-});
-
-export {Map};
-
-export default connect(mapStateToProps)(Map);
+export default Map;

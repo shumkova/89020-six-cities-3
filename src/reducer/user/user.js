@@ -1,6 +1,5 @@
 import {extend} from "../../utils";
 import EditAuthInfo from "../../adapters/edit-auth-info";
-import {AppRoute} from "../../const";
 import history from "../../history";
 
 const AuthorizationStatus = {

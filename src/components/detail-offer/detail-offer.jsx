@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import Header from "../header/header";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import history from "../../history";
-import {AppRoute, AppState, ListKind, ListTypes} from "../../const";
+import {AppRoute, ListTypes} from "../../const";
 import ReviewsList from "../reviews-list/reviews-list";
-import OffersList from "../offers-list/offers-list";
+import OffersList from "../offers-list/offers-list.connect";
 import withActiveItem from "../../hocs/with-active-item/with-active-item";
-import Map from "../map/map";
+import Map from "../map/map.connect";
 import ReviewForm from "../review-form/review-form";
 
 const OffersListWrapped = withActiveItem(OffersList);
@@ -115,9 +115,8 @@ const DetailOffer = (props) => {
 
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
-                <ReviewsList
-                  reviews={reviews}
-                />
+
+                {reviews.length && <ReviewsList reviews={reviews} />}
 
                 {authorizationStatus === AuthorizationStatus.AUTH ?
                   <ReviewForm
@@ -135,7 +134,7 @@ const DetailOffer = (props) => {
             <Map places={nearbyOffers} cityCords={cityCords}/>
           </section>
         </section>
-        <div className="container">
+        {nearbyOffers.length && <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <OffersListWrapped
@@ -146,7 +145,7 @@ const DetailOffer = (props) => {
             >
             </OffersListWrapped>
           </section>
-        </div>
+        </div>}
       </main>
     </div>
   );

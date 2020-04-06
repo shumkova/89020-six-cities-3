@@ -1,10 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
 import Header from "../header/header";
-import OfferCard from "../offer-card/offer-card";
-import {getFavorites} from "../../reducer/data/selectors";
-import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import OfferCard from "../offer-card/offer-card.connect";
 import {AppRoute, ListTypes} from "../../const";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";
 import {Link} from "react-router-dom";
@@ -81,11 +78,4 @@ Favorites.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  favorites: getFavorites(state),
-  authorizationStatus: getAuthorizationStatus(state),
-});
-
-export {Favorites};
-
-export default connect(mapStateToProps)(Favorites);
+export default Favorites;

@@ -3,9 +3,9 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
-import App from "./app";
+import App from "./app.connect";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import {AppState} from "../../const";
+import {AppState, SortTypes} from "../../const";
 
 const mockStore = configureStore([]);
 
@@ -67,11 +67,16 @@ it(`App should render everything`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       hotels: HOTELS,
-      state: AppState.READY,
+      appState: AppState.READY,
     },
     [NameSpace.APP]: {
       city: `Amsterdam`,
-      offer: {},
+      activeOffer: null,
+      currentOffer: null,
+      reviews: [],
+      nearbyOffers: [],
+      sortType: SortTypes.POPULAR,
+      reviewLoadingStatus: ``,
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -88,14 +93,14 @@ it(`App should render everything`, () => {
             setActiveOffer={noop}
             changeFavorite={noop}
             onBookmarkClick={noop}
+            loadCurrentOffer={noop}
             login={noop}
             offers={HOTELS}
             changeCity={noop}
             city={`Amsterdam`}
             cities={cities}
-            ready={true}
-            authorizationStatus={AuthorizationStatus.AUTH}
             userData={userData}
+            init={noop}
           />
         </Provider>, {
           createNodeMock: () => {
@@ -110,11 +115,16 @@ it(`App should render "pending"`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       hotels: [],
-      state: AppState.PENDING,
+      appState: AppState.PENDING,
     },
     [NameSpace.APP]: {
       city: `Amsterdam`,
-      offer: {},
+      activeOffer: null,
+      currentOffer: null,
+      reviews: [],
+      nearbyOffers: [],
+      sortType: SortTypes.POPULAR,
+      reviewLoadingStatus: ``,
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -131,14 +141,12 @@ it(`App should render "pending"`, () => {
             setActiveOffer={noop}
             changeFavorite={noop}
             onBookmarkClick={noop}
+            loadCurrentOffer={noop}
             login={noop}
-            offers={HOTELS}
             changeCity={noop}
-            city={`Amsterdam`}
             cities={cities}
-            ready={false}
-            authorizationStatus={AuthorizationStatus.AUTH}
             userData={userData}
+            init={noop}
           />
         </Provider>, {
           createNodeMock: () => {

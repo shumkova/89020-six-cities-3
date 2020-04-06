@@ -10,6 +10,7 @@ const activeCity = `London`;
 
 it(`On city click something happens`, () => {
   const onCityClick = jest.fn();
+  const mockedEvent = { preventDefault: () => {} };
 
   const list = shallow(<CitiesList
     cities={cities}
@@ -18,6 +19,6 @@ it(`On city click something happens`, () => {
   />);
 
   const city = list.find(`.locations__item-link`);
-  city.props().onClick();
+  city.props().onClick(mockedEvent);
   expect(onCityClick.mock.calls.length).toBe(1);
 });

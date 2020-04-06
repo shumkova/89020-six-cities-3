@@ -1,11 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import OfferCard from "../offer-card/offer-card.connect";
-import {ListKind} from "../../const";
-import {getSortType} from "../../reducer/app/selectors";
-import {connect} from "react-redux";
 import {sortOffers} from "../../utils";
-import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
 
 const OffersList = (props) => {
   const {offers, onHeaderClick, setActiveOffer, onBookmarkClick, listType, sortBy} = props;
@@ -68,14 +64,4 @@ OffersList.propTypes = {
   sortBy: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  sortBy: getSortType(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setActiveOffer(offerId) {
-    dispatch(AppActionCreator.setActiveOffer(offerId));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(OffersList);
+export default OffersList;

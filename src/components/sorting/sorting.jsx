@@ -49,14 +49,4 @@ Sorting.propTypes = {
   onToggleClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  sortBy: getSortType(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setSortingType(type) {
-    dispatch(ActionCreator.setSortingType(type));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sorting);
+export default Sorting;

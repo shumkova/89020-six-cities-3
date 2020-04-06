@@ -1,5 +1,6 @@
 import {extend} from "../../utils";
 import {AppState} from "../../const";
+import EditOffer from "../../adapters/edit-offer";
 
 const initialState = {
   hotels: [],
@@ -76,5 +77,27 @@ const reducer = (state = initialState, action) => {
   return state;
 };
 
+const Operation = {
+  loadFavorites: () => (dispatch, getState, api) => {
+    return api.get(`/favorite`)
+      .then((response) => {
+        const offers = EditOffer.parseOffers(response.data);
+        dispatch(ActionCreator.loadFavorites(offers));
+      });
+  },
 
-export {reducer, ActionCreator, ActionTypes};
+  changeFavorite: (offer) => (dispatch, getState, api) => {
+    const status = offer.isFavorite ? 0 : 1;
+    return api.post(`/favorite/${offer.id}/${status}`, {
+      "hotel_id": offer.id,
+      status
+    })
+      .then((response) => {
+        const updatedOffer = EditOffer.parseOffer(response.data);
+        dispatch(ActionCreator.changeFavorite(updatedOffer));
+      });
+  },
+};
+
+
+export {reducer, ActionCreator, ActionTypes, Operation};

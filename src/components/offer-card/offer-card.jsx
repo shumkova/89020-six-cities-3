@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import history from "../../history";
 import {AuthorizationStatus} from "../../reducer/user/user";
-import {AppRoute, ListKind} from "../../const";
+import {AppRoute} from "../../const";
 
 const OfferCard = (props) => {
   const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus, cardType} = props;

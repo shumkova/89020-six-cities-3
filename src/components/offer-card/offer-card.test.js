@@ -4,6 +4,7 @@ import OfferCard from "./offer-card";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Router} from "react-router-dom";
 import history from "../../history";
+import {ListTypes} from "../../const";
 
 const offer = {
   bedrooms: 3,
@@ -51,6 +52,7 @@ it(`Render OfferCard`, () => {
           onHeaderClick={noop}
           onBookmarkClick={noop}
           authorizationStatus={AuthorizationStatus.AUTH}
+          cardType={ListTypes.CITY.card}
         />
       </Router>
   ).toJSON;

@@ -1,7 +1,6 @@
 import {extend} from "../../utils";
 import EditComment from "../../adapters/edit-comment";
 import EditOffer from "../../adapters/edit-offer";
-import {AppState} from "../../const";
 import {SortTypes} from "../../const";
 
 const LoadingStatus = {

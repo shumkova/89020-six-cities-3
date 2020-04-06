@@ -7,6 +7,8 @@ import {Router} from "react-router-dom";
 import NameSpace from "../../reducer/name-space";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
+import {AppState, SortTypes} from "../../const";
+import moment from "moment";
 
 const mockStore = configureStore([]);
 
@@ -45,17 +47,44 @@ const HOTELS = [{
   type: `apartment`
 }];
 
+const REVIEWS = [{
+  comment: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.`,
+  date: moment(`2019-05-08T14:13:56.569Z`),
+  id: 1,
+  rating: 4,
+  user: {
+    avatar: `img/1.png`,
+    id: 4,
+    isPro: false,
+    name: `Max`,
+  }
+}];
+
+const CITIES = [{
+  location: {
+    latitude: 52.370216,
+    longitude: 4.895168,
+    zoom: 10
+  },
+  name: `Amsterdam`
+}];
+
 const noop = () => {};
 
 it(`Render DetailOffer`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       hotels: HOTELS,
-      applicationIsReady: true,
+      appState: AppState.READY,
     },
     [NameSpace.APP]: {
       city: `Amsterdam`,
-      offer: HOTELS[0],
+      activeOffer: null,
+      currentOffer: HOTELS[0].id,
+      reviews: REVIEWS,
+      nearbyOffers: HOTELS,
+      sortType: SortTypes.POPULAR,
+      reviewLoadingStatus: ``,
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -68,10 +97,17 @@ it(`Render DetailOffer`, () => {
         <Router history={history}>
           <DetailOffer
             onBookmarkClick={noop}
+            onHeaderClick={noop}
+            postReview={noop}
+            clearReviewLoadingStatus={noop}
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
           />
         </Router>
-      </Provider>
-  ).toJSON;
+      </Provider>, {
+        createNodeMock: () => {
+          return document.createElement(`div`);
+        }
+      }).toJSON;
 
   expect(tree).toMatchSnapshot();
 });

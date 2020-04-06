@@ -7,7 +7,7 @@ import {AppRoute, AppState} from "../../const";
 import PrivateRoute from "../private-route/private-route";
 import history from "../../history";
 import DetailOffer from "../detail-offer/detail-offer.connect";
-import Favorites from "../favorites/favorites";
+import Favorites from "../favorites/favorites.connect";
 
 class App extends React.PureComponent {
 
