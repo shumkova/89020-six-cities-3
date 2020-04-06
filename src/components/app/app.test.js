@@ -3,12 +3,11 @@ import renderer from "react-test-renderer";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
-import App from "./app.connect";
+import App from "./app";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {AppState, SortTypes} from "../../const";
 
 const mockStore = configureStore([]);
-
 
 const HOTELS = [{
   bedrooms: 3,
@@ -45,6 +44,25 @@ const HOTELS = [{
   type: `apartment`
 }];
 
+const cities = [{
+  location: {
+    latitude: 52.370216,
+    longitude: 4.895168,
+    zoom: 10
+  },
+  name: `Amsterdam`
+}];
+
+const userData = {
+  avatar: `img/1.png`,
+  email: `Oliver.conner@gmail.com`,
+  id: 1,
+  isPro: false,
+  name: `Oliver.conner`
+};
+
+const noop = () => {};
+
 it(`App should render everything`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
@@ -69,7 +87,23 @@ it(`App should render everything`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App />
+          <App
+            onCityClick={noop}
+            onHeaderClick={noop}
+            setActiveOffer={noop}
+            changeFavorite={noop}
+            onBookmarkClick={noop}
+            loadCurrentOffer={noop}
+            login={noop}
+            offers={HOTELS}
+            changeCity={noop}
+            city={`Amsterdam`}
+            cities={cities}
+            userData={userData}
+            init={noop}
+            appState={AppState.READY}
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
+          />
         </Provider>, {
           createNodeMock: () => {
             return document.createElement(`div`);
@@ -79,7 +113,7 @@ it(`App should render everything`, () => {
   expect(tree).toMatchSnapshot();
 });
 
-it(`App should render "pending"`, () => {
+it(`App should render nothing`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       hotels: [],
@@ -103,7 +137,23 @@ it(`App should render "pending"`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App />
+          <App
+            offers={HOTELS}
+            city={`Amsterdam`}
+            onCityClick={noop}
+            onHeaderClick={noop}
+            setActiveOffer={noop}
+            changeFavorite={noop}
+            onBookmarkClick={noop}
+            loadCurrentOffer={noop}
+            login={noop}
+            changeCity={noop}
+            cities={cities}
+            userData={userData}
+            init={noop}
+            appState={AppState.PENDING}
+            authorizationStatus={AuthorizationStatus.NO_AUTH}
+          />
         </Provider>, {
           createNodeMock: () => {
             return document.createElement(`div`);
