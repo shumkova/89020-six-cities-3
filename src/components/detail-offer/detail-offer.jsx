@@ -17,8 +17,6 @@ const MAX_STARS = 5;
 const DetailOffer = (props) => {
   const {offer, onBookmarkClick, authorizationStatus, reviews, nearbyOffers, cities, onHeaderClick, postReview, loadingStatus, clearReviewLoadingStatus} = props;
 
-
-
   const cityCords = cities.find((item) => {
     return item.name === offer.city.name;
   }).location;

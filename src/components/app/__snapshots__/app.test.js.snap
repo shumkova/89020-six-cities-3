@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App should render "pending" 1`] = `"pending"`;
-
 exports[`App should render everything 1`] = `
 <div
   className="page page--gray"
@@ -300,3 +298,5 @@ exports[`App should render everything 1`] = `
   </main>
 </div>
 `;
+
+exports[`App should render nothing 1`] = `null`;

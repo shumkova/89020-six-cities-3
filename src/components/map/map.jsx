@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
 
-// const ZOOM = 12;
-
 const ICON = leaflet.icon({
   iconUrl: `/img/pin.svg`,
   iconSize: [30, 30],
@@ -85,16 +83,6 @@ class Map extends React.PureComponent {
         .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: ICON_ACTIVE})
         .addTo(this._layerGroup);
     }
-
-    // if (activeOffer && currentOffer) {
-    //   leaflet
-    //     .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: ICON_ACTIVE})
-    //     .addTo(this._layerGroup);
-    //
-    //   leaflet
-    //     .marker([currentOffer.location.latitude, currentOffer.location.longitude], {icon: ICON})
-    //     .addTo(this._layerGroup);
-    // }
   }
 
   render() {
