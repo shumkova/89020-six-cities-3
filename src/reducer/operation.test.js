@@ -69,7 +69,7 @@ describe(`Operation works correctly`, () => {
         });
 
         expect(dispatch).toHaveBeenNthCalledWith(3, {
-          type: DataActionTypes.ACTIVATE_APP,
+          type: DataActionTypes.CHANGE_APP_READINESS,
           payload: AppState.READY,
         });
       });

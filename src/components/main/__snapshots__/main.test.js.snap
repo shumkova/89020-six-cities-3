@@ -25,7 +25,7 @@ exports[`Render Mail without offers 1`] = `
               alt="6 cities logo"
               className="header__logo"
               height={41}
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width={81}
             />
           </a>
@@ -41,7 +41,7 @@ exports[`Render Mail without offers 1`] = `
             >
               <a
                 className="header__nav-link header__nav-link--profile"
-                href="/favorites"
+                href="/login"
                 onClick={[Function]}
               >
                 <div
@@ -49,7 +49,9 @@ exports[`Render Mail without offers 1`] = `
                 />
                 <span
                   className="header__login"
-                />
+                >
+                  Sign in
+                </span>
               </a>
             </li>
           </ul>
@@ -94,33 +96,37 @@ exports[`Render Mail without offers 1`] = `
       className="cities"
     >
       <div
-        className="cities__places-container cities__places-container--empty container"
+        className="cities"
       >
-        <section
-          className="cities__no-places"
-        >
-          <div
-            className="cities__status-wrapper tabs__content"
-          >
-            <b
-              className="cities__status"
-            >
-              No places to stay available
-            </b>
-            <p
-              className="cities__status-description"
-            >
-              We could not find any property availbale at the moment in
-              Amsterdam
-            </p>
-          </div>
-        </section>
         <div
-          className="cities__right-section"
+          className="cities__places-container cities__places-container--empty container"
         >
           <section
-            className="cities__map map"
-          />
+            className="cities__no-places"
+          >
+            <div
+              className="cities__status-wrapper tabs__content"
+            >
+              <b
+                className="cities__status"
+              >
+                No places to stay available
+              </b>
+              <p
+                className="cities__status-description"
+              >
+                We could not find any property available at the moment in $
+                Amsterdam
+              </p>
+            </div>
+          </section>
+          <div
+            className="cities__right-section"
+          >
+            <section
+              className="cities__map map"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -153,7 +159,7 @@ exports[`Render Main with offers and sign in 1`] = `
               alt="6 cities logo"
               className="header__logo"
               height={41}
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width={81}
             />
           </a>
@@ -245,11 +251,12 @@ exports[`Render Main with offers and sign in 1`] = `
             action="#"
             className="places__sorting"
             method="get"
+            onClick={[Function]}
           >
             <span
               className="places__sorting-caption"
             >
-              Sort by
+              Sort by 
             </span>
             <span
               className="places__sorting-type"
@@ -267,28 +274,32 @@ exports[`Render Main with offers and sign in 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom places__options--opened"
+              className="places__options places__options--custom "
             >
               <li
                 className="places__option places__option--active"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Popular
               </li>
               <li
-                className="places__option"
+                className="places__option "
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: low to high
               </li>
               <li
-                className="places__option"
+                className="places__option "
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: high to low
               </li>
               <li
-                className="places__option"
+                className="places__option "
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Top rated first
@@ -296,19 +307,13 @@ exports[`Render Main with offers and sign in 1`] = `
             </ul>
           </form>
           <div
-            className="cities__places-list places__list tabs__content"
+            className="places__list cities__places-list"
           >
             <article
-              className="cities__place-card place-card"
+              className="place-card cities__place-card"
               onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
-              <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
@@ -391,7 +396,7 @@ exports[`Render Main with offers and sign in 1`] = `
                 >
                   <a
                     className="place-card__name-link"
-                    href="/offer/1"
+                    href="#"
                     onClick={[Function]}
                   >
                     Beautiful & luxurious studio at great location
@@ -453,7 +458,7 @@ exports[`Render Main with offers and user email 1`] = `
               alt="6 cities logo"
               className="header__logo"
               height={41}
-              src="img/logo.svg"
+              src="/img/logo.svg"
               width={81}
             />
           </a>
@@ -543,11 +548,12 @@ exports[`Render Main with offers and user email 1`] = `
             action="#"
             className="places__sorting"
             method="get"
+            onClick={[Function]}
           >
             <span
               className="places__sorting-caption"
             >
-              Sort by
+              Sort by 
             </span>
             <span
               className="places__sorting-type"
@@ -565,28 +571,32 @@ exports[`Render Main with offers and user email 1`] = `
               </svg>
             </span>
             <ul
-              className="places__options places__options--custom places__options--opened"
+              className="places__options places__options--custom "
             >
               <li
                 className="places__option places__option--active"
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Popular
               </li>
               <li
-                className="places__option"
+                className="places__option "
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: low to high
               </li>
               <li
-                className="places__option"
+                className="places__option "
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Price: high to low
               </li>
               <li
-                className="places__option"
+                className="places__option "
+                onClick={[Function]}
                 tabIndex="0"
               >
                 Top rated first
@@ -594,19 +604,13 @@ exports[`Render Main with offers and user email 1`] = `
             </ul>
           </form>
           <div
-            className="cities__places-list places__list tabs__content"
+            className="places__list cities__places-list"
           >
             <article
-              className="cities__place-card place-card"
+              className="place-card cities__place-card"
               onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
-              <div
-                className="place-card__mark"
-              >
-                <span>
-                  Premium
-                </span>
-              </div>
               <div
                 className="cities__image-wrapper place-card__image-wrapper"
               >
@@ -689,7 +693,7 @@ exports[`Render Main with offers and user email 1`] = `
                 >
                   <a
                     className="place-card__name-link"
-                    href="/offer/1"
+                    href="#"
                     onClick={[Function]}
                   >
                     Beautiful & luxurious studio at great location

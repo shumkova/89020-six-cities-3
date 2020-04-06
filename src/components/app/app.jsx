@@ -7,76 +7,93 @@ import {AppRoute, AppState} from "../../const";
 import PrivateRoute from "../private-route/private-route";
 import history from "../../history";
 import DetailOffer from "../detail-offer/detail-offer.connect";
-import Favorites from "../favorites/favorites";
+import Favorites from "../favorites/favorites.connect";
 
-const App = (props) => {
-  const {
-    appState,
-    authorizationStatus,
-    changeCity,
-    changeFavorite,
-    city,
-    cities,
-    login,
-    offers,
-    loadCurrentOffer,
-    userData,
-    clearCurrentOffer,
-  } = props;
-
-
-  if (appState === AppState.PENDING) {
-    return <>pending</>;
+class App extends React.PureComponent {
+  constructor(props) {
+    super(props);
   }
 
+  componentDidMount() {
+    const path = history.location.pathname;
+    const id = (path.search(AppRoute.OFFER) !== -1) && path.split(`/`)[2];
 
-  return (
-    <Router
-      history={history}
-    >
-      <Switch>
-        <Route exact path={AppRoute.ROOT}>
-          <Main
-            offers={offers}
-            city={city}
-            cities={cities}
-            authorizationStatus={authorizationStatus}
-            userData={userData}
-            onCityClick={changeCity}
-            onHeaderClick={loadCurrentOffer}
-            onBookmarkClick={changeFavorite}
-            clearCurrentOffer={clearCurrentOffer}
-          />
-        </Route>
-        <Route exact path={AppRoute.LOGIN}>
-          <SignIn
-            onSubmit={login}
-          />
-        </Route>
-        <Route exact path={AppRoute.OFFER + `/:id?`}>
-          <DetailOffer
-            onBookmarkClick={changeFavorite}
-            onHeaderClick={loadCurrentOffer}
-            authorizationStatus={authorizationStatus}
-          />
-        </Route>
+    this.props.init(id);
 
-        <PrivateRoute
-          authorizationStatus={authorizationStatus}
-          exact
-          path={AppRoute.FAVORITES}
-          render={() =>
-            <Favorites
+    // this.props.loadHotels(id);
+    // this.props.checkAuth();
+    // this.props.loadFavorites();
+    //
+    // if (id) {
+    //   this.props.loadCurrentOffer(id);
+    // }
+  }
+
+  render() {
+    const {
+      appState,
+      authorizationStatus,
+      changeCity,
+      changeFavorite,
+      city,
+      cities,
+      login,
+      offers,
+      loadCurrentOffer,
+      userData,
+    } = this.props;
+
+    if (appState === AppState.PENDING) {
+      return <>pending</>;
+    }
+
+    return (
+      <Router
+        history={history}
+      >
+        <Switch>
+          <Route exact path={AppRoute.ROOT}>
+            <Main
+              offers={offers}
+              city={city}
+              cities={cities}
+              authorizationStatus={authorizationStatus}
+              userData={userData}
+              onCityClick={changeCity}
               onHeaderClick={loadCurrentOffer}
               onBookmarkClick={changeFavorite}
             />
-          }
+          </Route>
+          <Route exact path={AppRoute.LOGIN}>
+            <SignIn
+              onSubmit={login}
+            />
+          </Route>
+          <Route exact path={AppRoute.OFFER + `/:id?`}>
+            <DetailOffer
+              onBookmarkClick={changeFavorite}
+              onHeaderClick={loadCurrentOffer}
+              authorizationStatus={authorizationStatus}
+            />
+          </Route>
 
-        />
-      </Switch>
-    </Router>
-  );
-};
+          <PrivateRoute
+            authorizationStatus={authorizationStatus}
+            exact
+            path={AppRoute.FAVORITES}
+            render={() => (
+              <Favorites
+                onHeaderClick={loadCurrentOffer}
+                onBookmarkClick={changeFavorite}
+              />
+            )}
+          />
+        </Switch>
+      </Router>
+    );
+  }
+
+}
 
 App.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
@@ -125,11 +142,15 @@ App.propTypes = {
   })).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
+  // loadHotels: PropTypes.func.isRequired,
+  // checkAuth: PropTypes.func.isRequired,
+  // loadFavorites: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   loadCurrentOffer: PropTypes.func.isRequired,
   changeFavorite: PropTypes.func.isRequired,
-  clearCurrentOffer: PropTypes.func.isRequired,
+  init: PropTypes.func.isRequired,
 };
+
 
 export default App;
 

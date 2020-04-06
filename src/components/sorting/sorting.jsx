@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {SortTypes} from "../../const";
-import {getSortType} from "../../reducer/app/selectors";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/app/app";
 
 const Sorting = (props) => {
   const {sortBy, setSortingType, isActive, onToggleClick} = props;
@@ -49,14 +46,4 @@ Sorting.propTypes = {
   onToggleClick: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  sortBy: getSortType(state),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setSortingType(type) {
-    dispatch(ActionCreator.setSortingType(type));
-  },
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sorting);
+export default Sorting;

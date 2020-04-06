@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import leaflet from "leaflet";
-import {connect} from "react-redux";
-import {getOfferById} from "../../reducer/data/selectors";
-import {getActiveOffer, getCurrentOffer} from "../../reducer/app/selectors";
 
 // const ZOOM = 12;
 
@@ -89,15 +86,15 @@ class Map extends React.PureComponent {
         .addTo(this._layerGroup);
     }
 
-    if (activeOffer && currentOffer) {
-      leaflet
-        .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: ICON_ACTIVE})
-        .addTo(this._layerGroup);
-
-      leaflet
-        .marker([currentOffer.location.latitude, currentOffer.location.longitude], {icon: ICON})
-        .addTo(this._layerGroup);
-    }
+    // if (activeOffer && currentOffer) {
+    //   leaflet
+    //     .marker([activeOffer.location.latitude, activeOffer.location.longitude], {icon: ICON_ACTIVE})
+    //     .addTo(this._layerGroup);
+    //
+    //   leaflet
+    //     .marker([currentOffer.location.latitude, currentOffer.location.longitude], {icon: ICON})
+    //     .addTo(this._layerGroup);
+    // }
   }
 
   render() {
@@ -116,11 +113,4 @@ Map.propTypes = {
   currentOffer: PropTypes.object,
 };
 
-const mapStateToProps = (state) => ({
-  activeOffer: getOfferById(state, getActiveOffer(state)),
-  currentOffer: getOfferById(state, getCurrentOffer(state)),
-});
-
-export {Map};
-
-export default connect(mapStateToProps)(Map);
+export default Map;

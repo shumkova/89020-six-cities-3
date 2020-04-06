@@ -6,7 +6,7 @@ import EditComment from "../adapters/edit-comment";
 import history from "../history";
 
 export const Operation = {
-  loadHotels: () => (dispatch, getState, api) => {
+  loadHotels: (id) => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
         const hotels = EditOffer.parseOffers(response.data);
@@ -15,31 +15,19 @@ export const Operation = {
         const cities = [...new Set(hotels.map((item) => item.city.name))];
 
         dispatch(AppActionCreator.changeCity(cities.length ? cities[0] : ``));
-        dispatch(DataActionCreator.changeAppReadiness(AppState.READY));
-      });
-  },
-
-  loadFavorites: () => (dispatch, getState, api) => {
-    return api.get(`/favorite`)
-      .then((response) => {
-        const offers = EditOffer.parseOffers(response.data);
-        dispatch(DataActionCreator.loadFavorites(offers));
-      });
-  },
-
-  changeFavorite: (offer) => (dispatch, getState, api) => {
-    const status = offer.isFavorite ? 0 : 1;
-    return api.post(`/favorite/${offer.id}/${status}`, {
-      "hotel_id": offer.id,
-      status
-    })
-      .then((response) => {
-        const updatedOffer = EditOffer.parseOffer(response.data);
-        dispatch(DataActionCreator.changeFavorite(updatedOffer));
+      })
+      .then(() => {
+        if (!id) {
+          dispatch(DataActionCreator.changeAppReadiness(AppState.READY));
+        }
       });
   },
 
   loadDetailOfferInfo: (id) => (dispatch, getState, api) => {
+    dispatch(DataActionCreator.changeAppReadiness(AppState.PENDING));
+    dispatch(AppActionCreator.setActiveOffer(null));
+    dispatch(AppActionCreator.setCurrentOffer(id));
+
     return api.get(`/comments/` + id)
       .then((response) => {
         const reviews = EditComment.parseComments(response.data);
@@ -51,8 +39,6 @@ export const Operation = {
       .then((response) => {
         const offers = EditOffer.parseOffers(response.data);
         dispatch(AppActionCreator.loadNearbyOffers(offers));
-      })
-      .then(() => {
         dispatch(DataActionCreator.changeAppReadiness(AppState.READY));
         history.push(AppRoute.OFFER + `/${id}`);
       })

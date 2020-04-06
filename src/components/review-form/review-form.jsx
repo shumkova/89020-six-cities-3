@@ -26,22 +26,22 @@ class ReviewForm extends React.PureComponent {
       rating: null,
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleRatingChange = this.handleRatingChange.bind(this);
-    this.handleCommentChange = this.handleCommentChange.bind(this);
-    this.toDefault = this.toDefault.bind(this);
+    this._handleSubmit = this._handleSubmit.bind(this);
+    this._handleRatingChange = this._handleRatingChange.bind(this);
+    this._handleCommentChange = this._handleCommentChange.bind(this);
+    this._toDefault = this._toDefault.bind(this);
   }
 
   componentDidUpdate() {
     const {loadingStatus, clearReviewLoadingStatus} = this.props;
 
     if (loadingStatus === LoadingStatus.SUCCESS) {
-      this.toDefault();
+      this._toDefault();
       clearReviewLoadingStatus();
     }
   }
 
-  handleSubmit(evt) {
+  _handleSubmit(evt) {
     const {onSubmit, id} = this.props;
     const {comment, rating} = this.state;
     evt.preventDefault();
@@ -52,19 +52,19 @@ class ReviewForm extends React.PureComponent {
     });
   }
 
-  handleRatingChange(evt) {
+  _handleRatingChange(evt) {
     this.setState({
       rating: parseInt(evt.target.value, 10)
     });
   }
 
-  handleCommentChange(evt) {
+  _handleCommentChange(evt) {
     this.setState({
       comment: evt.target.value
     });
   }
 
-  toDefault() {
+  _toDefault() {
     this.setState({
       comment: ``,
       rating: null,
@@ -80,7 +80,7 @@ class ReviewForm extends React.PureComponent {
         className="reviews__form form"
         action="#"
         method="post"
-        onSubmit={this.handleSubmit}
+        onSubmit={this._handleSubmit}
       >
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
@@ -93,7 +93,7 @@ class ReviewForm extends React.PureComponent {
                 id={`${star}-star${star > 1 ? `s` : ``}`}
                 type="radio"
                 checked={rating === star}
-                onChange={this.handleRatingChange}
+                onChange={this._handleRatingChange}
               />
               <label
                 htmlFor={`${star}-star${star > 1 ? `s` : ``}`}
@@ -116,7 +116,7 @@ class ReviewForm extends React.PureComponent {
           value={comment}
           minLength={CommentLength.MIN}
           maxLength={CommentLength.MAX}
-          onChange={this.handleCommentChange}
+          onChange={this._handleCommentChange}
         />
         {loadingStatus === LoadingStatus.FAILED ? <div>Something went wrong. Try again, please.</div> : <></>}
         <div className="reviews__button-wrapper">

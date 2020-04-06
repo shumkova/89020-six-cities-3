@@ -1,28 +1,22 @@
 import React from "react";
 import PropTypes from "prop-types";
-import OffersList from "../offers-list/offers-list";
-import Map from "../map/map";
+import OffersList from "../offers-list/offers-list.connect";
+import Map from "../map/map.connect";
 import CitiesList from "../cities-list/cities-list";
-// import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Header from "../header/header";
-import Sorting from "../sorting/sorting";
-import {ListKind} from "../../const";
+import Sorting from "../sorting/sorting.connect";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 import MainEmpty from "../main-empty/main-empty";
 import {ListTypes} from "../../const";
 
-// const OffersListWrapped = withActiveItem(OffersList);
 const SortingWrapped = withToggle(Sorting);
 
 const Main = (props) => {
-  const {offers, onHeaderClick, onCityClick, city, cities, onBookmarkClick, clearCurrentOffer} = props;
+  const {offers, onHeaderClick, onCityClick, city, cities, onBookmarkClick} = props;
 
   const cityCords = cities.find((item) => {
     return item.name === city;
   }).location;
-
-  clearCurrentOffer();
-
 
   return (
     <div className="page page--gray">
@@ -125,7 +119,6 @@ Main.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
-  clearCurrentOffer: PropTypes.func.isRequired,
 };
 
 export default Main;

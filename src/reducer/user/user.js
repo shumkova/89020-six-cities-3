@@ -1,6 +1,5 @@
 import {extend} from "../../utils";
 import EditAuthInfo from "../../adapters/edit-auth-info";
-import {AppRoute} from "../../const";
 import history from "../../history";
 
 const AuthorizationStatus = {
@@ -71,7 +70,7 @@ const Operation = {
         const user = EditAuthInfo.parseUser(response.data);
         dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setUser(user));
-        history.push(AppRoute.ROOT);
+        history.goBack();
       });
   }
 };

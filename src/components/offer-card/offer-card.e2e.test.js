@@ -3,6 +3,7 @@ import Enzyme, {shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import OfferCard from "./offer-card";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {ListTypes} from "../../const";
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -52,17 +53,19 @@ it(`On card hover active card is sent to callback`, () => {
     onHeaderClick={onHeaderClick}
     onBookmarkClick={onBookmarkClick}
     authorizationStatus={AuthorizationStatus.AUTH}
+    cardType={ListTypes.CITY.card}
   />);
 
   card.simulate(`mouseenter`);
   expect(onCardHover).toHaveBeenCalledTimes(1);
-  expect(onCardHover.mock.calls[0][0]).toMatchObject(OFFER);
+  expect(onCardHover).toHaveBeenCalledWith(OFFER.id);
 });
 
 it(`Offer name should be pressed`, () => {
   const onCardHover = jest.fn();
   const onHeaderClick = jest.fn();
   const onBookmarkClick = jest.fn();
+  const mockedEvent = {preventDefault: () => {}};
 
   const card = shallow(<OfferCard
     offer={OFFER}
@@ -70,10 +73,11 @@ it(`Offer name should be pressed`, () => {
     onHeaderClick={onHeaderClick}
     onBookmarkClick={onBookmarkClick}
     authorizationStatus={AuthorizationStatus.AUTH}
+    cardType={ListTypes.CITY.card}
   />);
 
   const offerName = card.find(`.place-card__name-link`);
-  offerName.props().onClick();
+  offerName.props().onClick(mockedEvent);
   expect(onHeaderClick.mock.calls.length).toBe(1);
 });
 
@@ -89,6 +93,7 @@ it(`Card bookmark should be pressed`, () => {
         onHeaderClick={onHeaderClick}
         onBookmarkClick={onBookmarkClick}
         authorizationStatus={AuthorizationStatus.AUTH}
+        cardType={ListTypes.CITY.card}
       />
   );
 

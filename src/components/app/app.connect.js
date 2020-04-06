@@ -1,13 +1,12 @@
 import {connect} from "react-redux";
 import {getCities, getOffers, getAppState} from "../../reducer/data/selectors";
-import {getCity, getCurrentOffer, getLoadingStatus} from "../../reducer/app/selectors";
+import {getCity} from "../../reducer/app/selectors";
 import {getAuthInfo, getAuthorizationStatus} from "../../reducer/user/selectors";
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
-import {ActionCreator as DataActionCreator} from "../../reducer/data/data";
 import {Operation as UserOperation} from "../../reducer/user/user";
+import {Operation as DataOperation} from "../../reducer/data/data";
 import App from "./app";
 import {Operation} from "../../reducer/operation";
-import {AppState} from "../../const";
 
 const mapStateToProps = (state) => ({
   appState: getAppState(state),
@@ -19,6 +18,23 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  init(id) {
+    dispatch(Operation.loadHotels(id));
+    dispatch(UserOperation.checkAuth());
+    dispatch(DataOperation.loadFavorites());
+    if (id) {
+      dispatch(Operation.loadDetailOfferInfo(id));
+    }
+  },
+  // loadHotels(id) {
+  //   dispatch(Operation.loadHotels(id));
+  // },
+  // checkAuth() {
+  //   dispatch(UserOperation.checkAuth());
+  // },
+  // loadFavorites() {
+  //   dispatch(DataOperation.loadFavorites());
+  // },
   login(authData) {
     dispatch(UserOperation.login(authData));
   },
@@ -26,20 +42,11 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(AppActionCreator.changeCity(city));
   },
   loadCurrentOffer(offerId) {
-    dispatch(DataActionCreator.changeAppReadiness(AppState.PENDING));
-    dispatch(AppActionCreator.setActiveOffer(null));
-    dispatch(AppActionCreator.setCurrentOffer(offerId));
     dispatch(Operation.loadDetailOfferInfo(offerId));
   },
   changeFavorite(offer) {
-    dispatch(Operation.changeFavorite(offer));
+    dispatch(DataOperation.changeFavorite(offer));
   },
-  clearCurrentOffer() {
-    dispatch(AppActionCreator.setCurrentOffer(null));
-  },
-  setAppState(appState) {
-    dispatch(DataActionCreator.changeAppReadiness(appState));
-  }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

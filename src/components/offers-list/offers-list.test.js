@@ -1,12 +1,13 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import OffersList from "./offers-list";
+import OffersList from "./offers-list.connect";
 import {Provider} from "react-redux";
 import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import {Router} from "react-router-dom";
 import history from "../../history";
 import {AuthorizationStatus} from "../../reducer/user/user";
+import {ListTypes, SortTypes} from "../../const";
 
 const mockStore = configureStore([]);
 
@@ -55,6 +56,12 @@ it(`Render OffersList`, () => {
     },
     [NameSpace.APP]: {
       city: `Amsterdam`,
+      activeOffer: null,
+      currentOffer: null,
+      reviews: [],
+      nearbyOffers: [],
+      sortType: SortTypes.POPULAR,
+      reviewLoadingStatus: ``,
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
@@ -70,6 +77,8 @@ it(`Render OffersList`, () => {
             onHeaderClick={noop}
             onBookmarkClick={noop}
             onItemHover={noop}
+            listType={ListTypes.CITY}
+            setActiveOffer={noop}
           />
         </Provider>
       </Router>

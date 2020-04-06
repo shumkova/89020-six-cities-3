@@ -7,6 +7,7 @@ import configureStore from "redux-mock-store";
 import NameSpace from "../../reducer/name-space";
 import {Router} from "react-router-dom";
 import history from "../../history";
+import {AppState, SortTypes} from "../../const";
 
 const mockStore = configureStore([]);
 
@@ -72,6 +73,12 @@ it(`Render Main with offers and user email`, () => {
     },
     [NameSpace.APP]: {
       city: `Amsterdam`,
+      activeOffer: null,
+      currentOffer: null,
+      reviews: [],
+      nearbyOffers: [],
+      sortType: SortTypes.POPULAR,
+      reviewLoadingStatus: ``,
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.AUTH,
@@ -106,14 +113,20 @@ it(`Render Main with offers and user email`, () => {
 it(`Render Mail without offers`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
-      hotels: offers,
-      applicationIsReady: true,
+      hotels: [],
+      appState: AppState.READY,
     },
     [NameSpace.APP]: {
       city: `Amsterdam`,
+      activeOffer: null,
+      currentOffer: null,
+      reviews: [],
+      nearbyOffers: [],
+      sortType: SortTypes.POPULAR,
+      reviewLoadingStatus: ``,
     },
     [NameSpace.USER]: {
-      authorizationStatus: AuthorizationStatus.AUTH,
+      authorizationStatus: AuthorizationStatus.NO_AUTH,
       authInfo: {},
     }
   });
@@ -146,10 +159,16 @@ it(`Render Main with offers and sign in`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
       hotels: offers,
-      applicationIsReady: true,
+      appState: AppState.READY,
     },
     [NameSpace.APP]: {
       city: `Amsterdam`,
+      activeOffer: null,
+      currentOffer: null,
+      reviews: [],
+      nearbyOffers: [],
+      sortType: SortTypes.POPULAR,
+      reviewLoadingStatus: ``,
     },
     [NameSpace.USER]: {
       authorizationStatus: AuthorizationStatus.NO_AUTH,
