@@ -17,6 +17,8 @@ const MAX_STARS = 5;
 const DetailOffer = (props) => {
   const {offer, onBookmarkClick, authorizationStatus, reviews, nearbyOffers, cities, onHeaderClick, postReview, loadingStatus, clearReviewLoadingStatus} = props;
 
+
+
   const cityCords = cities.find((item) => {
     return item.name === offer.city.name;
   }).location;
@@ -116,7 +118,7 @@ const DetailOffer = (props) => {
               <section className="property__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
 
-                {reviews.length && <ReviewsList reviews={reviews} />}
+                {(reviews.length > 0) && <ReviewsList reviews={reviews} />}
 
                 {authorizationStatus === AuthorizationStatus.AUTH ?
                   <ReviewForm

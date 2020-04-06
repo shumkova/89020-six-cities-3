@@ -10,7 +10,7 @@ const activeCity = `London`;
 
 it(`On city click something happens`, () => {
   const onCityClick = jest.fn();
-  const mockedEvent = { preventDefault: () => {} };
+  const mockedEvent = {preventDefault: () => {}};
 
   const list = shallow(<CitiesList
     cities={cities}

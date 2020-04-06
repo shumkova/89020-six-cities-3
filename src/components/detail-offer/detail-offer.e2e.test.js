@@ -4,7 +4,6 @@ import Adapter from 'enzyme-adapter-react-16';
 import {AuthorizationStatus} from "../../reducer/user/user";
 import DetailOffer from "./detail-offer";
 import moment from "moment";
-import {LoadingStatus} from "../../reducer/app/app";
 
 Enzyme.configure({adapter: new Adapter()});
 

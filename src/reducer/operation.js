@@ -6,7 +6,7 @@ import EditComment from "../adapters/edit-comment";
 import history from "../history";
 
 export const Operation = {
-  init: (id) => (dispatch, getState, api) => {
+  loadHotels: (id) => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then((response) => {
         const hotels = EditOffer.parseOffers(response.data);

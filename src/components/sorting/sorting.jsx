@@ -1,9 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {SortTypes} from "../../const";
-import {getSortType} from "../../reducer/app/selectors";
-import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/app/app";
 
 const Sorting = (props) => {
   const {sortBy, setSortingType, isActive, onToggleClick} = props;

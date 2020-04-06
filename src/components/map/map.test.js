@@ -37,12 +37,6 @@ const HOTELS = [{
   type: `apartment`
 }];
 
-const coordinates = [{
-  latitude: 52.35514938496378,
-  longitude: 4.673877537499948,
-  zoom: 8,
-}];
-
 const cityCords = {
   latitude: 52.370216,
   longitude: 4.895168,

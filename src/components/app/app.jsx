@@ -10,12 +10,23 @@ import DetailOffer from "../detail-offer/detail-offer.connect";
 import Favorites from "../favorites/favorites.connect";
 
 class App extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
     const path = history.location.pathname;
     const id = (path.search(AppRoute.OFFER) !== -1) && path.split(`/`)[2];
 
     this.props.init(id);
+
+    // this.props.loadHotels(id);
+    // this.props.checkAuth();
+    // this.props.loadFavorites();
+    //
+    // if (id) {
+    //   this.props.loadCurrentOffer(id);
+    // }
   }
 
   render() {
@@ -82,7 +93,7 @@ class App extends React.PureComponent {
     );
   }
 
-};
+}
 
 App.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape({
@@ -131,11 +142,15 @@ App.propTypes = {
   })).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   userData: PropTypes.object.isRequired,
+  // loadHotels: PropTypes.func.isRequired,
+  // checkAuth: PropTypes.func.isRequired,
+  // loadFavorites: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   loadCurrentOffer: PropTypes.func.isRequired,
   changeFavorite: PropTypes.func.isRequired,
   init: PropTypes.func.isRequired,
 };
+
 
 export default App;
 

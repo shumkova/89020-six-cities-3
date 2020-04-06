@@ -65,7 +65,7 @@ it(`Offer name should be pressed`, () => {
   const onCardHover = jest.fn();
   const onHeaderClick = jest.fn();
   const onBookmarkClick = jest.fn();
-  const mockedEvent = { preventDefault: () => {} };
+  const mockedEvent = {preventDefault: () => {}};
 
   const card = shallow(<OfferCard
     offer={OFFER}

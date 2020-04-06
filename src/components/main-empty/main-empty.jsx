@@ -24,6 +24,6 @@ const MainEmpty = (props) => {
 
 MainEmpty.propTypes = {
   city: PropTypes.string.isRequired,
-}
+};
 
 export default MainEmpty;

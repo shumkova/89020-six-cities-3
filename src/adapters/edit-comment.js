@@ -24,6 +24,3 @@ class EditComment {
 }
 
 export default EditComment;
-
-
-

@@ -57,7 +57,7 @@ const Operation = {
         dispatch(ActionCreator.setUser(EditAuthInfo.parseUser(response.data)));
       })
       .catch((err) => {
-        // throw err;
+        throw err;
       });
   },
 

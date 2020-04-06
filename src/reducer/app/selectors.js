@@ -26,6 +26,6 @@ const getSortType = (state) => {
 
 const getLoadingStatus = (state) => {
   return state[NameSpace.APP].reviewLoadingStatus;
-}
+};
 
 export {getCity, getActiveOffer, getReviews, getNearbyOffers, getSortType, getCurrentOffer, getLoadingStatus};

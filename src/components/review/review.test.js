@@ -19,7 +19,7 @@ const review = {
 it(`Render Review`, () => {
   const tree = renderer.create(
       <Review review={review}/>
-  )
+  );
 
   expect(tree).toMatchSnapshot();
 });

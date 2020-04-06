@@ -9,6 +9,7 @@ import {AppState, SortTypes} from "../../const";
 
 const mockStore = configureStore([]);
 
+
 const HOTELS = [{
   bedrooms: 3,
   city: {
@@ -44,25 +45,6 @@ const HOTELS = [{
   type: `apartment`
 }];
 
-const cities = [{
-  location: {
-    latitude: 52.370216,
-    longitude: 4.895168,
-    zoom: 10
-  },
-  name: `Amsterdam`
-}];
-
-const userData = {
-  avatar: `img/1.png`,
-  email: `Oliver.conner@gmail.com`,
-  id: 1,
-  isPro: false,
-  name: `Oliver.conner`
-};
-
-const noop = () => {};
-
 it(`App should render everything`, () => {
   const store = mockStore({
     [NameSpace.DATA]: {
@@ -87,21 +69,7 @@ it(`App should render everything`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App
-            onCityClick={noop}
-            onHeaderClick={noop}
-            setActiveOffer={noop}
-            changeFavorite={noop}
-            onBookmarkClick={noop}
-            loadCurrentOffer={noop}
-            login={noop}
-            offers={HOTELS}
-            changeCity={noop}
-            city={`Amsterdam`}
-            cities={cities}
-            userData={userData}
-            init={noop}
-          />
+          <App />
         </Provider>, {
           createNodeMock: () => {
             return document.createElement(`div`);
@@ -135,19 +103,7 @@ it(`App should render "pending"`, () => {
   const tree = renderer
     .create(
         <Provider store={store}>
-          <App
-            onCityClick={noop}
-            onHeaderClick={noop}
-            setActiveOffer={noop}
-            changeFavorite={noop}
-            onBookmarkClick={noop}
-            loadCurrentOffer={noop}
-            login={noop}
-            changeCity={noop}
-            cities={cities}
-            userData={userData}
-            init={noop}
-          />
+          <App />
         </Provider>, {
           createNodeMock: () => {
             return document.createElement(`div`);

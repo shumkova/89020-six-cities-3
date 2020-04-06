@@ -22,8 +22,19 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(Operation.loadHotels(id));
     dispatch(UserOperation.checkAuth());
     dispatch(DataOperation.loadFavorites());
-    id && dispatch(Operation.loadDetailOfferInfo(id));
+    if (id) {
+      dispatch(Operation.loadDetailOfferInfo(id));
+    }
   },
+  // loadHotels(id) {
+  //   dispatch(Operation.loadHotels(id));
+  // },
+  // checkAuth() {
+  //   dispatch(UserOperation.checkAuth());
+  // },
+  // loadFavorites() {
+  //   dispatch(DataOperation.loadFavorites());
+  // },
   login(authData) {
     dispatch(UserOperation.login(authData));
   },
