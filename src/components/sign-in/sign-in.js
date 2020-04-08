@@ -45,7 +45,7 @@ class SignIn extends React.PureComponent {
                     type="email"
                     name="email"
                     placeholder="Email"
-                    pattern="[a-zA-Z]{1}([a-zA-Z0-9\-_\.]{1,})?@[a-zA-Z]{1}([a-zA-Z0-9.]{1,})?[a-zA-Z0-9]{1}\.[a-zA-Z]{2,}"
+                    pattern="[a-zA-Z0-9]{1}([a-zA-Z0-9\-_\.]{1,})?@[a-zA-Z]{1}([a-zA-Z0-9.]{1,})?[a-zA-Z0-9]{1}\.[a-zA-Z]{2,}"
                     required
                     ref={this.loginRef}
                   />
