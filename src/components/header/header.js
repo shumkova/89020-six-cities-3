@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
-import {getAuthInfo, getAuthorizationStatus} from "../../reducer/user/selectors";
-import {connect} from "react-redux";
 
 const Header = (props) => {
-  const {authorizationStatus, userData} = props;
+  const {authorizationStatus, authInfo} = props;
 
   return (
     <header className="header">
@@ -32,7 +30,7 @@ const Header = (props) => {
                   to={authorizationStatus === AuthorizationStatus.AUTH ? AppRoute.FAVORITES : AppRoute.LOGIN}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  <span className="header__login">{authorizationStatus === AuthorizationStatus.AUTH ? userData.email : `Sign in`}</span>
+                  <span className="header__login">{authorizationStatus === AuthorizationStatus.AUTH ? authInfo.email : `Sign in`}</span>
                 </Link>
               </li>
             </ul>
@@ -45,14 +43,13 @@ const Header = (props) => {
 
 Header.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  userData: PropTypes.object.isRequired,
+  authInfo: PropTypes.shape({
+    avatar: PropTypes.string,
+    email: PropTypes.string,
+    id: PropTypes.number,
+    name: PropTypes.string,
+    isPro: PropTypes.bool,
+  }).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  authorizationStatus: getAuthorizationStatus(state),
-  userData: getAuthInfo(state),
-});
-
-export {Header};
-
-export default connect(mapStateToProps)(Header);
+export default Header;

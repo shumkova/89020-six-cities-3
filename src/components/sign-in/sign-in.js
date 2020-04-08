@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Header from "../header/header";
+import Header from "../header/header.connect";
 
 class SignIn extends React.PureComponent {
   constructor(props) {

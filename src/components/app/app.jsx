@@ -29,7 +29,6 @@ class App extends React.PureComponent {
       login,
       offers,
       loadCurrentOffer,
-      userData,
     } = this.props;
 
     if (appState === AppState.PENDING) {
@@ -46,8 +45,6 @@ class App extends React.PureComponent {
               offers={offers}
               city={city}
               cities={cities}
-              authorizationStatus={authorizationStatus}
-              userData={userData}
               onCityClick={changeCity}
               onHeaderClick={loadCurrentOffer}
               onBookmarkClick={changeFavorite}
@@ -81,7 +78,6 @@ class App extends React.PureComponent {
       </Router>
     );
   }
-
 }
 
 App.propTypes = {
@@ -130,7 +126,6 @@ App.propTypes = {
     }).isRequired,
   })).isRequired,
   authorizationStatus: PropTypes.string.isRequired,
-  userData: PropTypes.object.isRequired,
   login: PropTypes.func.isRequired,
   loadCurrentOffer: PropTypes.func.isRequired,
   changeFavorite: PropTypes.func.isRequired,

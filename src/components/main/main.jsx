@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import OffersList from "../offers-list/offers-list.connect";
 import Map from "../map/map.connect";
 import CitiesList from "../cities-list/cities-list";
-import Header from "../header/header";
+import Header from "../header/header.connect";
 import Sorting from "../sorting/sorting.connect";
 import withToggle from "../../hocs/with-toggle/with-toggle";
 import MainEmpty from "../main-empty/main-empty";
@@ -56,6 +56,7 @@ const Main = (props) => {
                   <Map
                     places={offers}
                     cityCords={cityCords}
+                    currentOffer={null}
                   />
                 </section>
               </div>
@@ -116,8 +117,6 @@ Main.propTypes = {
       zoom: PropTypes.number.isRequired,
     }).isRequired,
   })).isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-  userData: PropTypes.object.isRequired,
   onBookmarkClick: PropTypes.func.isRequired,
 };
 

@@ -5,7 +5,7 @@ import {AuthorizationStatus} from "../../reducer/user/user";
 import {AppRoute} from "../../const";
 
 const OfferCard = (props) => {
-  const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus, cardType} = props;
+  const {offer, onCardHover, onHeaderClick, onBookmarkClick, authorizationStatus, cardType, nearbyFor} = props;
 
   const percent = parseFloat(offer.rating) / 5 * 100 + `%`;
 
@@ -41,7 +41,7 @@ const OfferCard = (props) => {
             type="button"
             onClick={() => {
               return authorizationStatus === AuthorizationStatus.AUTH ?
-                onBookmarkClick(offer) :
+                onBookmarkClick(offer, nearbyFor) :
                 history.push(AppRoute.LOGIN);
             }}
           >
@@ -115,6 +115,7 @@ OfferCard.propTypes = {
   onBookmarkClick: PropTypes.func.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   cardType: PropTypes.string.isRequired,
+  nearbyFor: PropTypes.number,
 };
 
 export default OfferCard;

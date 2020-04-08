@@ -24,15 +24,12 @@ class Map extends React.PureComponent {
 
     const {places, cityCords, activeOffer, currentOffer} = this.props;
 
-    const coordinates = places.map((place) => place.location);
-
     this._map = leaflet.map(mapRef, {
       center: [cityCords.latitude, cityCords.longitude],
       zoom: cityCords.zoom,
       zoomControl: false,
       marker: true
     });
-
 
     this._map.setView([cityCords.latitude, cityCords.longitude], cityCords.zoom);
 
@@ -44,33 +41,32 @@ class Map extends React.PureComponent {
 
     this._layerGroup = leaflet.layerGroup().addTo(this._map);
 
-    this.drawPins(coordinates, activeOffer, currentOffer);
+    this.drawPins(places, activeOffer, currentOffer);
   }
 
   componentDidUpdate() {
     const {places, cityCords, activeOffer, currentOffer} = this.props;
 
-
-    const coordinates = places.map((place) => place.location);
-
     this._map.setView([cityCords.latitude, cityCords.longitude], cityCords.zoom);
 
     this._layerGroup.clearLayers();
 
-    this.drawPins(coordinates, activeOffer, currentOffer);
+    this.drawPins(places, activeOffer, currentOffer);
   }
 
   componentWillUnmount() {
     this._map.remove();
   }
 
-  drawPins(coordinates, activeOffer, currentOffer) {
+  drawPins(places, activeOffer, currentOffer) {
 
-    coordinates.map((coordinate) => {
-      leaflet
-        .marker([coordinate.latitude, coordinate.longitude], {icon: ICON})
-        .addTo(this._layerGroup);
-    });
+    if (places.length > 0) {
+      places.map((place) => {
+        leaflet
+          .marker([place.location.latitude, place.location.longitude], {icon: ICON})
+          .addTo(this._layerGroup);
+      });
+    }
 
     if (currentOffer) {
       leaflet
@@ -93,10 +89,44 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
-  places: PropTypes.arrayOf(
-      PropTypes.object.isRequired
-  ).isRequired,
-  cityCords: PropTypes.object.isRequired,
+  places: PropTypes.arrayOf(PropTypes.shape({
+    bedrooms: PropTypes.number.isRequired,
+    city: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      location: PropTypes.shape({
+        latitude: PropTypes.number.isRequired,
+        longitude: PropTypes.number.isRequired,
+        zoom: PropTypes.number.isRequired,
+      }).isRequired,
+    }).isRequired,
+    description: PropTypes.string.isRequired,
+    goods: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    host: PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }),
+    id: PropTypes.number.isRequired,
+    images: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+    isFavorite: PropTypes.bool.isRequired,
+    isPremium: PropTypes.bool.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+    adults: PropTypes.number.isRequired,
+    preview: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+  })),
+  cityCords: PropTypes.shape({
+    latitude: PropTypes.number.isRequired,
+    longitude: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+  }).isRequired,
   activeOffer: PropTypes.object,
   currentOffer: PropTypes.object,
 };

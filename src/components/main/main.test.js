@@ -143,7 +143,6 @@ it(`Render Mail without offers`, () => {
                 city={`Amsterdam`}
                 cities={cities}
                 authorizationStatus={AuthorizationStatus.AUTH}
-                userData={userData}
               />
             </Provider>
           </Router>, {
@@ -188,7 +187,6 @@ it(`Render Main with offers and sign in`, () => {
               city={`Amsterdam`}
               cities={cities}
               authorizationStatus={AuthorizationStatus.NO_AUTH}
-              userData={userData}
             />
           </Provider>
         </Router>, {

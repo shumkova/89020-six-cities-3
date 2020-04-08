@@ -4,7 +4,7 @@ import OfferCard from "../offer-card/offer-card.connect";
 import {sortOffers} from "../../utils";
 
 const OffersList = (props) => {
-  const {offers, onHeaderClick, setActiveOffer, onBookmarkClick, listType, sortBy} = props;
+  const {offers, onHeaderClick, setActiveOffer, onBookmarkClick, listType, sortBy, nearbyFor} = props;
 
   return (
     <div className={`places__list ${listType.list}`}>
@@ -17,6 +17,7 @@ const OffersList = (props) => {
           onCardHover={setActiveOffer}
           onHeaderClick={onHeaderClick}
           onBookmarkClick={onBookmarkClick}
+          nearbyFor={nearbyFor}
         />
       ))}
     </div>
@@ -62,6 +63,7 @@ OffersList.propTypes = {
   onBookmarkClick: PropTypes.func.isRequired,
   listType: PropTypes.object.isRequired,
   sortBy: PropTypes.string.isRequired,
+  nearbyFor: PropTypes.number,
 };
 
 export default OffersList;

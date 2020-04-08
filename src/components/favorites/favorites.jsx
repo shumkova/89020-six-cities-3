@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Header from "../header/header";
+import Header from "../header/header.connect";
 import OfferCard from "../offer-card/offer-card.connect";
 import {AppRoute, ListTypes} from "../../const";
 import FavoritesEmpty from "../favorites-empty/favorites-empty";

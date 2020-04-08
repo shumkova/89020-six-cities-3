@@ -1,16 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Header from "../header/header";
+import Header from "../header/header.connect";
 import {AuthorizationStatus} from "../../reducer/user/user";
 import history from "../../history";
 import {AppRoute, ListTypes} from "../../const";
 import ReviewsList from "../reviews-list/reviews-list";
 import OffersList from "../offers-list/offers-list.connect";
-import withActiveItem from "../../hocs/with-active-item/with-active-item";
 import Map from "../map/map.connect";
 import ReviewForm from "../review-form/review-form";
-
-const OffersListWrapped = withActiveItem(OffersList);
 
 const MAX_STARS = 5;
 
@@ -131,19 +128,20 @@ const DetailOffer = (props) => {
             </div>
           </div>
           <section className="property__map map">
-            <Map places={nearbyOffers} cityCords={cityCords}/>
+            <Map places={nearbyOffers} cityCords={cityCords} currentOffer={offer}/>
           </section>
         </section>
-        {nearbyOffers.length && <div className="container">
+        {(nearbyOffers.length > 0) && <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <OffersListWrapped
+            <OffersList
               offers={nearbyOffers}
               onHeaderClick={onHeaderClick}
               onBookmarkClick={onBookmarkClick}
               listType={ListTypes.NEARBY}
+              nearbyFor={offer.id}
             >
-            </OffersListWrapped>
+            </OffersList>
           </section>
         </div>}
       </main>
@@ -200,7 +198,14 @@ DetailOffer.propTypes = {
     }).isRequired,
   })).isRequired,
   nearbyOffers: PropTypes.array.isRequired,
-  cities: PropTypes.array.isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    location: PropTypes.shape({
+      latitude: PropTypes.number.isRequired,
+      longitude: PropTypes.number.isRequired,
+      zoom: PropTypes.number.isRequired,
+    }).isRequired,
+  })).isRequired,
   onHeaderClick: PropTypes.func.isRequired,
   postReview: PropTypes.func.isRequired,
   loadingStatus: PropTypes.string.isRequired,
